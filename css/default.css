@@ -1,0 +1,900 @@
+/*
+Document   : default
+Created on : 2013-04-23, 12:18:06
+Author     : Andrzej
+Description: Purpose of the main stylesheet follows.
+*/
+
+/*
+układ strony
+*/
+
+div #header {
+	/*
+	background-image: url('../img/page_header.png');
+	background-size: contain;
+	*/
+}
+#container
+{
+	width: 1024px;
+	margin: auto;
+}
+#header, #center, #footer
+{
+	margin: 5px;
+}
+#menu
+{
+	float: left;
+	width: 17%;
+	padding: 0px;
+	vertical-align: top;
+}
+#content
+{
+	float: right;
+	width: 80%;
+	padding: 0px;
+	vertical-align: top;
+}
+#project
+{
+	margin: 2px;
+	text-align: center;
+	font-size: 12px;
+	color: #000;
+}
+#slogan
+{
+	margin: 5px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+}
+
+.Clear
+{
+	clear: both;
+	line-height: 0px;
+}
+
+html
+{
+}
+
+body
+{
+	background: #ffffff url("http://mvc-project.pl/img/page_background.jpg") repeat-x;
+	font-family: sans-serif;
+	font-size: small;
+}
+
+a img
+{
+	border: none;
+}
+
+/*
+pasek nawigacji
+*/
+
+.NavBar
+{
+	width: 100%;
+/*	border: 1px solid #ddd; */
+}
+
+.NavItem
+{
+	font-size: 13px;
+	text-align: center;
+	line-height: 35px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.NavItem:hover
+{
+}
+
+.NavItem a
+{
+	display: block;
+/*	font-weight: bold; */
+	text-decoration: none;
+	background: #f2f2f2 url('http://mycms.pl/img/buttons/btn_grey_off_35.jpg') repeat-x;
+	color: #a00;
+	border: 1px solid #bbb;
+}
+
+.NavItem a:hover
+{
+	background: #f2f2f2 url('http://mycms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
+	color: #a00;
+	text-decoration: none;
+}
+
+a.NavLink
+{
+}
+
+a.NavLinkSelected
+{
+	background: #f2f2f2 url('http://mycms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
+	color: #a00;
+}
+
+/*
+elementy strony
+*/
+
+h1, h2, h3, h4, h5, h6
+{
+	font-weight: bold;
+	line-height: 1.8em;
+}
+
+h1
+{
+	font-size: 18px;
+}
+h2
+{
+	font-size: 16px;
+}
+h3
+{
+	font-size: 14px;
+}
+h4
+{
+	font-size: 12px;
+}
+
+ul
+{
+	line-height: 16px;
+}
+ol
+{
+	line-height: 16px;
+}
+li
+{
+	line-height: 16px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+a
+{
+	color: #6060a0;
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+a.Disabled 
+{
+	color: #999;
+}
+
+div.PageHeader
+{
+	margin: 0px;
+}
+
+span.PageLogo
+{
+	margin: 0px;
+	float: left;
+}
+
+span.PageUtilities
+{
+	float: right;
+}
+
+span.Title
+{
+	color: #ccc;
+}
+
+.LogoImage
+{
+	vertical-align: top;
+}
+
+.LogoTitle
+{
+	padding-left: 30px;
+	font: italic bold 55px/55px Georgia, serif;
+	vertical-align: bottom;
+	color: #c00;
+	text-shadow: 4px 4px 6px #aaa;
+}
+
+.LogoSubTitle
+{
+	padding-left: 30px;
+	font: italic bold 40px/40px Georgia, serif;
+	vertical-align: top;
+	color: #0c0;
+	text-shadow: 4px 4px 6px #bbb;
+}
+
+div.PageMenu
+{
+	padding: 5px;
+	text-align: left;
+}
+
+div.PageContent
+{
+	padding: 5px;
+	text-align: left;
+	line-height: 20px;
+}
+
+div.PageMainContent
+{
+	font-family: sans-serif;
+	font-size: small;
+}
+
+div.PageFooter
+{
+	font-family: Verdana, Geneva, sans-serif;
+	text-align: center;
+}
+
+div.PageLinks
+{
+	color: #309030;
+	text-align: right;
+	line-height: 20px;
+	padding-top: 15px;
+}
+
+div.PageUser
+{
+	color: #309030;
+	text-align: right;
+	line-height: 20px;
+	padding-top: 20px;
+}
+
+div.PagePath
+{
+	padding-top: 20px;
+	text-align: right;
+}
+
+.TopLinkItem
+{
+	padding-left: 20px;
+}
+
+.TopLinkIcon
+{
+	vertical-align: middle;
+	border: 0px solid #fff;
+	padding-left: 0px;
+	padding-right: 5px;
+	padding-top: 0px;
+	padding-bottom: 2px;
+}
+
+a.PathLink
+{
+	color: #6060a0;
+	text-decoration: none;
+}
+
+a.PathLink:hover
+{
+	color: #f00000;
+	text-decoration: underline;
+}
+
+.PathItem
+{
+	padding-left: 5px;
+	padding-right: 0px;
+}
+
+.UserItem
+{
+	float: left;
+}
+
+.Logo
+{
+	border: 0px solid #CFCFCF;
+}
+
+.WindowHeader 
+{
+	line-height: 30px;
+	font-size: medium;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom: 1px solid #369;
+	color: #369;
+	margin-bottom: 20px;
+}
+
+.MenuIco
+{
+	vertical-align: top;
+	padding-left: 1px;
+	padding-right: 2px;
+}
+
+.MenuItem
+{
+	vertical-align: top;
+	padding-left: 2px;
+	padding-right: 1px;
+	padding-bottom: 10px;
+}
+
+.MenuItemSelected
+{
+	color: #c00;
+}
+
+.SearchButton
+{
+	text-align: center; 
+	padding-top: 10px;
+}
+
+.FormPanel
+{
+	text-align: left;
+	vertical-align: middle;
+	font-size: smaller;
+	color: #303030;
+}
+
+.MenuLink
+{
+	color: #6060a0;
+	text-decoration: none;
+}
+
+.MenuLink:hover
+{
+	text-decoration: underline;
+}
+
+.DataLink
+{
+	padding: 1px;
+	line-height: 10px;
+}
+
+.FormLinkSeparated
+{
+	font-size: small;
+}
+
+.Table
+{
+	border: 1px solid #C0D0E0;
+	font-size: smaller;
+	padding: 5px;
+	color: #303030;
+	background-color: #f9f9f9;
+}
+
+.FormTitleBar
+{
+	border-bottom: 1px dotted #ABC;
+	text-align: left;
+	padding-bottom: 7px;
+}
+
+.FormIcon
+{
+	padding-right: 15px;
+}
+
+.FormTitle
+{
+	font-size: medium;
+	font-weight: bold;
+	color: #369;
+	line-height: 32px;
+	vertical-align: top;
+}
+
+.FormSearch
+{
+	float: right;
+	padding-right: 5px;
+	padding-top: 5px;
+}
+
+.FormSearchBar
+{
+	border-bottom: 1px dotted #ABC;
+	text-align: center;
+	padding: 2px;
+	font-size: 11px;
+}
+
+.FormSearchCaption
+{
+	color: #999;
+}
+
+.FormSearchValue
+{
+	color: #c00;
+}
+
+.FormSearchClose > img
+{
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.FormSearchClose > img:hover
+{
+	cursor: pointer;
+}
+
+.UserSelLabel
+{
+	float: right;
+	padding-right: 15px;
+	padding-top: 8px;
+	font-size: 11px;
+}
+
+.FormDates
+{
+	float: right;
+	padding-right: 35px;
+	padding-top: 5px;
+}
+
+.TitleCell
+{
+	border-bottom: 1px solid #90B0D0;
+	font-size: small;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #369;
+}
+
+.DataCell
+{
+	border-bottom: 1px dotted #C0D0E0;
+	line-height: 14px;
+	font-size: small;
+	text-align: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	color: #000;
+}
+
+.FormCell
+{
+	border-bottom: 1px dotted #C0D0E0;
+	line-height: 14px;
+	font-size: small;
+	text-align: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	color: #000;
+}
+
+.ActionCell
+{
+	border-bottom: 1px dotted #C0D0E0;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.DataLock
+{
+	border-bottom: 1px dotted #C0D0E0;
+	line-height: 14px;
+	font-size: small;
+	text-align: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	color: #c00;
+}
+
+.DataCellMsg
+{
+	line-height: 14px;
+	font-size: small;
+	text-align: center;
+	padding: 10px;
+	color: #c00;
+}
+
+.DataRowBright
+{
+	background-color: inherit;	
+}
+
+.DataRowDark
+{
+	background-color: inherit;
+}
+
+.DataRowBright:hover
+{
+	background-color: #f7f8f9;
+}
+
+.DataRowDark:hover
+{
+	background-color: #f7f8f9;
+}
+
+.DetailsCell
+{
+	border-bottom: 1px dotted #C0D0E0;
+	font-size: small;
+	text-align: left;
+	padding: 5px;
+	color: #00f;
+}
+
+.FormInput, .FormComboBox
+{
+	font-family: sans-serif;
+	font-size: small;
+	border: 1px solid #999;
+	background-color: #fff;
+	padding: 2px;
+}
+
+.ButtonBar
+{
+	padding-top: 15px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.Message
+{
+	text-align: center; 
+}
+
+.MessageBoxError
+{
+	border: 1px solid #ff0000;
+	background-color: #fdd7cd;
+	vertical-align: middle;
+}
+
+.MessageBoxWarning
+{
+	border: 1px solid #00bb00;
+	background-color: #ffffcc;
+	vertical-align: middle;
+}
+
+.MessageBoxInformation
+{
+	border: 1px solid #0000ff;
+	background-color: #ddeeff;
+	vertical-align: middle;
+}
+
+.MessageBoxQuestion
+{
+	border: 1px solid #eeee00;
+	background-color: #ffffdd;
+	vertical-align: middle;
+}
+
+.MsgIcon
+{
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: middle;
+}
+
+.MsgMessage
+{
+	padding-left: 20px;
+	padding-right: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	line-height: 20px;
+	font-size: small;
+	color: #000090;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.SortIcon
+{
+	vertical-align: middle;
+	padding-bottom: 3px;
+}
+
+.NaviBar
+{
+	text-align: center;
+	padding: 0px;
+}
+
+.NaviPointersLeft
+{
+	font-size: small;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.NaviPointers
+{
+	font-size: small;
+	padding: 10px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.NaviPointersRight
+{
+	font-size: small;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.NaviPointersCount
+{
+	font-size: small;
+	padding: 0px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.PagePointer
+{
+	border: 1px solid #ccc;
+	color: #369;
+	padding: 5px;
+	text-align: center;
+	line-height: 30px;
+}
+
+.PagePointerCurrent
+{
+	border: 1px solid #036;
+	color: #fff;
+	background-color: #369;
+	padding: 5px;
+	text-align: center;
+	line-height: 30px;
+}
+
+.PagePointerDisabled
+{
+	border: 1px solid #ccc;
+	color: #ccc;
+	padding: 5px;
+	text-align: center;
+	line-height: 30px;
+}
+
+.PagePointer:hover
+{
+	color: #fff;
+	background-color: #369;
+	text-decoration: none;
+}
+
+.PagePointerCurrent:hover
+{
+	text-decoration: none;
+}
+
+.PagePointerDisabled:hover
+{
+	text-decoration: none;
+}
+
+.FormGoToPage
+{
+}
+
+.FormShowRows
+{
+}
+
+.PageInput
+{
+	border: 1px solid #999;
+	background-color: #fff;
+	color: #000;
+	text-align: center;
+	width: 40px;
+	font-size: small;
+}
+
+.PageGo
+{
+	width: 40px;
+	font-size: small;
+}
+
+.ActionIcon
+{
+	margin: 2px;
+	border: 0px dotted #fff;
+}
+
+.MessageError
+{
+	padding: 15px;
+	text-align: left;
+	vertical-align: middle;
+	font-size: small;
+	border: 1px solid #C0D0E0;
+	color: #c00;
+	background-color: #ffeedd;
+}
+
+.MessageWarning
+{
+	padding: 15px;
+	text-align: left;
+	vertical-align: middle;
+	font-size: small;
+	border: 1px solid #C0D0E0;
+	color: #d63;
+	background-color: #ffeebb;
+}
+
+.MessageInformation
+{
+	padding: 15px;
+	text-align: left;
+	vertical-align: middle;
+	font-size: small;
+	border: 1px solid #C0D0E0;
+	color: #00c;
+	background-color: #f0f9ff;
+}
+
+.MessageQuestion
+{
+	padding: 15px;
+	text-align: left;
+	vertical-align: middle;
+	font-size: small;
+	border: 1px solid #C0D0E0;
+	color: #c90;
+	background-color: #fff8f0;
+}
+
+.MessageTitle
+{
+	border-bottom: 1px solid #C0D0E0;
+	padding-bottom: 5px;
+	font-size: medium;
+	line-height: 20px;
+	text-align: center;
+}
+
+.MessageIcon
+{
+	padding-right: 15px;
+}
+
+.MessageText
+{
+	line-height: 17px;
+	text-align: left;
+	color: #369;
+}
+
+.MessageSeparator
+{
+	border-bottom: 1px dotted #C0D0E0;
+}
+
+.Footer 
+{
+	line-height: 14px;
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+	color: #666;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-top: 20px;
+}
+
+.Separator
+{
+	padding: 10px;
+}
+
+.Stats
+{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #666;
+}
+
+ul.IpList
+{
+	margin: 0px;
+	padding-left: 20px;
+}
+
+li.IpItem
+{
+	margin: 0px;
+	line-height: 12px;
+}
+
+.PanelItem
+{
+	padding: 20px;
+	text-align: center;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	line-height: 15px;
+}
+
+.ItemEnabled
+{
+	color: #666;
+}
+
+.ItemDisabled
+{
+	color: #999;
+}
+
+a.PanelLink
+{
+	color: #666;
+}
+
+.PageSignature
+{
+	font-size: 11px; 
+	color: #666; 
+	text-align: right;
+}
+
+.IconSignature
+{
+	vertical-align: middle;
+	padding: 5px;
+}
