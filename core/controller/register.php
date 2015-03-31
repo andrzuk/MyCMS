@@ -48,25 +48,28 @@ if (isset($_POST['register_button'])) // obsługa formularza
 		$email = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : NULL;
 		$login = isset($_POST['login']) ? htmlspecialchars(trim($_POST['login'])) : NULL;
 		$password = isset($_POST['password']) ? htmlspecialchars(trim($_POST['password'])) : NULL;
+		$pesel = isset($_POST['pesel']) ? htmlspecialchars(trim($_POST['pesel'])) : NULL;
 		
 		// resetuje ustawienia uzytkownika:
 		$_SESSION['user_id'] = 0;
 		$_SESSION['user_status'] = 0;
 		$_SESSION['user_login'] = NULL;
 		$_SESSION['user_name'] = NULL;
-
+		
 		// zapamiętuje dane w formularzu:
 		$_SESSION['form_fields']['imie'] = $imie;
 		$_SESSION['form_fields']['nazwisko'] = $nazwisko;
 		$_SESSION['form_fields']['email'] = $email;
 		$_SESSION['form_fields']['login'] = $login;
 		$_SESSION['form_fields']['password'] = $password;
-
+		$_SESSION['form_fields']['pesel'] = $pesel;
+		
 		// wymagane pola:
 		$required = array(
 			'imie' => $imie, 
 			'nazwisko' => $nazwisko, 
 			'email' => $email, 
+			'pesel' => $pesel, 
 			'login' => $login, 
 			'password' => $password,
 		);
@@ -81,6 +84,7 @@ if (isset($_POST['register_button'])) // obsługa formularza
 				'imie' => $imie, 
 				'nazwisko' => $nazwisko, 
 				'email' => $email, 
+				'pesel' => $pesel, 
 				'user_login' => $login, 
 				'user_password' => $password,
 			);
@@ -97,77 +101,95 @@ if (isset($_POST['register_button'])) // obsługa formularza
 			
 			$check_email = $validator_object->check_email($email);
 			
+			$check_pesel = $validator_object->check_pesel($pesel);
+			
 			$check_exist = $model_object->Exist($record_object);
 			
 			if ($check_result) // kontrola bezpieczeństwa poprawna
 			{
 				if ($check_email) // email poprawny
 				{
-					if (!$check_exist) // nie istnieje jeszcze taki login ani email
+					if ($check_pesel) // pesel poprawny
 					{
-						// zapisuje użytkownika do bazy:
-						
-						$result = $model_object->Register($record_object);
-						
-						if ($result) // zapis się powiódł
+						if (!$check_exist) // nie istnieje jeszcze taki login ani email ani pesel
 						{
-							// ustawia użytkownika:
-							$_SESSION['user_id'] = $result['id'];
-							$_SESSION['user_status'] = $result['status'];
-							$_SESSION['user_imie'] = $result['imie'];
-							$_SESSION['user_nazwisko'] = $result['nazwisko'];
-							$_SESSION['user_login'] = $result['user_login'];
-							$_SESSION['user_email'] = $result['email'];
+							// zapisuje użytkownika do bazy:
 							
-							// pokazuje user-details:
+							$result = $model_object->Register($record_object);
 							
-							$page_options = new Options('users', $result['id']);
+							if ($result) // zapis się powiódł
+							{
+								// ustawia użytkownika:
+								$_SESSION['user_id'] = $result['id'];
+								$_SESSION['user_status'] = $result['status'];
+								$_SESSION['user_imie'] = $result['imie'];
+								$_SESSION['user_nazwisko'] = $result['nazwisko'];
+								$_SESSION['user_login'] = $result['user_login'];
+								$_SESSION['user_email'] = $result['email'];
+								
+								// pokazuje user-details:
+								
+								$page_options = new Options('users', $result['id']);
 
-							$content_options = $page_options->get_options('view');
+								$content_options = $page_options->get_options('view');
 
-							$list_columns = array(
-								array('db_name' => 'user_login', 		'column_name' => 'Login',		'color' => '#900'),
-								array('db_name' => 'imie', 				'column_name' => 'Imię', 		'color' => '#369'),
-								array('db_name' => 'nazwisko', 			'column_name' => 'Nazwisko', 	'color' => '#369'),
-								array('db_name' => 'email', 			'column_name' => 'E-mail', 		'color' => '#69c'),
-								array('db_name' => 'data_rejestracji', 	'column_name' => 'Rejestracja', 'color' => '#090'),
-								array('db_name' => 'data_logowania', 	'column_name' => 'Logowanie', 	'color' => '#369'),
-								array('db_name' => 'data_modyfikacji', 	'column_name' => 'Modyfikacja', 'color' => '#036'),
-								array('db_name' => 'data_wylogowania', 	'column_name' => 'Wylogowanie',	'color' => '#d00'),
-							);
+								$list_columns = array(
+									array('db_name' => 'user_login', 		'column_name' => 'Login',		'color' => '#900'),
+									array('db_name' => 'imie', 				'column_name' => 'Imię', 		'color' => '#369'),
+									array('db_name' => 'nazwisko', 			'column_name' => 'Nazwisko', 	'color' => '#369'),
+									array('db_name' => 'email', 			'column_name' => 'E-mail', 		'color' => '#69c'),
+									array('db_name' => 'data_rejestracji', 	'column_name' => 'Rejestracja', 'color' => '#090'),
+									array('db_name' => 'data_logowania', 	'column_name' => 'Logowanie', 	'color' => '#369'),
+									array('db_name' => 'data_modyfikacji', 	'column_name' => 'Modyfikacja', 'color' => '#036'),
+									array('db_name' => 'data_wylogowania', 	'column_name' => 'Wylogowanie',	'color' => '#d00'),
+								);
 
-							// pobiera rekord o danym Id:
-							$login_object = $model_object->GetOne($result['id']);
-							
-							// wyświetla formularz wypełniony danymi:
-							$site_content = $view_object->ShowDetails($login_object, $list_columns);
+								// pobiera rekord o danym Id:
+								$login_object = $model_object->GetOne($result['id']);
+								
+								// wyświetla formularz wypełniony danymi:
+								$site_content = $view_object->ShowDetails($login_object, $list_columns);
 
-							// user-details.
+								// user-details.
 
-							// wyświetla komunikat:
-							$site_message = array(
-								'INFORMATION', 'Zostałeś poprawnie zarejestrowany w serwisie.'
-							);
+								// wyświetla komunikat:
+								$site_message = array(
+									'INFORMATION', 'Zostałeś poprawnie zarejestrowany w serwisie.'
+								);
+							}
+							else // rejestracja się nie powiodła
+							{
+								// wyświetla pusty formularz:
+								$site_content = $view_object->ShowForm(NULL, $failed);
+								
+								// wyświetla komunikat:
+								$site_message = array(
+									'ERROR', 'Rejestracja zakończyła się niepowodzeniem.'
+								);
+							}
 						}
-						else // rejestracja się nie powiodła
+						else // już istnieje taki login lub email lub pesel
 						{
 							// wyświetla pusty formularz:
 							$site_content = $view_object->ShowForm(NULL, $failed);
 							
 							// wyświetla komunikat:
 							$site_message = array(
-								'ERROR', 'Rejestracja zakończyła się niepowodzeniem.'
+								'ERROR', 'Użytkownik o takim loginie lub adresie e-mail lub numerze PESEL już istnieje.'
 							);
 						}
 					}
-					else // już istnieje taki login lub email
+					else // pesel niepoprawny
 					{
+						// oznacza niepoprawne pole:
+						$failed[] = 'pesel';
+						
 						// wyświetla pusty formularz:
 						$site_content = $view_object->ShowForm(NULL, $failed);
 						
 						// wyświetla komunikat:
 						$site_message = array(
-							'ERROR', 'Użytkownik o takim loginie lub adresie e-mail już istnieje.'
+							'ERROR', 'Nieprawidłowy numer PESEL. Proszę poprawić.'
 						);
 					}
 				}
@@ -235,6 +257,7 @@ else // pusty formularz
 	$_SESSION['form_fields']['imie'] = NULL;
 	$_SESSION['form_fields']['nazwisko'] = NULL;
 	$_SESSION['form_fields']['email'] = NULL;
+	$_SESSION['form_fields']['pesel'] = NULL;
 	$_SESSION['form_fields']['login'] = NULL;
 	$_SESSION['form_fields']['password'] = NULL;
 	

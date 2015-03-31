@@ -20,6 +20,7 @@ class Register_View
 		$nazwisko = isset($_SESSION['form_fields']['nazwisko']) ? $_SESSION['form_fields']['nazwisko'] : NULL;
 		$email = isset($_SESSION['form_fields']['email']) ? $_SESSION['form_fields']['email'] : NULL;
 		$password = isset($_SESSION['form_fields']['password']) ? $_SESSION['form_fields']['password'] : NULL;
+		$pesel = isset($_SESSION['form_fields']['pesel']) ? $_SESSION['form_fields']['pesel'] : NULL;
 
 		// Form Generator:
 		
@@ -68,6 +69,12 @@ class Register_View
 		$form_input = Array('caption' => 'E-mail', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
+		$form_data = Array(
+						Array('type' => 'text', 'id' => 'pesel', 'name' => 'pesel', 'caption' => '', 'value' => $pesel, 'style' => 'width: 96%;')
+						);
+		$form_input = Array('caption' => 'Pesel', 'data' => $form_data);
+		$form_inputs[] = $form_input;
+		
 		$form_data = Array(
 						Array('type' => 'text', 'id' => 'login', 'name' => 'login', 'caption' => '', 'value' => $login, 'style' => 'width: 96%;')
 						);

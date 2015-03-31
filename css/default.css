@@ -655,6 +655,7 @@ a.PathLink:hover
 	font-size: small;
 	text-align: right;
 	vertical-align: middle;
+	width: 20%;
 }
 
 .NaviPointers
@@ -663,6 +664,7 @@ a.PathLink:hover
 	padding: 10px;
 	vertical-align: middle;
 	text-align: center;
+	width: 60%;
 }
 
 .NaviPointersRight
@@ -670,6 +672,7 @@ a.PathLink:hover
 	font-size: small;
 	text-align: left;
 	vertical-align: middle;
+	width: 20%;
 }
 
 .NaviPointersCount
@@ -684,6 +687,7 @@ a.PathLink:hover
 {
 	border: 1px solid #ccc;
 	color: #369;
+	background-color: #fff;
 	padding: 5px;
 	text-align: center;
 	line-height: 30px;
@@ -703,6 +707,7 @@ a.PathLink:hover
 {
 	border: 1px solid #ccc;
 	color: #ccc;
+	background-color: #fff;
 	padding: 5px;
 	text-align: center;
 	line-height: 30px;
