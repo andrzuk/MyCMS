@@ -215,7 +215,7 @@ span.Title
 	padding-left: 30px;
 	font: italic bold 55px/55px Georgia, serif;
 	vertical-align: bottom;
-	color: #c00;
+	color: #d00;
 	text-shadow: 4px 4px 6px #aaa;
 }
 
@@ -224,7 +224,7 @@ span.Title
 	padding-left: 30px;
 	font: italic bold 40px/40px Georgia, serif;
 	vertical-align: top;
-	color: #0c0;
+	color: #f80;
 	text-shadow: 4px 4px 6px #bbb;
 }
 
@@ -896,6 +896,7 @@ a.PanelLink
 	font-size: 11px; 
 	color: #666; 
 	text-align: right;
+	float: right;
 }
 
 .IconSignature

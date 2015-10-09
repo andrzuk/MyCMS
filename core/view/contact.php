@@ -17,9 +17,7 @@ class Contact_View
 		$site_content = NULL;
 		$site_modified = NULL;
 		
-		// tekst wprowadzający:
-		
-		$site_content .= '<div class="PageMainContent">';
+		// struktura strony (tabela, komórki, mapa, kontakt i znacznik formularza):
 		
 		if (is_array($row))
 		{
@@ -28,8 +26,6 @@ class Contact_View
 				if ($key == 'contents') $site_content .= $value;
 			}
 		}
-		
-		$site_content .= '</div>';
 		
 		// formularz wysyłania wiadomości:
 		
@@ -102,9 +98,9 @@ class Contact_View
 		
 		$main_form->set_buttons($form_buttons, 'right');
 
-		// render:
+		// render formularza i wstawienie w miejscu znacznika:
 		
-		$site_content .= $main_form->build_form();
+		$site_content = str_replace(CONTACT_FORM, $main_form->build_form(), $site_content);
 		
 		// Form Generator.
 		

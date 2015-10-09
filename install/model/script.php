@@ -422,7 +422,7 @@ $sql = array(
 			"
 				INSERT INTO `pages` (`id`, `main_page`, `system_page`, `category_id`, `title`, `contents`, `author_id`, `visible`, `modified`) VALUES
 				(1, 1, 1, 0, 'Strona główna', '<h1>Serwis $short_title</h1><h2>$main_title</h2><h3>Strona główna</h3><p>$main_description</p>', 1, 1, '$save_time'),
-				(2, 2, 1, 0, 'Kontakt', 'Szanowni Państwo! Mogą Państwo skontaktować się z nami, korzystając z poniższego formularza.', 1, 1, '$save_time'),
+				(2, 2, 1, 0, 'Kontakt', '<style>\r\np { margin: 0; padding: 0; }\r\ntd.form { vertical-align: top; margin: 0; padding: 0 0 10px 0; }\r\ntd.map { padding-bottom: 20px; }\r\nh2, h3 { margin: 0; padding: 0px 0px 10px 50px; }\r\n</style>\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\r\n<tr>\r\n<td class=\"map\" colspan=\"2\">\r\n<p style=\"text-align: center;\">\r\nYour Map to Company\r\n</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td class=\"form\">\r\n<h2>Your Company Name</h2>\r\n<h3>address</h3>\r\n<h3>code city</h3>\r\n<h3>tel. +48 00 00 000</h3>\r\n<h3>email: <a href=\"mailto:name@domain.pl\" target=\"_blank\">name@domain.pl</a></h3>\r\n</td>\r\n<td class=\"form\">\r\n{_contact_form_}\r\n</td>\r\n</tr>\r\n</table>', 1, 1, '$save_time'),
 				(3, 0, 1, 0, 'Regulamin serwisu', 'Regulamin serwisu.', 1, 1, '$save_time'),
 				(4, 0, 1, 0, 'Pomoc techniczna', 'Pomoc techniczna.', 1, 1, '$save_time'),
 				(5, 0, 1, 0, 'Polityka plików cookies', 'Polityka plików cookies.', 1, 1, '$save_time');

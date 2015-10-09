@@ -50,10 +50,10 @@ if ($access) // są uprawnienia
 	if ($record_object) // strona istnieje
 	{
 		// wyświetla tytuł strony:
-		$content_title = $view_object->ShowTitle($record_object);
+		$content_title = $view_object->ShowTitle($record_object, $data_import);
 
 		// wyświetla zawartość strony:
-		$site_content = $view_object->ShowPage($record_object, $data_import);
+		$site_content = $view_object->ShowPage($record_object);
 	}
 	else // strona nie istnieje
 	{

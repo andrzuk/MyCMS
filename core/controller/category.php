@@ -42,10 +42,10 @@ if ($record_object) // kategoria istnieje
 		$record_object = $model_object->GetPageContent($id);
 
 		// wyświetla tytuł strony:
-		$content_title = $view_object->ShowTitle($record_object);
+		$content_title = $view_object->ShowTitle($record_object, $data_import);
 
 		// wyświetla zawartość strony:
-		$site_content = $view_object->ShowPage($record_object, $data_import);
+		$site_content = $view_object->ShowPage($record_object);
 		
 		if (empty($site_content)) // brak strony powiązanej z kategorią
 		{

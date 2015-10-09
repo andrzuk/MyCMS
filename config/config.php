@@ -37,8 +37,8 @@ define ('FREE', 4);
  */
  
 define ('PASS_MASK', '********'); 
-
 define ('PAGE_IMPORT_TEMPLATE', '{_import_page_}&id='); 
+define ('CONTACT_FORM', '{_contact_form_}');
 
 /* Before database starts: */
 define ('PAGE_LOGO', GALLERY_DIR.'logo/1');   // main logo

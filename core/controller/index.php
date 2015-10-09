@@ -62,8 +62,11 @@ else // folder "install" nie istnieje (etap eksploatacji)
 
 	if ($record_object) // strona istnieje
 	{
+		// wyświetla tytuł strony:
+		$content_title = $view_object->ShowTitle($record_object, $data_import);
+
 		// wyświetla zawartość strony:
-		$site_content = $view_object->ShowPage($record_object, $data_import);
+		$site_content = $view_object->ShowPage($record_object);
 	}
 	else // strona nie istnieje
 	{
@@ -80,6 +83,8 @@ else // folder "install" nie istnieje (etap eksploatacji)
 		);
 	}	
 }
+
+$content_title = !empty($content_title) ? $content_title : 'Strona nie znaleziona';
 
 $site_content = !empty($site_content) && empty($site_dialog) ? $site_content : NULL;
 

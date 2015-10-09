@@ -896,6 +896,7 @@ a.PanelLink
 	font-size: 11px; 
 	color: #666; 
 	text-align: right;
+	float: right;
 }
 
 .IconSignature
