@@ -53,6 +53,7 @@ class Elements
 		$setting = new Settings($this->db);
 		
 		$page_footer = $setting->get_config_key('page_footer');
+		if (empty($page_footer)) $page_footer = 'Copyright &copy; {_year_} MyCMS';
 
 		$footer .= '<table class="Footer" width="100%" cellpadding="0">';
 		$footer .= '<tr>';

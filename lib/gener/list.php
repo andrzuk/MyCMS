@@ -287,7 +287,7 @@ class ListBuilder
 				if (sizeof($this->actions))
 				{
 					// kolumna akcji:
-					$main_text .= '<td class="ActionCell" style="text-align: ' . $this->attribs[$idx]['align'] . ';">';
+					$main_text .= '<td class="ActionCell" style="text-align: center;">';
 					
 					foreach ($this->actions as $k => $v)
 					{
