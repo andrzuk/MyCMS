@@ -101,6 +101,7 @@ class ViewBuilder
 			$main_text .= '<td class="FormCell" width="' . $col_attrib[1]['width'] .
 									'" style="text-align: ' . $col_attrib[1]['align'] .
 									';">';
+									
 			if (is_array($this->row[$db_name])) // dane tablicowe
 			{
 				if ($db_name == 'archives') // pozycje z linkami
@@ -119,11 +120,25 @@ class ViewBuilder
 				}
 				else // zwykłe pozycje
 				{
-					foreach ($this->row[$db_name] as $ik => $iv)
+					if (array_key_exists('original', $this->row[$db_name]) && array_key_exists('converted', $this->row[$db_name])) // linki referer i uri
 					{
+						foreach ($this->row[$db_name] as $ik => $iv)
+						{
+							if ($ik == 'original') $original = $iv;
+							if ($ik == 'converted') $converted = $iv;
+						}
 						$main_text .= '<div>';
-						$main_text .= strip_tags($iv);
+						$main_text .= '<a href="' . $original . '" target="_blank">' . $converted . '</a>';
 						$main_text .= '</div>';
+					}
+					else // zwykłe dane
+					{
+						foreach ($this->row[$db_name] as $ik => $iv)
+						{
+							$main_text .= '<div>';
+							$main_text .= strip_tags($iv);
+							$main_text .= '</div>';
+						}
 					}
 				}
 			}

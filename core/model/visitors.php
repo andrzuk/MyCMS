@@ -62,8 +62,14 @@ class Visitors_Model
 				'ip' => $row['visitor_ip'],
 				'host' => $this->host_name->find_host_name($row['visitor_ip']),
 			);
-			$row['http_referer'] = str_replace(array("=", "%", ","), array(" = ", " % ", ", "), $row['http_referer']);
-			$row['request_uri'] = str_replace(array("=", "%", ","), array(" = ", " % ", ", "), $row['request_uri']);
+			$row['http_referer'] = array(
+				'original' => $row['http_referer'],
+				'converted' => str_replace(array("=", "%", ","), array(" = ", " % ", ", "), $row['http_referer']),
+			);
+			$row['request_uri'] = array(
+				'original' => $row['request_uri'],
+				'converted' => str_replace(array("=", "%", ","), array(" = ", " % ", ", "), $row['request_uri']),
+			);
 			$this->row_item = $row;
 			mysqli_free_result($result);
 		}
