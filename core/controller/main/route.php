@@ -26,7 +26,7 @@ $site_menu = $context->get_menu();
 
 $page_data = new PageController($db);
 $page_data->init($site_links, $site_path, $site_navbar, $site_menu);
-$page_data->set_content($content_title, $site_content);
+$page_data->set_content($content_title, $site_content, $content_options);
 $page_data->set_user($user);
 
 if (isset($site_message))
