@@ -94,7 +94,7 @@ $site_content = !empty($site_content) ? $site_content : NULL;
 // ścieżka strony:
 $site_path = array (
     'index.php' => 'Strona główna',
-    'index.php?route=' . MODULE_NAME . '&id=' . $id => $content_title
+    'index.php?route=' . MODULE_NAME . '&id=' . $id => $model_object->GetTitle($id),
 );
 
 // opcje dla podstrony:

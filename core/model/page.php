@@ -91,6 +91,22 @@ class Page_Model
 		
 		return $this->row_item;
 	}
+	
+	public function GetTitle($id)
+	{
+		$this->row_item = NULL;
+
+		$query = "SELECT title FROM " . $this->table_name . " WHERE visible=1 AND id=" . intval($id);
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result); 
+			$this->row_item = $row['title'];
+			mysqli_free_result($result);
+		}
+		
+		return $this->row_item;
+	}
 }
 
 ?>
