@@ -132,7 +132,7 @@ class Sites_Model
 					mysqli_real_escape_string($this->db, trim($record_item['contents'])) . "', '" . 
 					$record_item['author_id'] . "', '" . 
 					$record_item['visible'] . "', '" . 
-					$this->mySqlDateTime . "')";
+					$this->mySqlDateTime . "', 0)";
 		mysqli_query($this->db, $query);
 		
 		return mysqli_affected_rows($this->db);
@@ -224,7 +224,8 @@ class Sites_Model
 						mysqli_real_escape_string($this->db, $original_row_item['contents']) . "', '" . 
 						$original_row_item['author_id'] . "', '" . 
 						$original_row_item['visible'] . "', '" . 
-						$original_row_item['modified'] . "')";
+						$original_row_item['modified'] . "', '" .
+						$original_row_item['previews'] . "')";
 			mysqli_query($this->db, $query);
 			
 			return mysqli_affected_rows($this->db);
@@ -257,6 +258,7 @@ class Sites_Model
 					"', author_id='" . $record_item['author_id'] . 
 					"', visible='" . $record_item['visible'] . 
 					"', modified='" . $record_item['modified'] . 
+					"', previews='" . $record_item['previews'] . 
 					"' WHERE id=" . intval($record_item['page_id']);
 		mysqli_query($this->db, $query);
 

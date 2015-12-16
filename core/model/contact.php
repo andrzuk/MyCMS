@@ -29,6 +29,8 @@ class Contact_Model
 	{
 		$this->row_item = array();
 
+		$this->UpdatePreviews();
+
 		$query = "SELECT * FROM pages WHERE visible=1 AND main_page=2";
 		$result = mysqli_query($this->db, $query);
 		if ($result)
@@ -55,6 +57,16 @@ class Contact_Model
 			}
 		}
 		return $this->row_item;
+	}
+	
+	private function UpdatePreviews()
+	{
+		$query = "UPDATE " . $this->table_name . 
+					" SET previews = previews + 1" .
+					" WHERE visible=1 AND main_page=2";
+		mysqli_query($this->db, $query);
+		
+		return mysqli_affected_rows($this->db);
 	}
 	
 	public function Receive($record_item, $send_object, $send_copy)

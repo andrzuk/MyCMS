@@ -20,6 +20,8 @@ class Page_Model
 	public function GetPageContent($id)
 	{
 		$this->row_item = array();
+		
+		$this->UpdatePreviews($id);
 
 		$query = "SELECT * FROM " . $this->table_name . " WHERE visible=1 AND id=" . intval($id);
 		$result = mysqli_query($this->db, $query);
@@ -49,6 +51,16 @@ class Page_Model
 		}
 		
 		return $this->row_item;
+	}
+	
+	private function UpdatePreviews($id)
+	{
+		$query = "UPDATE " . $this->table_name . 
+					" SET previews = previews + 1" .
+					" WHERE visible=1 AND id=" . intval($id);
+		mysqli_query($this->db, $query);
+		
+		return mysqli_affected_rows($this->db);
 	}
 	
 	public function GetAuthors()

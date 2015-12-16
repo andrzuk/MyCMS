@@ -21,6 +21,8 @@ class Category_Model
 	{
 		$this->row_item = array();
 
+		$this->UpdatePreviews($id);
+
 		$query = "SELECT " . $this->table_name . ".*" . 
 				" FROM " . $this->table_name . 
 				" INNER JOIN categories ON categories.id = " . $this->table_name . ".category_id" .
@@ -55,6 +57,16 @@ class Category_Model
 		return $this->row_item;
 	}	
 
+	private function UpdatePreviews($id)
+	{
+		$query = "UPDATE " . $this->table_name . 
+					" SET previews = previews + 1" .
+					" WHERE visible=1 AND category_id=" . intval($id);
+		mysqli_query($this->db, $query);
+		
+		return mysqli_affected_rows($this->db);
+	}
+	
 	public function GetAuthors()
 	{
 		$this->rows_list = array();

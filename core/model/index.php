@@ -21,6 +21,8 @@ class Index_Model
 	{
 		$this->row_item = array();
 
+		$this->UpdatePreviews();
+
 		$query = "SELECT * FROM " . $this->table_name . " WHERE visible=1 AND main_page=1";
 		$result = mysqli_query($this->db, $query);
 		if ($result)
@@ -48,6 +50,16 @@ class Index_Model
 		}
 		return $this->row_item;
 	}	
+	
+	private function UpdatePreviews()
+	{
+		$query = "UPDATE " . $this->table_name . 
+					" SET previews = previews + 1" .
+					" WHERE visible=1 AND main_page=1";
+		mysqli_query($this->db, $query);
+		
+		return mysqli_affected_rows($this->db);
+	}
 	
 	public function GetAuthors()
 	{

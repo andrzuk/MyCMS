@@ -96,6 +96,7 @@ $sql = array(
 				  `author_id` int(11) unsigned NOT NULL,
 				  `visible` tinyint(1) NOT NULL,
 				  `modified` datetime NOT NULL,
+				  `previews` int(11) unsigned NOT NULL,
 				  PRIMARY KEY (`id`),
 				  KEY `page_id` (`page_id`),
 				  KEY `fk_pages_users` (`author_id`)
@@ -196,6 +197,7 @@ $sql = array(
 				  `author_id` int(11) unsigned NOT NULL,
 				  `visible` tinyint(1) NOT NULL,
 				  `modified` datetime NOT NULL,
+				  `previews` int(11) unsigned NOT NULL,
 				  PRIMARY KEY (`id`),
 				  KEY `category_id` (`category_id`),
 				  KEY `fk_pages_users` (`author_id`)
@@ -420,12 +422,12 @@ $sql = array(
 				(58, 'email_remindpwd_body_2', 'Zaloguj się, a następnie zmień hasło na swoje własne.', 'treść generowanego maila z nowym hasłem - za hasłem', 2, 1, '$save_time');
 			",
 			"
-				INSERT INTO `pages` (`id`, `main_page`, `system_page`, `category_id`, `title`, `contents`, `author_id`, `visible`, `modified`) VALUES
-				(1, 1, 1, 0, 'Strona główna', '<h1>Serwis $short_title</h1><h2>$main_title</h2><h3>Strona główna</h3><p>$main_description</p>', 1, 1, '$save_time'),
-				(2, 2, 1, 0, 'Kontakt', '<style>\r\np.contact { margin: 0; padding: 0; }\r\ntd.form { vertical-align: top; margin: 0; padding: 0 0 10px 0; }\r\ntd.map { padding-bottom: 20px; text-align: center; }\r\nh2.info, h3.info { margin: 0; padding: 0px 0px 10px 50px; }\r\n</style>\r\n\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\r\n<tr>\r\n<td class=\"map\" colspan=\"2\">\r\n<p.contact style=\"text-align: center;\">\r\n<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4867.701649478604!2d16.91226795315743!3d52.40937977092189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x6201d17fe9c37f41!2sDZ+Bank+Polska+S.A.+Centrum+Bankowo%C5%9Bci+Korporacyjnej!5e0!3m2!1spl!2sus!4v1417506974043\" width=\"100%\" height=\"300\" frameborder=\"0\" style=\"border: #aaa 1px solid;\"></iframe>\r\n\r\n</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td class=\"form\">\r\n<h2 class=\"info\">e-mail: <a href=\"mailto:andrzuk@tlen.pl\">andrzuk@tlen.pl</a></h2>\r\n<h2 class=\"info\">#GG: <a href=\"gg:5684331\">5684331</a></h2>\r\n<h2 class=\"info\">twitter: <a href=\"https://twitter.com/andy_zukowski\" target=\"_blank\">@andy_zukowski</a></h2>\r\n<h2 class=\"info\">facebook: <a href=\"https://www.facebook.com/zukowski.andrzej\" target=\"_blank\">/zukowski.andrzej</a></h2>\r\n<h2 class=\"info\">LinkedIn: <a href=\"https://pl.linkedin.com/in/andrzejzukowski\" target=\"_blank\">/andrzejzukowski</a></h2>\r\n</td>\r\n<td>\r\n{_contact_form_}\r\n</td>\r\n</tr>\r\n</table>', 1, 1, '$save_time'),
-				(3, 0, 1, 0, 'Regulamin serwisu', 'Regulamin serwisu.', 1, 1, '$save_time'),
-				(4, 0, 1, 0, 'Pomoc techniczna', 'Pomoc techniczna.', 1, 1, '$save_time'),
-				(5, 0, 1, 0, 'Polityka plików cookies', 'Polityka plików cookies.', 1, 1, '$save_time');
+				INSERT INTO `pages` (`id`, `main_page`, `system_page`, `category_id`, `title`, `contents`, `author_id`, `visible`, `modified`, `previews`) VALUES
+				(1, 1, 1, 0, 'Strona główna', '<h1>Serwis $short_title</h1><h2>$main_title</h2><h3>Strona główna</h3><p>$main_description</p>', 1, 1, '$save_time', 0),
+				(2, 2, 1, 0, 'Kontakt', '<style>\r\np.contact { margin: 0; padding: 0; }\r\ntd.form { vertical-align: top; margin: 0; padding: 0 0 10px 0; }\r\ntd.map { padding-bottom: 20px; text-align: center; }\r\nh2.info, h3.info { margin: 0; padding: 0px 0px 10px 50px; }\r\n</style>\r\n\r\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\r\n<tr>\r\n<td class=\"map\" colspan=\"2\">\r\n<p.contact style=\"text-align: center;\">\r\n<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4867.701649478604!2d16.91226795315743!3d52.40937977092189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x6201d17fe9c37f41!2sDZ+Bank+Polska+S.A.+Centrum+Bankowo%C5%9Bci+Korporacyjnej!5e0!3m2!1spl!2sus!4v1417506974043\" width=\"100%\" height=\"300\" frameborder=\"0\" style=\"border: #aaa 1px solid;\"></iframe>\r\n\r\n</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td class=\"form\">\r\n<h2 class=\"info\">e-mail: <a href=\"mailto:andrzuk@tlen.pl\">andrzuk@tlen.pl</a></h2>\r\n<h2 class=\"info\">#GG: <a href=\"gg:5684331\">5684331</a></h2>\r\n<h2 class=\"info\">twitter: <a href=\"https://twitter.com/andy_zukowski\" target=\"_blank\">@andy_zukowski</a></h2>\r\n<h2 class=\"info\">facebook: <a href=\"https://www.facebook.com/zukowski.andrzej\" target=\"_blank\">/zukowski.andrzej</a></h2>\r\n<h2 class=\"info\">LinkedIn: <a href=\"https://pl.linkedin.com/in/andrzejzukowski\" target=\"_blank\">/andrzejzukowski</a></h2>\r\n</td>\r\n<td>\r\n{_contact_form_}\r\n</td>\r\n</tr>\r\n</table>', 1, 1, '$save_time', 0),
+				(3, 0, 1, 0, 'Regulamin serwisu', 'Regulamin serwisu.', 1, 1, '$save_time', 0),
+				(4, 0, 1, 0, 'Pomoc techniczna', 'Pomoc techniczna.', 1, 1, '$save_time', 0),
+				(5, 0, 1, 0, 'Polityka plików cookies', 'Polityka plików cookies.', 1, 1, '$save_time', 0);
 			",
 			"
 				INSERT INTO `users` (`id`, `user_login`, `user_password`, `imie`, `nazwisko`, `email`, `status`, `ulica`, `kod`, `miasto`, `pesel`, `telefon`, `data_rejestracji`, `data_logowania`, `data_modyfikacji`, `data_wylogowania`, `active`) VALUES

@@ -31,6 +31,7 @@ class Page_View
 		$site_title = NULL;
 		$site_modified = NULL;
 		$author_login = NULL;
+		$site_previews = NULL;
 		
 		foreach ($import as $i => $j)
 		{
@@ -54,14 +55,15 @@ class Page_View
 			{
 				if ($key == 'title') $site_title .= $value;
 				if ($key == 'modified') $site_modified .= $value;
+				if ($key == 'previews') $site_previews .= $value;
 			}
+			$site_title .= '<span class="PageSignature">';
+			$site_title .= '<img src="img/16x16/date.png" class="IconSignature" alt="date" />' . $site_modified;
+			$site_title .= '<img src="img/16x16/user.png" class="IconSignature" alt="author" />' . $author_login;
+			$site_title .= '<img src="img/16x16/web.png" class="IconSignature" alt="previews" />' . $site_previews;
+			$site_title .= '</span>';
 		}
 		
-		$site_title .= '<span class="PageSignature">';
-		$site_title .= '<img src="img/16x16/date.png" class="IconSignature" alt="article date" />' . $site_modified;
-		$site_title .= '<img src="img/16x16/user.png" class="IconSignature" alt="article author" />' . $author_login;
-		$site_title .= '</span>';
-
 		return $site_title;
 	}
 }
