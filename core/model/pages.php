@@ -218,7 +218,7 @@ class Pages_Model
 						mysqli_real_escape_string($this->db, $original_row_item['contents']) . "', '" . 
 						$original_row_item['author_id'] . "', '" . 
 						$original_row_item['visible'] . "', '" . 
-						$original_row_item['modified'] . ", '" .
+						$original_row_item['modified'] . "', '" .
 						$original_row_item['previews'] . "')";
 			mysqli_query($this->db, $query);
 			
