@@ -228,24 +228,27 @@ class PageController extends Controller
 		
 		$this->title .= '<span class="PageSignature">';
 		
-		foreach ($this->options as $key => $val)
+		if (is_array($this->options))
 		{
-			if (is_array($val))
+			foreach ($this->options as $key => $val)
 			{
-				foreach ($val as $k => $v)
+				if (is_array($val))
 				{
-					if ($k == 'address') $address = $v;
-					if ($k == 'caption') $caption = $v;
-					if ($k == 'icon') $icon = $v;
-				}				
-				$this->title .= '<span class="PageAction">';
-				$this->title .= '<a href="'.$address.'"><img src="'.$icon.'" class="IconSignature" />'.$caption.'</a>';
-				$this->title .= '</span>';
-				
-				if ($caption == 'Zamknij') break;
+					foreach ($val as $k => $v)
+					{
+						if ($k == 'address') $address = $v;
+						if ($k == 'caption') $caption = $v;
+						if ($k == 'icon') $icon = $v;
+					}				
+					$this->title .= '<span class="PageAction">';
+					$this->title .= '<a href="'.$address.'"><img src="'.$icon.'" class="IconSignature" />'.$caption.'</a>';
+					$this->title .= '</span>';
+					
+					if ($caption == 'Zamknij') break;
+				}
 			}
 		}
-		
+				
 		$this->title .= '</span>';
 		
 		$output .= '<div class="WindowHeader">';
