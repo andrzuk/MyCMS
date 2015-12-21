@@ -37,144 +37,163 @@ $content_options = $page_options->get_options('login');
 // brakujące pola:
 $failed = array();
 
-if (isset($_POST['login_button'])) // obsługa formularza
+if (!isset($_SESSION['user_status']) || !$_SESSION['user_status']) // nie zalogowany
 {
-	if (!isset($_SESSION['form_sent']) || $_POST['form_hash'] != $_SESSION['form_sent']) // wysłano formularz
+	if (isset($_POST['login_button'])) // obsługa formularza
 	{
-		$_SESSION['form_sent'] = $_POST['form_hash'];
-
-		$login = isset($_POST['login']) ? htmlspecialchars(trim($_POST['login'])) : NULL;
-		$password = isset($_POST['password']) ? htmlspecialchars(trim($_POST['password'])) : NULL;
-		
-		// resetuje ustawienia uzytkownika:
-		$_SESSION['user_id'] = 0;
-		$_SESSION['user_status'] = 0;
-		$_SESSION['user_login'] = NULL;
-		$_SESSION['user_name'] = NULL;
-
-		// zapamiętuje dane w formularzu:
-		$_SESSION['form_fields']['login'] = $login;
-		$_SESSION['form_fields']['password'] = $password;
-
-		// wymagane pola:
-		$required = array(
-			'login' => $login, 
-			'password' => $password
-		);
-
-		foreach ($required as $k => $v)
-			if (empty($v)) $failed[] = $k;
-		
-		// sprawdzanie czy uzupełniono wszystkie dane:
-		if (empty($failed))
+		if (!isset($_SESSION['form_sent']) || $_POST['form_hash'] != $_SESSION['form_sent']) // wysłano formularz
 		{
-			$record_object = array(
-				'user_login' => $login, 
-				'user_password' => $password
+			$_SESSION['form_sent'] = $_POST['form_hash'];
+
+			$login = isset($_POST['login']) ? htmlspecialchars(trim($_POST['login'])) : NULL;
+			$password = isset($_POST['password']) ? htmlspecialchars(trim($_POST['password'])) : NULL;
+			
+			// resetuje ustawienia uzytkownika:
+			$_SESSION['user_id'] = 0;
+			$_SESSION['user_status'] = 0;
+			$_SESSION['user_login'] = NULL;
+			$_SESSION['user_name'] = NULL;
+
+			// zapamiętuje dane w formularzu:
+			$_SESSION['form_fields']['login'] = $login;
+			$_SESSION['form_fields']['password'] = $password;
+
+			// wymagane pola:
+			$required = array(
+				'login' => $login, 
+				'password' => $password
 			);
 
-			$input_check = NULL;
-			foreach ($record_object as $k => $v) 
-				$input_check .= $v .' ';
-
-			include LIB_DIR . 'validator.php';
+			foreach ($required as $k => $v)
+				if (empty($v)) $failed[] = $k;
 			
-			$validator_object = new Validator();
-			
-			$check_result = $validator_object->check_security($input_check);
-			
-			if ($check_result) // kontrola bezpieczeństwa poprawna
+			// sprawdzanie czy uzupełniono wszystkie dane:
+			if (empty($failed))
 			{
-				// weryfikuje użytkownika na podstawie bazy:
+				$record_object = array(
+					'user_login' => $login, 
+					'user_password' => $password
+				);
+
+				$input_check = NULL;
+				foreach ($record_object as $k => $v) 
+					$input_check .= $v .' ';
+
+				include LIB_DIR . 'validator.php';
 				
-				$result = $model_object->Login($record_object);
+				$validator_object = new Validator();
 				
-				if ($result) // logowanie się powiodło
+				$check_result = $validator_object->check_security($input_check);
+				
+				if ($check_result) // kontrola bezpieczeństwa poprawna
 				{
-					// ustawia użytkownika:
-					$_SESSION['user_id'] = $result['id'];
-					$_SESSION['user_status'] = $result['status'];
-					$_SESSION['user_imie'] = $result['imie'];
-					$_SESSION['user_nazwisko'] = $result['nazwisko'];
-					$_SESSION['user_login'] = $result['user_login'];
-					$_SESSION['user_email'] = $result['email'];
+					// weryfikuje użytkownika na podstawie bazy:
 					
-					$site_dialog = array(
-						'INFORMATION',
-						'Logowanie',
-						'Zostałeś poprawnie zalogowany do serwisu.',
-						array(
+					$result = $model_object->Login($record_object);
+					
+					if ($result) // logowanie się powiodło
+					{
+						// ustawia użytkownika:
+						$_SESSION['user_id'] = $result['id'];
+						$_SESSION['user_status'] = $result['status'];
+						$_SESSION['user_imie'] = $result['imie'];
+						$_SESSION['user_nazwisko'] = $result['nazwisko'];
+						$_SESSION['user_login'] = $result['user_login'];
+						$_SESSION['user_email'] = $result['email'];
+						
+						$site_dialog = array(
+							'INFORMATION',
+							'Logowanie',
+							'Zostałeś poprawnie zalogowany do serwisu.',
 							array(
-								'index.php?route=admin', 'Panel'
-							),
-							array(
-								'index.php?route=profile', 'Profil'
-							),
-						)
-					);
+								array(
+									'index.php?route=admin', 'Panel'
+								),
+								array(
+									'index.php?route=profile', 'Profil'
+								),
+							)
+						);
+					}
+					else // logowanie się nie powiodło
+					{
+						// wyświetla pusty formularz:
+						$site_content = $view_object->ShowForm(NULL, $failed);
+						
+						// wyświetla komunikat:
+						$site_message = array(
+							'ERROR', 'Nieprawidłowy login lub e-mail lub hasło lub też konto zostało zablokowane.'
+						);
+					}
+					
+					$login_object = array('server' => $_SERVER, 'session' => $_SESSION);
+					
+					// rejestruje próbę logowania:
+					$model_object->Store($record_object, $login_object);
 				}
-				else // logowanie się nie powiodło
+				else // nie przeszło kontroli bezpieczeństwa
 				{
 					// wyświetla pusty formularz:
 					$site_content = $view_object->ShowForm(NULL, $failed);
 					
 					// wyświetla komunikat:
 					$site_message = array(
-						'ERROR', 'Nieprawidłowy login lub e-mail lub hasło lub też konto zostało zablokowane.'
+						'ERROR', 'Do pól formularza wprowadzono zabronione wyrażenia.'
 					);
 				}
-				
-				$login_object = array('server' => $_SERVER, 'session' => $_SESSION);
-				
-				// rejestruje próbę logowania:
-				$model_object->Store($record_object, $login_object);
 			}
-			else // nie przeszło kontroli bezpieczeństwa
+			else // nie uzupełniono wszystkich pól
 			{
 				// wyświetla pusty formularz:
 				$site_content = $view_object->ShowForm(NULL, $failed);
 				
 				// wyświetla komunikat:
 				$site_message = array(
-					'ERROR', 'Do pól formularza wprowadzono zabronione wyrażenia.'
+					'WARNING', 'Proszę wpisać login lub e-mail oraz hasło.'
 				);
 			}
 		}
-		else // nie uzupełniono wszystkich pól
+		else // odświeżono formularz
 		{
-			// wyświetla pusty formularz:
-			$site_content = $view_object->ShowForm(NULL, $failed);
-			
-			// wyświetla komunikat:
-			$site_message = array(
-				'WARNING', 'Proszę wpisać login lub e-mail oraz hasło.'
+			$content_options = $page_options->get_options(NULL);
+
+			$site_dialog = array(
+				'WARNING',
+				'Niedozwolona operacja',
+				'Formularz został już wysłany i nie należy go odświeżać.',
+				array(
+					array(
+						'index.php', 'Zamknij'
+					),
+				)
 			);
 		}
 	}
-	else // odświeżono formularz
+	else // pusty formularz
 	{
-		$content_options = $page_options->get_options(NULL);
-
-		$site_dialog = array(
-			'WARNING',
-			'Niedozwolona operacja',
-			'Formularz został już wysłany i nie należy go odświeżać.',
-			array(
-				array(
-					'index.php', 'Zamknij'
-				),
-			)
-		);
+		// czyści dane w formularzu:
+		$_SESSION['form_fields']['login'] = NULL;
+		$_SESSION['form_fields']['password'] = NULL;
+		
+		// wyświetla pusty formularz:
+		$site_content = $view_object->ShowForm(NULL, $failed);
 	}
 }
-else // pusty formularz
+else // zalogowany
 {
-	// czyści dane w formularzu:
-	$_SESSION['form_fields']['login'] = NULL;
-	$_SESSION['form_fields']['password'] = NULL;
-	
-	// wyświetla pusty formularz:
-	$site_content = $view_object->ShowForm(NULL, $failed);
+	$site_dialog = array(
+		'WARNING',
+		'Logowanie',
+		'Zostałeś już zalogowany do serwisu.',
+		array(
+			array(
+				'index.php?route=logout', 'Wyloguj'
+			),
+			array(
+				'index.php', 'Zamknij'
+			),
+		)
+	);
 }
 
 /*
