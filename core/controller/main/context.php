@@ -692,7 +692,9 @@ class Context
 		$output .= '<a href="http://www.linkedin.com/profile/view?id=93739159&trk=hb_tab_pro_top" target="_blank"><img src="img/linkedin.png" style="border: 0px solid #fff;" alt="linkedin" title="Znajdź nas na LinkedIn" /></a>&nbsp;';
 		$output .= '<a href="https://twitter.com/andy_zukowski" target="_blank"><img src="img/twitter.png" style="border: 0px solid #fff;" alt="twitter" title="Znajdź nas na Twitterze" /></a>&nbsp;';
 		$output .= '<a href="https://plus.google.com/u/0/113303165754486219878" target="_blank"><img src="img/google_plus.png" style="border: 0px solid #fff;" alt="google+" title="Znajdź nas na Google Plus" /></a>&nbsp;';
+		/*
 		$output .= '<a href="http://osoby.yasni.pl/andrzej+zukowski+1473151" target="_blank"><img src="http://www.yasni.pl/yasni_button.php?btn=22&lng=pl" width="32" height="32" border="0" alt="yasni.pl | No. 1 free people search - Find anyone on the web" title="Znajdź nas na Yasni" /></a>';
+		*/
 
 		$output .= '<div class="Separator"></div>';
 		

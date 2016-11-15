@@ -396,7 +396,7 @@ $sql = array(
 				(32, 'page_pointer_band', '4', 'liczebność (połowa) paska ze wskaźnikami stron w pasku nawigacji', 1, 1, '$save_time'),
 				(33, 'using_office_editor', 'false', 'użycie edytora tekstów typu WYSIWYG (układ Office-a)', 3, 1, '$save_time'),
 				(34, 'starting_office_editor', 'false', 'automatyczne uruchomienie edytora tekstów typu WYSIWYG (układ Office-a)', 3, 1, '$save_time'),
-				(35, 'office_editor_location', 'http://active-cms.eu/ckeditor/', 'położenie edytora Office-a wykorzystywanego do edycji artykułów', 2, 1, '$save_time'),
+				(35, 'office_editor_location', 'lib/editor', 'położenie edytora Office-a wykorzystywanego do edycji artykułów', 2, 1, '$save_time'),
 				(36, 'chart_library_path', '../pChart', 'ścieżka do biblioteki renderowania wykresów', 2, 1, '$save_time'),
 				(37, 'chart_images_path', '../pChart/tmp/', 'ścieżka do wyrenderowanych obrazów wykresów', 1, 1, '$save_time'),
 				(38, 'chart_width', '740', 'szerokość wykresu statystyk serwisu', 1, 1, '$save_time'),

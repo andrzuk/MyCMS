@@ -114,7 +114,9 @@ class ViewBuilder
 							if ($iik == 'caption') $item_caption = $iiv;
 						}
 						$main_text .= '<div>';
-						$main_text .= '<span style="padding-right: 20px;">' . $item_caption . '</span><span><a href="index.php?route=' . $this->module . '&action=restore&id=' . $item_id . '"><img src="img/16x16/archives.png" class="TopLinkIcon" alt="restore" title="Przywróć" /></a></span>';
+						$main_text .= '<span style="padding-right: 20px;">' . $item_caption . '</span>';
+						$main_text .= '<span><a href="index.php?route=' . $this->module . '&action=preview&id=' . $item_id . '"><img src="img/16x16/page_view.png" class="TopLinkIcon" alt="preview" title="Podgląd" /></a></span>';
+						$main_text .= '<span><a href="index.php?route=' . $this->module . '&action=restore&id=' . $item_id . '"><img src="img/16x16/archives.png" class="TopLinkIcon" alt="restore" title="Przywróć" /></a></span>';
 						$main_text .= '</div>';
 					}
 				}

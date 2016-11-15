@@ -202,7 +202,7 @@ class PageController extends Controller
 		{
 			$output .= 'Zalogowany: <b>' . $user_imie .' '. $user_nazwisko . '</b>&nbsp;-&nbsp;'.
 				'<a href="index.php?route=logout" class="PathLink">'.
-				'<img src="img/stop.png" class="TopLinkIcon" alt="Logout" />Wyloguj</a>';
+				'<img src="img/logout.png" class="TopLinkIcon" alt="Logout" />Wyloguj</a>';
 		}
 		else
 		{

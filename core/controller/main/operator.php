@@ -1215,6 +1215,33 @@ class Operator
 		}
 	}
 	
+	// podgląd wersji:
+	
+	public function ShowPreview($id, $params, $access, $acl)
+	{
+		$this->content_title = $params['content_title'];
+		
+		if (in_array($this->user_status, $access) && $acl) // są uprawnienia
+		{
+			$this->content_options = $params['content_options'];
+			
+			// ograniczenia dla usera:
+			$restrict_id = isset($params['restrict']) ? $params['restrict'] : NULL;
+			
+			$id = $restrict_id ? $restrict_id : $id;
+			
+			// pobiera rekord o danym Id:
+			$this->record_object = $this->model_object->GetArchiveContent($id);
+			
+			// wyświetla stronę w danej wersji:
+			$this->site_content = $this->view_object->PreviewArchive($this->record_object);
+		}
+		else // brak uprawnień
+		{
+			$this->AccessDenied();
+		}
+	}
+	
 	// lista:
 	
 	public function DrawList($params, $access, $acl)

@@ -206,7 +206,7 @@ class FormBuilder
 								$main_text .= '<tr class="FormRow">';
 								$main_text .= '<td class="FormCell" colspan="'. $this->columns .'">';
 							}
-							$main_text .= '<textarea ';
+							$main_text .= '<textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ';
 							foreach ($arr_val as $atr_key => $atr_value)
 							{
 								if ($atr_key == 'id') $main_text .= 'id="'.$atr_value.'" ';

@@ -236,6 +236,25 @@ if (isset($_GET['action'])) // add, view, edit, delete
 			$controller_object->Restore($id, $params, $access, $acl->available());
 		}
 		break;
+
+		// podgląd wersji:
+		
+		case 'preview':
+		{
+			$content_options = $page_options->get_options('add');
+			
+			$params = array(
+				'content_title' => $content_title . ' - Podgląd',
+				'content_options' => $content_options
+			);
+			
+			$access = array(ADMIN, OPERATOR);
+			
+			$acl = new AccessControlList(MODULE_NAME, $db);
+			
+			$controller_object->ShowPreview($id, $params, $access, $acl->available());
+		}
+		break;
 	}
 }
 else // list of all

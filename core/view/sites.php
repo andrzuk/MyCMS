@@ -319,6 +319,31 @@ class Sites_View
 		
 		return $site_content;
 	}
+	
+	/*
+	 * Podgląd
+	 */
+	
+	public function PreviewArchive($row)
+	{
+		$site_content = NULL;
+		
+		$site_content .= '<div class="PageMainContent">';
+		
+		if (is_array($row))
+		{
+			foreach ($row as $key => $value)
+			{
+				if ($key == 'contents') $site_content .= $value;
+			}
+		}
+		
+		$site_content .= '</div>';
+		
+		$site_content = empty($row) ? NULL : $site_content;
+		
+		return $site_content;
+	}
 }
 
 ?>

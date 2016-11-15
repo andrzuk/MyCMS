@@ -313,6 +313,22 @@ class Pages_Model
 		}
 		return $category_id;
 	}
+	
+	public function GetArchiveContent($id)
+	{
+		$this->row_item = array();
+		
+		$query = "SELECT * FROM archives WHERE visible=1 AND id=" . intval($id);
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result); 
+			$this->row_item = $row;
+			mysqli_free_result($result);
+		}
+		
+		return $this->row_item;
+	}
 }
 
 ?>

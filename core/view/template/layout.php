@@ -6,13 +6,13 @@ echo '<html lang="en">';
 
 echo '<head>';
 
-echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_editor().'/contents.css" />';
+echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_editor().'/css/contents.css" />';
 echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'/css/default.css" />';
 echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'/css/jquery.bxslider.css" />';
 echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'/css/lightbox.css" />';
 echo '<link rel="shortcut icon" href="'.$page_data->get_domain().'/img/favicon.ico" type="image/x-icon">';
 echo '<link rel="icon" href="'.$page_data->get_domain().'/img/favicon.ico" type="image/x-icon">';
-echo '<script type="text/javascript" src="'.$page_data->get_editor().'ckeditor.js"></script>';		
+echo '<script type="text/javascript" src="'.$page_data->get_editor().'/js/ckeditor.js"></script>';
 echo '<script type="text/javascript" src="'.$page_data->get_domain().'/js/jquery.1.10.2.js"></script>';
 echo '<script type="text/javascript" src="'.$page_data->get_domain().'/js/jquery.bxslider.min.js"></script>';
 echo '<meta http-equiv="Content-Language" content="pl" />';
