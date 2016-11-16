@@ -47,6 +47,29 @@ class ViewBuilder
 		$this->buttons = $buttons;
 	}
 	
+	private function get_split_text($source, $length)
+	{
+		$result = NULL;
+		$idx = 0;
+		$broken = FALSE;
+
+		$source = str_replace(chr(13) . chr(10), chr(32), $source);
+		$words = explode(chr(32), $source);
+
+		foreach ($words as $k => $v)
+		{
+			$result .= $v . chr(32);
+			if ($idx++ >= $length) 
+			{
+				$broken = TRUE;
+				break;
+			}
+		}
+		$result = $broken ? $result . '...&nbsp;»' : trim($result);
+		
+		return $result;
+	}
+	
 	public function build_view()
 	{
 		$main_text = NULL;
@@ -138,7 +161,7 @@ class ViewBuilder
 						foreach ($this->row[$db_name] as $ik => $iv)
 						{
 							$main_text .= '<div>';
-							$main_text .= strip_tags($iv);
+							$main_text .= $this->get_split_text(strip_tags($iv), 10);
 							$main_text .= '</div>';
 						}
 					}
@@ -150,7 +173,7 @@ class ViewBuilder
 			}
 			else // zwykłe dane
 			{
-				$main_text .= strip_tags($this->row[$db_name]);
+				$main_text .= $this->get_split_text(strip_tags($this->row[$db_name]), 10);
 			}
 			$main_text .= '</td>';
 			$main_text .= '</tr>';
