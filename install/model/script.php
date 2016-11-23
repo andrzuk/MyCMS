@@ -358,7 +358,8 @@ $sql = array(
 				(13, 'registers', 'Rejestracje', 'registers'),
 				(14, 'logins', 'Logowania', 'logins'),
 				(15, 'passwords', 'Hasła', 'reminds'),
-				(16, 'style', 'Wygląd', 'style');
+				(16, 'script', 'Działanie', 'script'),
+				(17, 'style', 'Wygląd', 'style');
 			",
 			"
 				INSERT INTO `configuration` (`id`, `key_name`, `key_value`, `meaning`, `field_type`, `active`, `modified`) VALUES
@@ -450,7 +451,8 @@ $sql = array(
 				(13, 1, 13, 1),
 				(14, 1, 14, 1),
 				(15, 1, 15, 1),
-				(16, 1, 16, 1);
+				(16, 1, 16, 1),
+				(17, 1, 17, 1);
 			",
 		),
 	),

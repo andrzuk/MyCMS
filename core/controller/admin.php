@@ -54,11 +54,13 @@ if (in_array($user_status, $access)) // są uprawnienia
 
 	// wczytuje dodatkowe statystyki:
 	
-	include APP_DIR . 'model' . '/' . 'style' . '.php';
-
+	include APP_DIR . 'model' . '/' . 'style.php';
 	$additional_object = new Style_Model($db);
+	$style_record = $additional_object->GetSize();
 	
-	$additional_record = $additional_object->GetSize();
+	include APP_DIR . 'model' . '/' . 'script.php';
+	$additional_object = new Script_Model($db);
+	$script_record = $additional_object->GetSize();
 	
 	// pokazuje admin-panel:
 
@@ -74,8 +76,14 @@ if (in_array($user_status, $access)) // są uprawnienia
 				),
 				array(
 					'address' => 'index.php?route=style',
-					'label' => 'Wygląd'.' ('.$additional_record.')',
+					'label' => 'Wygląd'.' ('.$style_record.')',
 					'icon' => 'img/48x48/36.png',
+					'access' => in_array($user_status, array(ADMIN, OPERATOR)),
+				),
+				array(
+					'address' => 'index.php?route=script',
+					'label' => 'Działanie'.' ('.$script_record.')',
+					'icon' => 'img/48x48/55.png',
 					'access' => in_array($user_status, array(ADMIN, OPERATOR)),
 				),
 				array(
