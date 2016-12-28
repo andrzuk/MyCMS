@@ -166,16 +166,16 @@ class Messages_View
 		switch ($mode)
 		{
 			case 1:
-				$list_title = 'Lista - Nadesłane';
+				$list_title = strtoupper(MODULE_NAME) . ' - Nadesłane';
 				break;
 			case 2:
-				$list_title = 'Lista - Zatwierdzone';
+				$list_title = strtoupper(MODULE_NAME) . ' - Zatwierdzone';
 				break;
 			default:
-				$list_title = 'Lista - Wszystkie';
+				$list_title = strtoupper(MODULE_NAME) . ' - Wszystkie';
 				break;
 		}
-		$list_image = 'img/32x32/application_side_list.png';
+		$list_image = 'img/32x32/mail.png';
 
 		$main_list->init($list_title, $list_image);
 
@@ -233,7 +233,7 @@ class Messages_View
 		$main_view = new ViewBuilder();
 		
 		$view_title = 'Podgląd';
-		$view_image = 'img/32x32/list_edit.png';
+		$view_image = 'img/32x32/list.png';
 		$view_width = '600px';
 
 		$main_view->init($view_title, $view_image, $view_width);

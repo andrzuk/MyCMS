@@ -78,7 +78,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 						'index.php?route=script', 'Edytuj'
 					),
 					array(
-						'index.php', 'Zamknij', 'window.location.href=window.location.href'
+						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
 					),
 				)
 			);
@@ -115,7 +115,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 					'index.php?route=script', 'Edytuj'
 				),
 				array(
-					'index.php', 'Zamknij', 'window.location.href=window.location.href'
+					'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
 				),
 			)
 		);

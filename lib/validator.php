@@ -8,8 +8,12 @@ class Validator
 {
 	public function check_security($query)
 	{
+		/*
 		$restricted_words = array('use', 'grant', 'revoke', 'variables', 'outfile', 'shutdown', 'reload', 'process', 'replication', 'execute', 'insert', 'update', 'rename', 'delete', 'drop', 'alter', 'truncate', 'create', 'database', 'union', 'select', 'unhex', 'hex', 'concat', 'char');
 		$restricted_schema = array('%20Union%20', '%20Select%20', 'UNHEX(', 'HEX(', 'concat(', 'char(', 'table_schema', 'table_name', 'column_name', 'INFORMATION_SCHEMA.tables', 'INFORMATION_SCHEMA.columns');
+		*/
+		$restricted_words = array();
+		$restricted_schema = array();
 		
 		foreach ($restricted_words as $i => $item)
 		{

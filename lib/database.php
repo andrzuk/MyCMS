@@ -13,7 +13,7 @@ class Database
 	
 	public function __construct()
 	{
-		error_reporting(0);
+		error_reporting(E_ALL);
 	}
 	
 	public function init($host, $db, $usr, $pwd)

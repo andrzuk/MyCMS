@@ -220,8 +220,9 @@ class Config_View
 		
 		$main_list = new ListBuilder();
 		
-		$list_title = 'Lista - wszystkie pozycje';
-		$list_image = 'img/32x32/application_side_list.png';
+		$list_title = strtoupper(MODULE_NAME) . ' - Wszystkie';
+
+		$list_image = 'img/32x32/options.png';
 
 		$main_list->init($list_title, $list_image);
 
@@ -278,7 +279,7 @@ class Config_View
 		$main_view = new ViewBuilder();
 		
 		$view_title = 'Podgląd';
-		$view_image = 'img/32x32/list_edit.png';
+		$view_image = 'img/32x32/list.png';
 		$view_width = '600px';
 
 		$main_view->init($view_title, $view_image, $view_width);

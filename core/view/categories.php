@@ -322,16 +322,16 @@ class Categories_View
 		switch ($mode)
 		{
 			case 1:
-				$list_title = 'Lista - Pasek nawigacji';
+				$list_title = strtoupper(MODULE_NAME) . ' - Pasek nawigacji';
 				break;
 			case 2:
-				$list_title = 'Lista - Menu boczne';
+				$list_title = strtoupper(MODULE_NAME) . ' - Menu boczne';
 				break;
 			default:
-				$list_title = 'Lista - Wszystkie';
+				$list_title = strtoupper(MODULE_NAME) . ' - Wszystkie';
 				break;
 		}
-		$list_image = 'img/32x32/application_side_list.png';
+		$list_image = 'img/32x32/document-library.png';
 
 		$main_list->init($list_title, $list_image);
 
@@ -396,7 +396,7 @@ class Categories_View
 		$main_view = new ViewBuilder();
 		
 		$view_title = 'Podgląd';
-		$view_image = 'img/32x32/list_edit.png';
+		$view_image = 'img/32x32/list.png';
 		$view_width = '600px';
 
 		$main_view->init($view_title, $view_image, $view_width);
@@ -407,11 +407,11 @@ class Categories_View
 		
 		$main_view->set_columns($columns);
 
+		$main_view->set_buttons(array('edit', 'cancel',));
+
 		// render:
 		
 		$site_content = $main_view->build_view();
-		
-		$main_view->set_buttons(array('edit', 'cancel',));
 		
 		// View Generator.
 		

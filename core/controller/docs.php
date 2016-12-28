@@ -245,7 +245,7 @@ if (isset($_GET['action'])) // add, view, edit, delete, download, preview
 }
 else // list of all
 {
-	$list_options = $page_options->get_options('multi');
+	$content_options = $page_options->get_options('multi');
 	
 	$mode_options = array (
 		array (
@@ -260,7 +260,7 @@ else // list of all
 		),
 	);
 
-	$content_options = array_merge($list_options, $mode_options);
+	$content_options = array_merge($mode_options, $content_options);
 	
 	$params = array(
 		'content_title' => $content_title,
@@ -273,7 +273,7 @@ else // list of all
 
 	$controller_object->DrawList($params, $access, $acl->available());
 }
-			
+
 $content_title = $controller_object->Get('content_title');
 $content_options = $controller_object->Get('content_options');
 $site_content = $controller_object->Get('site_content');

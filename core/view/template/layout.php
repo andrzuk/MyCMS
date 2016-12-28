@@ -6,9 +6,9 @@ echo '<html lang="pl">';
 
 echo '<head>';
 
-echo '<meta charset="UTF-8" />';
+echo '<meta charset="utf-8">';
 /*
-echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_editor().'/contents.css" />';
+echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_editor().'css/contents.css" />';
 */
 echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'css/default.css" />';
 echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'css/jquery.bxslider.css" />';
@@ -16,31 +16,23 @@ echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'c
 echo '<link rel="shortcut icon" href="'.$page_data->get_domain().'img/favicon.ico" type="image/x-icon">';
 echo '<link rel="icon" href="'.$page_data->get_domain().'img/favicon.ico" type="image/x-icon">';
 /*
-echo '<script type="text/javascript" src="'.$page_data->get_editor().'ckeditor.js"></script>';		
+echo '<script type="text/javascript" src="'.$page_data->get_editor().'js/ckeditor.js"></script>';
 */
 echo '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>';
 echo '<script type="text/javascript" src="'.$page_data->get_domain().'js/jquery.bxslider.min.js"></script>';
 echo '<script type="text/javascript" src="'.$page_data->get_domain().'js/default.js"></script>';
-echo '<script type="text/javascript" src="'.$page_data->get_domain().'js/go.js"></script>';
-echo '<script type="text/javascript" src="'.$page_data->get_domain().'js/diagram.js"></script>';
 echo '<meta name="keywords" content="'.$page_data->get_keywords().'" />';
 echo '<meta name="description" content="'.$page_data->get_description().'" />';
 echo '<meta name="author" content="'.$page_data->get_author().'" />';
 echo '<meta name="robots" content="index, follow, all" />';
 echo '<meta name="googlebot" content="index, follow, all" />';
-echo '<meta name="distribution" content="global" />';
-echo '<meta name="revisit-after" content="2 days" />';
 echo '<meta name="copyright" content="'.$page_data->get_copyright().'" />';
 echo '<meta name="classification" content="'.$page_data->get_classification().'" />';
 echo '<meta name="publisher" content="'.$page_data->get_publisher().'" />';
 echo '<meta name="page-topic" content="'.$page_data->get_topic().'" />';
-echo '<meta name="rating" content="general" />';
-echo '<meta name="security" content="public" />';
-echo '<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />';
 echo '<title>'.$page_data->get_title().'</title>';
 echo '<base href="'.$page_data->get_domain().'" target="_self" />';
 
-// Google-Analytics script:
 echo "<script type=\"text/javascript\">";
 echo "  var _gaq = _gaq || [];";
 echo "  _gaq.push(['_setAccount', 'UA-16941734-5']);";
@@ -55,18 +47,6 @@ echo "</script>";
 echo '</head>';
 
 echo '<body>';
-
-// Facebook Javascript SDK:
-/*
-echo '<div id="fb-root"></div>';
-echo '<script>(function(d, s, id) {';
-echo 'var js, fjs = d.getElementsByTagName(s)[0];';
-echo 'if (d.getElementById(id)) return;';
-echo 'js = d.createElement(s); js.id = id;';
-echo 'js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1";';
-echo 'fjs.parentNode.insertBefore(js, fjs);';
-echo '}(document, \'script\', \'facebook-jssdk\'));</script>';
-*/
 
 echo '<div id="container" style="width: '.$page_data->get_site_width().';">';
 

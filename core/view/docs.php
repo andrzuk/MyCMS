@@ -420,16 +420,16 @@ class Docs_View
 		switch ($mode)
 		{
 			case 1:
-				$list_title = 'Lista - Dokumenty PDF';
+				$list_title = strtoupper(MODULE_NAME) . ' - Dokumenty PDF';
 				break;
 			case 2:
-				$list_title = 'Lista - Nagrania dźwiękowe MP3';
+				$list_title = strtoupper(MODULE_NAME) . ' - Nagrania dźwiękowe MP3';
 				break;
 			default:
-				$list_title = 'Lista - Wszystkie';
+				$list_title = strtoupper(MODULE_NAME) . ' - Wszystkie';
 				break;
 		}
-		$list_image = 'img/32x32/application_side_list.png';
+		$list_image = 'img/32x32/report_picture.png';
 
 		$main_list->init($list_title, $list_image);
 
@@ -490,7 +490,7 @@ class Docs_View
 		$main_view = new ViewBuilder();
 		
 		$view_title = 'Podgląd';
-		$view_image = 'img/32x32/list_edit.png';
+		$view_image = 'img/32x32/list.png';
 		$view_width = '600px';
 
 		$main_view->init($view_title, $view_image, $view_width);

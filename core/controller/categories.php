@@ -131,11 +131,14 @@ if (isset($_GET['action'])) // add, view, edit, delete
 			if ($page_id)
 			{
 				$additional_options = array (
-					'address' => 'index.php?route=pages&action=edit&id=' . $page_id,
-					'caption' => 'Edytuj stronę',
-					'icon' => 'img/category.png'
+					array (
+						'address' => 'index.php?route=pages&action=edit&id=' . $page_id,
+						'caption' => 'Edytuj stronę',
+						'icon' => 'img/category.png'
+					),
 				);
-				$content_options[] = $additional_options;
+				
+				$content_options = array_merge($additional_options, $content_options);
 			}
 
 			$params = array(

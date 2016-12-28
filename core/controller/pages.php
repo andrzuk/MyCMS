@@ -133,11 +133,14 @@ if (isset($_GET['action'])) // add, view, edit, delete
 			$content_options = $page_options->get_options('edit');
 
 			$additional_options = array (
-				'address' => 'index.php?route=categories&action=edit&id=' . $category_id,
-				'caption' => 'Edytuj kategorię',
-				'icon' => 'img/category.png'
+				array (
+					'address' => 'index.php?route=categories&action=edit&id=' . $category_id,
+					'caption' => 'Edytuj kategorię',
+					'icon' => 'img/category.png'
+				),
 			);
-			$content_options[] = $additional_options;
+			
+			$content_options = array_merge($additional_options, $content_options);
 
 			$params = array(
 				'content_title' => $content_title,
