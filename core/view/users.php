@@ -30,6 +30,8 @@ class Users_View
 		$telefon = isset($_SESSION['form_fields']['telefon']) ? $_SESSION['form_fields']['telefon'] : NULL;
 		$active = 1;
 		$data_modyfikacji = NULL;
+		$data_logowania = '2000-01-01 12:00:00';
+		$data_wylogowania = '2000-01-01 12:00:00';
 
 		if (is_array($row))
 		{
@@ -46,6 +48,8 @@ class Users_View
 			$telefon = $row['telefon'];
 			$active = $row['active']; 			
 			$data_modyfikacji = $row['data_modyfikacji'];
+			$data_logowania = $row['data_logowania'];
+			$data_wylogowania = $row['data_wylogowania'];
 		}
 
 		switch ($row['status'])
@@ -148,6 +152,12 @@ class Users_View
 							);
 			$form_input = Array('caption' => 'Login', 'data' => $form_data);
 			$form_inputs[] = $form_input;
+
+			$form_data = Array(
+							Array('type' => 'hidden', 'id' => 'data_logowania', 'name' => 'data_logowania', 'value' => $data_logowania),
+							Array('type' => 'hidden', 'id' => 'data_wylogowania', 'name' => 'data_wylogowania', 'value' => $data_wylogowania)
+							);
+			$form_hiddens[] = $form_data;
 		}
 				
 		$form_data = Array(

@@ -146,11 +146,14 @@ class Users_Model
 					mysqli_real_escape_string($this->db, $record_item['miasto']) . "', '" . 
 					mysqli_real_escape_string($this->db, $record_item['pesel']) . "', '" . 
 					mysqli_real_escape_string($this->db, $record_item['telefon']) . "', '" . 
-					$this->mySqlDateTime . "', '', '', '', '" . 
+					$this->mySqlDateTime . "', '" . 
+					$record_item['data_logowania'] . "', '" . 
+					$this->mySqlDateTime . "', '" . 
+					$record_item['data_wylogowania'] . "', '" . 
 					$record_item['active'] . "')";
 
 		mysqli_query($this->db, $query);
-		
+
 		$query = "SELECT id FROM " . $this->table_name . " ORDER BY id DESC LIMIT 0, 1";
 		$result = mysqli_query($this->db, $query);
 		$row = mysqli_fetch_assoc($result);
