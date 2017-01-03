@@ -6,11 +6,18 @@ class Init_Model
 	{
 	}
 	
-	public function GetIntro()
+	public function GetIntro($install_exists)
 	{
 		include 'intro.php';
 		
-		return $intro_content;
+		if ($install_exists) // tryb instalacji
+		{
+			return $intro_content;
+		}
+		else // tryb normalnej pracy
+		{
+			return $connection_content;
+		}
 	}
 }
 

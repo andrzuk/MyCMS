@@ -277,9 +277,9 @@ class Categories_View
 		// hiddens (dodatkowe informacje fomularza):
 		
 		$form_data = Array(
-						Array('type' => 'hidden', 'id' => 'level', 'name' => 'level', 'value' => NULL),
-						Array('type' => 'hidden', 'id' => 'icon_id', 'name' => 'icon_id', 'value' => NULL),
-						Array('type' => 'hidden', 'id' => 'page_id', 'name' => 'page_id', 'value' => NULL),
+						Array('type' => 'hidden', 'id' => 'level', 'name' => 'level', 'value' => $level),
+						Array('type' => 'hidden', 'id' => 'icon_id', 'name' => 'icon_id', 'value' => $icon_id),
+						Array('type' => 'hidden', 'id' => 'page_id', 'name' => 'page_id', 'value' => $page_id),
 						);
 		$form_hiddens[] = $form_data;
 			

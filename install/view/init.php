@@ -41,14 +41,14 @@ class Init_View
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
-		// action:
-		
+		// action:		
+
 		$form_action = 'index.php';
-		
+
 		$main_form->set_action($form_action);
 		
 		// failed:
-		
+
 		$main_form->set_failed($failed);
 
 		// inputs:
@@ -138,6 +138,21 @@ class Init_View
 		// render:
 		
 		$site_content = $main_form->build_form();
+		
+		// java script:
+		
+		$site_content .= '
+			<script>
+				document.getElementById("save_button").onclick = function() {
+					var message = document.createElement("p");
+					message.setAttribute("style", "text-align: center; line-height: 8px; font-size: 1.5em; font-weight: bold; color: red;");
+					var text = document.createTextNode("Proszę czekać. Trwa konfigurowanie serwisu...");
+					message.appendChild(text);
+					document.getElementById("save_button").hidden = true;
+					document.getElementsByClassName("ButtonBar")[0].appendChild(message);
+				}
+			</script>
+		';
 
 		// Form Generator.
 		

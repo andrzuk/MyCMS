@@ -4,11 +4,11 @@ define ('MODULE_NAME', 'init');
 
 $content_title = 'Instalacja serwisu';
 
-include 'model' . '/' . MODULE_NAME . '.php';
+include dirname(__FILE__) . '/../../' . INSTALL_DIR . 'model' . '/' . MODULE_NAME . '.php';
 
 $model_object = new Init_Model($db);
 
-include 'view' . '/' . MODULE_NAME . '.php';
+include dirname(__FILE__) . '/../../' . INSTALL_DIR . 'view' . '/' . MODULE_NAME . '.php';
 
 $view_object = new Init_View($db);
 

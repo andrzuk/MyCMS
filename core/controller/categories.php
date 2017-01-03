@@ -256,7 +256,7 @@ else // list of all
 		),
 	);
 
-	$content_options = array_merge($list_options, $mode_options);
+	$content_options = array_merge($mode_options, $list_options);
 		
 	$params = array(
 		'content_title' => $content_title,

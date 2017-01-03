@@ -94,8 +94,8 @@ if (in_array($user_status, $access)) // są uprawnienia
 				),
 				array(
 					'address' => 'index.php?route=roles',
-					'label' => 'Access Control List'.' ('.$record_object[14].')',
-					'icon' => 'img/48x48/09.png',
+					'label' => 'Kontrola dostępu'.' ('.$record_object[14].')',
+					'icon' => 'img/48x48/60.png',
 					'access' => in_array($user_status, array(ADMIN)),
 				),
 				array(

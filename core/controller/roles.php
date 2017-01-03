@@ -418,7 +418,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 			),
 		);
 
-		$content_options = array_merge($list_options, $function_options);
+		$content_options = array_merge($function_options, $list_options);
 
 		// pobiera listę rekordów:
 		$record_list = $model_object->GetAll(NULL, $db_params);
