@@ -920,6 +920,9 @@ class Operator
 				// pobiera rekord o danym Id:
 				$this->record_object = $this->model_object->GetOne($id);
 				
+				// sprawdza, czy rekord zawiera dane:
+				if (!isset($this->record_object['id'])) $this->record_object = NULL;
+				
 				// wyświetla formularz wypełniony danymi:
 				$this->site_content = $this->view_object->ShowForm($this->record_object, $params['required'], $failed_fields, $this->data_import);
 			}
@@ -947,6 +950,9 @@ class Operator
 			
 			// pobiera rekord o danym Id:
 			$this->record_object = $this->model_object->GetOne($id);
+			
+			// sprawdza, czy rekord zawiera dane:
+			if (!isset($this->record_object['id'])) $this->record_object = NULL;
 			
 			// wyświetla formularz wypełniony danymi:
 			$this->site_content = $this->view_object->ShowRecord($this->record_object, $this->list_columns);
@@ -1005,6 +1011,9 @@ class Operator
 			// pobiera rekord o danym Id:
 			$this->record_object = $this->model_object->GetDetails($id);
 			
+			// sprawdza, czy rekord zawiera dane:
+			if (!isset($this->record_object['id'])) $this->record_object = NULL;
+			
 			// wyświetla formularz wypełniony danymi:
 			$this->site_content = $this->view_object->ShowDetails($this->record_object, $this->list_columns);
 		}
@@ -1048,6 +1057,9 @@ class Operator
 			
 			// pobiera rekord o danym Id:
 			$this->record_object = $this->model_object->GetOne($id);
+			
+			// sprawdza, czy rekord zawiera dane:
+			if (!isset($this->record_object['id'])) $this->record_object = NULL;
 			
 			// wyświetla formularz wypełniony danymi:
 			$this->site_content = $this->view_object->PreviewRecord($this->record_object, $this->list_columns);

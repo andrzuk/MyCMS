@@ -34,7 +34,7 @@ class Pages_Model
 		$filter = empty($value) ? NULL : " AND (title LIKE '%" . $value . "%' OR contents LIKE '%" . $value . "%' OR caption LIKE '%" . $value . "%')";
 
 		$query = 	"SELECT COUNT(*) AS licznik FROM " . $this->table_name . 
-					" INNER JOIN categories ON categories.id = " . $this->table_name . ".category_id" .
+					" LEFT JOIN categories ON categories.id = " . $this->table_name . ".category_id" .
 					" INNER JOIN users ON users.id = " . $this->table_name . ".author_id" .
 					" WHERE system_page = 0" . $condition . $filter;
 		$result = mysqli_query($this->db, $query);
@@ -54,7 +54,7 @@ class Pages_Model
 
 		$query = 	"SELECT pages.*, categories.caption, users.user_login" .
 					" FROM " . $this->table_name . 
-					" INNER JOIN categories ON categories.id = " . $this->table_name . ".category_id" .
+					" LEFT JOIN categories ON categories.id = " . $this->table_name . ".category_id" .
 					" INNER JOIN users ON users.id = " . $this->table_name . ".author_id" .
 					" WHERE " . $this->table_name . ".id=" . intval($id);
 		$result = mysqli_query($this->db, $query);
@@ -96,7 +96,7 @@ class Pages_Model
 		$query = 	"SELECT pages.id, pages.title, pages.contents," .
 					" categories.caption, users.user_login, pages.modified, pages.visible" .
 					" FROM " . $this->table_name . 
-					" INNER JOIN categories ON categories.id = " . $this->table_name . ".category_id" .
+					" LEFT JOIN categories ON categories.id = " . $this->table_name . ".category_id" .
 					" INNER JOIN users ON users.id = " . $this->table_name . ".author_id" .
 					" WHERE system_page = 0" . $condition . $filter .
 					" ORDER BY " . $params['sort_field'] . " " . $params['sort_order'] . 
@@ -178,8 +178,10 @@ class Pages_Model
 		$query = "DELETE FROM " . $this->table_name . " WHERE id=" . intval($id);
 		mysqli_query($this->db, $query);
 
+		/*
 		$query = "DELETE FROM categories WHERE id=" . intval($category_id);
 		mysqli_query($this->db, $query);
+		*/
 
 		return mysqli_affected_rows($this->db);
 	}

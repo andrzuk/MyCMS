@@ -122,7 +122,7 @@ class Categories_Model
 		$query = "INSERT INTO pages VALUES (NULL, '0', '0', '" . $category_id . "', '" . 
 					mysqli_real_escape_string($this->db, trim($record_item['caption'])) . "', '', '" . 
 					$this->user_id . "', '1', '" . 
-					$this->mySqlDateTime . "')";
+					$this->mySqlDateTime . "', '0')";
 		mysqli_query($this->db, $query);
 		
 		return $result;
@@ -194,11 +194,13 @@ class Categories_Model
 		$query = "DELETE FROM " . $this->table_name . " WHERE id=" . intval($id);
 		mysqli_query($this->db, $query);
 
+		/*
 		$query = "DELETE FROM archives WHERE category_id=" . intval($id);
 		mysqli_query($this->db, $query);
 
 		$query = "DELETE FROM pages WHERE category_id=" . intval($id);
 		mysqli_query($this->db, $query);
+		*/
 
 		return mysqli_affected_rows($this->db);
 	}

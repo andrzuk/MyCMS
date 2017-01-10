@@ -59,7 +59,7 @@ class Messages_View
 		}		
 		else
 		{
-			$form_action = 'index.php?route=' . MODULE_NAME . '&action=add';
+			$form_action = 'index.php?route=' . MODULE_NAME;
 		}
 		
 		$main_form->set_action($form_action);
