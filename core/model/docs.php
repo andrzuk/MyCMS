@@ -134,6 +134,9 @@ class Docs_Model
 				mysqli_free_result($result);
 			}
 			
+			// tworzy katalog dla dokumentów:
+			if (!file_exists(GALLERY_DIR . $sub_dir)) mkdir(GALLERY_DIR . $sub_dir, 0777, true);
+
 			// zapisuje plik na dysku:
 			$target = GALLERY_DIR . $sub_dir . $doc_id;
 
@@ -181,6 +184,9 @@ class Docs_Model
 						"' WHERE id=" . intval($id);
 			mysqli_query($this->db, $query);
 			
+			// tworzy katalog dla dokumentów:
+			if (!file_exists(GALLERY_DIR . $sub_dir)) mkdir(GALLERY_DIR . $sub_dir, 0777, true);
+
 			// zapisuje plik na dysku:
 			$target = GALLERY_DIR . $sub_dir . $id;
 

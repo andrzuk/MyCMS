@@ -135,6 +135,9 @@ class Images_Model
 				mysqli_free_result($result);
 			}
 			
+			// tworzy katalog dla galerii obrazków:
+			if (!file_exists(GALLERY_DIR . IMG_DIR)) mkdir(GALLERY_DIR . IMG_DIR, 0777, true);
+
 			// zapisuje plik na dysku:
 			$target = GALLERY_DIR . IMG_DIR . $obrazek_id;
 
@@ -185,6 +188,9 @@ class Images_Model
 						"' WHERE id=" . intval($id);
 			mysqli_query($this->db, $query);
 			
+			// tworzy katalog dla galerii obrazków:
+			if (!file_exists(GALLERY_DIR . IMG_DIR)) mkdir(GALLERY_DIR . IMG_DIR, 0777, true);
+
 			// zapisuje plik na dysku:
 			$target = GALLERY_DIR . IMG_DIR . $id;
 
