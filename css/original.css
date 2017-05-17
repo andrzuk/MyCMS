@@ -728,7 +728,7 @@ textarea.FormInput
 	border: 1px solid #999; /* #ccc; */
 	color: #369;
 	background-color: #fff;
-	padding: 5px;
+	padding: 5px 10px;
 	text-align: center;
 	line-height: 30px;
 }
@@ -738,7 +738,7 @@ textarea.FormInput
 	border: 1px solid #999; /* #036; */
 	color: #fff;
 	background-color: #369;
-	padding: 5px;
+	padding: 5px 10px;
 	text-align: center;
 	line-height: 30px;
 }
@@ -748,7 +748,7 @@ textarea.FormInput
 	border: 1px solid #999; /* #ccc; */
 	color: #ccc;
 	background-color: #fff;
-	padding: 5px;
+	padding: 5px 10px;
 	text-align: center;
 	line-height: 30px;
 }

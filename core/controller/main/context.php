@@ -61,9 +61,9 @@ class Context
 						'icon' => 'img/top/search.png'
 					),
 					array (
-						'address' => 'index.php?route=map',
-						'caption' => 'Mapa serwisu',
-						'icon' => 'img/top/folders.png'
+						'address' => 'index.php?route=stats',
+						'caption' => 'Stats',
+						'icon' => 'img/top/application.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
@@ -93,9 +93,9 @@ class Context
 						'icon' => 'img/top/search.png'
 					),
 					array (
-						'address' => 'index.php?route=map',
-						'caption' => 'Mapa serwisu',
-						'icon' => 'img/top/folders.png'
+						'address' => 'index.php?route=stats',
+						'caption' => 'Stats',
+						'icon' => 'img/top/application.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
@@ -125,9 +125,9 @@ class Context
 						'icon' => 'img/top/search.png'
 					),
 					array (
-						'address' => 'index.php?route=map',
-						'caption' => 'Mapa serwisu',
-						'icon' => 'img/top/folders.png'
+						'address' => 'index.php?route=stats',
+						'caption' => 'Stats',
+						'icon' => 'img/top/application.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
@@ -157,9 +157,9 @@ class Context
 						'icon' => 'img/top/search.png'
 					),
 					array (
-						'address' => 'index.php?route=map',
-						'caption' => 'Mapa serwisu',
-						'icon' => 'img/top/folders.png'
+						'address' => 'index.php?route=stats',
+						'caption' => 'Stats',
+						'icon' => 'img/top/application.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
