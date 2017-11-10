@@ -73,6 +73,18 @@ class Login_View
 		
 		// Form Generator.
 		
+		// script:
+		
+		$site_content .= '
+			<script>
+				$(document).ready(function() {
+					setTimeout(function() {
+						$("input#login").focus();
+					}, 500);
+				});
+			</script>
+		';
+		
 		return $site_content;
 	}
 }

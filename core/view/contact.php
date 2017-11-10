@@ -104,6 +104,18 @@ class Contact_View
 		
 		// Form Generator.
 		
+		// script:
+		
+		$site_content .= '
+			<script>
+				$(document).ready(function() {
+					setTimeout(function() {
+						$("input#autor").focus();
+					}, 500);
+				});
+			</script>
+		';
+		
 		return $site_content;
 	}
 }

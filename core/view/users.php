@@ -331,7 +331,7 @@ class Users_View
 			array('width' => '9%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '9%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '2%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '2%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'left', 'visible' => '0'),
 			array('width' => '10%', 'align' => 'left', 'visible' => '0'),
 			array('width' => '10%', 'align' => 'left', 'visible' => '0'),
