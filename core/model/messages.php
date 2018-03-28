@@ -105,6 +105,14 @@ class Messages_Model
 
 		return mysqli_affected_rows($this->db);
 	}
+	
+	public function RemoveAll()
+	{
+		$query = "DELETE FROM " . $this->table_name . " WHERE requested = 1";
+		mysqli_query($this->db, $query);
+
+		return mysqli_affected_rows($this->db);
+	}
 }
 
 ?>

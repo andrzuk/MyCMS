@@ -11,7 +11,7 @@ define ('MODULE_NAME', 'messages');
 $content_title = 'Wiadomości użytkowników';
 
 $site_path = array (
-    'index.php' => 'Strona główna',
+	'index.php' => 'Strona główna',
 	'index.php?route=admin' => 'Panel administratora',
 	'index.php?route=' . MODULE_NAME => $content_title
 );
@@ -25,14 +25,14 @@ include APP_DIR . 'view' . '/' . MODULE_NAME . '.php';
 $view_object = new Messages_View($db);
 
 $list_columns = array(
-	array('db_name' => 'id', 				'column_name' => 'Id', 					'sorting' => 1),
-	array('db_name' => 'client_ip', 		'column_name' => 'Adres IP',			'sorting' => 1),
-	array('db_name' => 'client_name', 		'column_name' => 'Imię lub nick',		'sorting' => 1),
-	array('db_name' => 'client_email', 		'column_name' => 'Adres e-mail',		'sorting' => 1),
-	array('db_name' => 'message_content', 	'column_name' => 'Wiadomość', 			'sorting' => 1),
-	array('db_name' => 'requested', 		'column_name' => 'Zgłoszenie', 			'sorting' => 1),
-	array('db_name' => 'send_date',			'column_name' => 'Nadesłano', 			'sorting' => 1),
-	array('db_name' => 'close_date',		'column_name' => 'Zamknięto', 			'sorting' => 1),
+	array('db_name' => 'id',              'column_name' => 'Id',            'sorting' => 1),
+	array('db_name' => 'client_ip',       'column_name' => 'Adres IP',      'sorting' => 1),
+	array('db_name' => 'client_name',     'column_name' => 'Imię lub nick', 'sorting' => 1),
+	array('db_name' => 'client_email',    'column_name' => 'Adres e-mail',  'sorting' => 1),
+	array('db_name' => 'message_content', 'column_name' => 'Wiadomość',     'sorting' => 1),
+	array('db_name' => 'requested',       'column_name' => 'Zgłoszenie',    'sorting' => 1),
+	array('db_name' => 'send_date',       'column_name' => 'Nadesłano',     'sorting' => 1),
+	array('db_name' => 'close_date',      'column_name' => 'Zamknięto',     'sorting' => 1),
 );
 
 if (isset($_GET['mode'])) $_SESSION['mode'] = intval($_GET['mode']);
@@ -152,6 +152,25 @@ if (isset($_GET['action'])) // add, view, edit, delete
 			$controller_object->Delete($id, $params, $access, $acl->available());
 		}
 		break;
+
+		// czyszczenie:
+		
+		case 'clear':
+		{
+			$content_options = $page_options->get_options('list');
+			
+			$params = array(
+				'content_title' => $content_title,
+				'content_options' => $content_options
+			);
+			
+			$access = array(ADMIN, OPERATOR);
+			
+			$acl = new AccessControlList(MODULE_NAME, $db);
+			
+			$controller_object->Clear($params, $access, $acl->available());
+		}
+		break;
 	}
 }
 else // list of all
@@ -166,6 +185,11 @@ else // list of all
 			'address' => 'index.php?route=' . MODULE_NAME . '&mode=2',
 			'caption' => 'Zatwierdzone',
 			'icon' => 'img/checked.png'
+		),
+		array (
+			'address' => 'index.php?route=' . MODULE_NAME . '&action=clear',
+			'caption' => 'Wyczyść',
+			'icon' => 'img/trash.png'
 		),
 		array (
 			'address' => 'index.php?route=admin',

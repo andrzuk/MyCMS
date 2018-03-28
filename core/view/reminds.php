@@ -50,10 +50,10 @@ class Reminds_View
 		// kolumny wyświetlane:
 		$col_attrib = array(
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '35%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '15%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '15%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '15%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '40%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '0%', 'align' => 'center', 'visible' => '0'),

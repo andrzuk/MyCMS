@@ -196,9 +196,9 @@ class ListBuilder
 			}
 			else // pozostałe kolumny
 			{
-				$sort_ico = NULL;
+				$sort_ico = '&nbsp;';
 			}
-			
+
 			if (isset($this->attribs[$idx - 1]))
 			{
 				if ($this->attribs[$idx - 1]['visible']) // kolumna widoczna
@@ -206,17 +206,17 @@ class ListBuilder
 					if ($column_sort) // kolumna sortowalna
 					{
 						$main_text .= 	'<td class="TitleCell" width="' . $this->attribs[$idx - 1]['width'] .
-											'" style="text-align: ' . $this->attribs[$idx - 1]['align'] . ';">' .
+											'" style="text-align: ' . $this->attribs[$idx - 1]['align'] . ';"><br>' .
 											'<b><a href="index.php?route=' . $this->module .
 											'&sort=' . $idx .
 											'&order=' . $this->params['sort_order'] .
-											'" class="MenuLink">' . $column_name . '</a></b>' . $sort_ico . '</td>';
+											'" class="MenuLink">' . $column_name . '</a></b><br>' . $sort_ico . '</td>';
 					}
 					else // kolumna niesortowalna
 					{
 						$main_text .= 	'<td class="TitleCell" width="' . $this->attribs[$idx - 1]['width'] .
 											'" style="text-align: ' . $this->attribs[$idx - 1]['align'] .
-											';"><b>' . $column_name . '</b></td>';
+											';"><br><b>' . $column_name . '</b><br>&nbsp;</td>';
 					}
 				}
 			}

@@ -1137,6 +1137,71 @@ class Operator
 		}
 	}
 	
+	// czyszczenie:
+	
+	public function Clear($params, $access, $acl)
+	{
+		$this->content_title = $params['content_title'];
+		
+		if (in_array($this->user_status, $access) && $acl) // są uprawnienia
+		{
+			$this->content_options = $params['content_options'];
+			
+			if (isset($_GET['confirm'])) // usuwanie zatwierdzone
+			{
+				// ograniczenia dla usera:
+				$restrict_id = isset($params['restrict']) ? $params['restrict'] : NULL;
+
+				// usuwa rekordy z bazy:
+				$result = $this->model_object->RemoveAll();
+
+				if ($result) // zapis się powiódł
+				{
+					// wyświetla komunikat:
+					$this->site_message = array(
+						'INFORMATION', 'Wszystkie rekordy zostały poprawnie usunięte.'
+					);
+				}
+				else // zapis się nie powiódł
+				{
+					// wyświetla komunikat:
+					$this->site_message = array(
+						'ERROR', 'Usuwanie rekordów się nie powiodło. Proszę spróbować ponownie.'
+					);
+				}
+				
+				// pobiera listę rekordów:
+				$record_list = $this->model_object->GetAll($restrict_id, $this->db_params);
+				
+				// aktualizuje statystykę listy:
+				$this->navi_object->update($this->model_object, $this->list_params);
+			
+				// wyświetla listę rekordów:
+				$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+			}
+			else // przystąpienie do usuwania
+			{
+				$this->site_dialog = array(
+					'QUESTION',
+					'Usuwanie rekordów',
+					'Uwaga! Rekordy zostaną bezpowrotnie usunięte. <br />Czy na pewno chcesz usunąć rekordy?',
+					array(
+						array(
+							'index.php?route=' . MODULE_NAME . '&action=clear&confirm=1', 'Tak'
+						),
+						array(
+							'index.php?route=' . MODULE_NAME, 'Nie'
+						)
+					)
+				);
+			}
+		}
+		else // brak uprawnień
+		{
+			$this->AccessDenied();
+		}
+	}
+	
 	// archiwizacja:
 	
 	public function Archive($id, $params, $access, $acl)

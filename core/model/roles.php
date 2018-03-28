@@ -129,11 +129,11 @@ class Roles_Model
 				
 				if ($sub_result)
 				{
-					$row['function'] = array();
+					$row['function'] = NULL;
 					
 					while ($sub_row = mysqli_fetch_assoc($sub_result))
 					{
-						$row['function'][] = $sub_row['function'];
+						$row['function'] .= $sub_row['function'] . '; ';
 					}
 					mysqli_free_result($sub_result);
 				}				

@@ -185,8 +185,8 @@ class Roles_View
 		
 		$main_list = new ListBuilder();
 		
-		$list_title = strtoupper(MODULE_NAME) . ' - Wszystkie';
-		$list_image = 'img/32x32/control_panel_access.png';
+		$list_title = strtoupper(MODULE_NAME);
+		$list_image = 'img/32x32/lock_go.png';
 
 		$main_list->init($list_title, $list_image);
 
@@ -201,10 +201,10 @@ class Roles_View
 		// kolumny wyświetlane:
 		$col_attrib = array(
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '20%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '40%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
 		);
 		

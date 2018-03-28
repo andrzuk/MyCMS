@@ -98,12 +98,6 @@ if (in_array($user_status, $access)) // są uprawnienia
 					'icon' => 'img/48x48/60.png',
 					'access' => in_array($user_status, array(ADMIN)),
 				),
-				array(
-					'address' => 'index.php?route=visitors',
-					'label' => 'Odwiedziny'.' ('.$record_object[2].')',
-					'icon' => 'img/48x48/24.png',
-					'access' => in_array($user_status, array(ADMIN)),
-				),
 			),
 		),
 		array(
@@ -174,12 +168,18 @@ if (in_array($user_status, $access)) // są uprawnienia
 					'icon' => 'img/48x48/26.png',
 					'access' => in_array($user_status, array(ADMIN)),
 				),
+				array(
+					'address' => 'index.php?route=visitors',
+					'label' => 'Odwiedziny'.' ('.$record_object[2].')',
+					'icon' => 'img/48x48/24.png',
+					'access' => in_array($user_status, array(ADMIN)),
+				),
 			),
 		),
 	);
 
-	$panel_title = 'Funkcje administracyjne';
-	$panel_image = 'img/32x32/webmaster_tools.png';
+	$panel_title = 'Zarządzanie aplikacją';
+	$panel_image = 'img/32x32/system.png';
 	$panel_width = '90%';
 
 	// inicjuje panel:

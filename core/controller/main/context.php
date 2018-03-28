@@ -689,10 +689,11 @@ class Context
 		$output .= '</div>';
 
 		$output .= '<a href="https://www.facebook.com/WlasnaStronaInternetowa" target="_blank"><img src="img/facebook.png" style="border: 0px solid #fff;" alt="facebook" title="Znajdź nas na Facebooku" /></a>&nbsp;';
+		$output .= '<a href="https://andrzuk.blogspot.com/" target="_blank"><img src="img/blogger.png" style="border: 0px solid #fff;" alt="blogger" title="Znajdź nas na Bloggerze" /></a>&nbsp;';
 		$output .= '<a href="http://www.linkedin.com/in/andrzejzukowski" target="_blank"><img src="img/linkedin.png" style="border: 0px solid #fff;" alt="linkedin" title="Znajdź nas na LinkedIn" /></a>&nbsp;';
-		$output .= '<a href="https://twitter.com/andy_zukowski" target="_blank"><img src="img/twitter.png" style="border: 0px solid #fff;" alt="twitter" title="Znajdź nas na Twitterze" /></a>&nbsp;';
 		$output .= '<a href="https://plus.google.com/u/0/113303165754486219878" target="_blank"><img src="img/google_plus.png" style="border: 0px solid #fff;" alt="google+" title="Znajdź nas na Google Plus" /></a>&nbsp;';
 		/*
+		$output .= '<a href="https://twitter.com/andy_zukowski" target="_blank"><img src="img/twitter.png" style="border: 0px solid #fff;" alt="twitter" title="Znajdź nas na Twitterze" /></a>&nbsp;';
 		$output .= '<a href="http://osoby.yasni.pl/andrzej+zukowski+1473151" target="_blank"><img src="http://www.yasni.pl/yasni_button.php?btn=22&lng=pl" width="32" height="32" border="0" alt="yasni.pl | No. 1 free people search - Find anyone on the web" title="Znajdź nas na Yasni" /></a>';
 		*/
 

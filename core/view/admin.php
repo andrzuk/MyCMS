@@ -44,12 +44,11 @@ class Admin_View
 				if ($row_k == 'items') $items = $row_v;
 			}
 			
-			$site_content .= '<div style="text-align: center; font-size: 11px; color: #999; border-bottom: 1px dotted #ccc;">';
+			$site_content .= '<div style="text-align: left; font-size: 11px; color: #999; border-bottom: 1px dotted #ccc;">';
 			$site_content .= $group;
 			$site_content .= '</div>';
 			
-			$site_content .= '<table width="100%" align="center">';
-			$site_content .= '<tr>';
+			$site_content .= '<div class="PanelRow" style="display: flex;">';
 			foreach ($items as $k => $v)
 			{
 				foreach ($v as $key => $value)
@@ -60,7 +59,7 @@ class Admin_View
 					if ($key == 'access') $access = $value;
 				}
 
-				$site_content .= '<td class="PanelItem">';
+				$site_content .= '<span class="PanelItem" style="width: 100px; padding: 15px 20px;">';
 
 				if ($access) // funkcja dostępna
 				{
@@ -74,10 +73,9 @@ class Admin_View
 					$site_content .= '<img src="'.$icon.'" class="TopLinkIcon" alt="'.$label.'" />';
 					$site_content .= '<div class="ItemDisabled">'.$label.'</div>';
 				}
-				$site_content .= '</td>';
+				$site_content .= '</span>';
 			}
-			$site_content .= '</tr>';
-			$site_content .= '</table>';
+			$site_content .= '</div>';
 		}
 		
 		$site_content .= '</td>';

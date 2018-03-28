@@ -38,8 +38,8 @@ class Searches_View
 		$col_attrib = array(
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '40%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '20%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '25%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '20%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '0%', 'align' => 'center', 'visible' => '0'),
 		);
