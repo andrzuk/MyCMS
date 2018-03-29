@@ -38,6 +38,10 @@ class Message
 				$class_name = 'MessageBoxError';
 				$icon_name = 'msg_error.png';
 				break;
+			case 'SUCCESS':
+				$class_name = 'MessageBoxSuccess';
+				$icon_name = 'msg_success.png';
+				break;
 			case 'WARNING':
 				$class_name = 'MessageBoxWarning';
 				$icon_name = 'msg_warning.png';
@@ -60,11 +64,9 @@ class Message
 
 		$main_message_body .= '<table class="'. $class_name .'" width="100%" cellspacing="0" cellpadding="0" align="left">';
 		$main_message_body .= '<tr>';
-		/*
-		$main_message_body .= '<td class="MsgIcon" width="50">';
-		$main_message_body .= '<img src="'. $this->path .'img/msg/'. $icon_name .'" alt="" width="48" height="48" />';
+		$main_message_body .= '<td class="MsgIcon">';
+		$main_message_body .= '<img src="'. $this->path .'img/msg/'. $icon_name .'" alt="" width="32" height="32" />';
 		$main_message_body .= '</td>';
-		*/
 		$main_message_body .= '<td class="MsgMessage" style="text-align: center;">';
 		$main_message_body .= $content;
 		$main_message_body .= '</td>';

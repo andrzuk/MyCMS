@@ -262,7 +262,7 @@ class Operator
 
 												// wyświetla komunikat:
 												$this->site_message = array(
-													'INFORMATION', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
+													'SUCCESS', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
 												);
 											}
 											if (isset($_POST["update_button"])) // zapisz i zamknij
@@ -281,7 +281,7 @@ class Operator
 
 												// wyświetla komunikat:
 												$this->site_message = array(
-													'INFORMATION', 'Rekord został poprawnie dopisany do bazy.'
+													'SUCCESS', 'Rekord został poprawnie dopisany do bazy.'
 												);
 											}
 										}
@@ -499,7 +499,7 @@ class Operator
 
 							// wyświetla komunikat:
 							$this->site_message = array(
-								'INFORMATION', 'Rekordy zostały poprawnie dopisane do bazy.'
+								'SUCCESS', 'Rekordy zostały poprawnie dopisane do bazy.'
 							);
 						}
 						else // zapis się nie powiódł
@@ -752,7 +752,7 @@ class Operator
 
 												// wyświetla komunikat:
 												$this->site_message = array(
-													'INFORMATION', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
+													'SUCCESS', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
 												);
 											}
 											if (isset($_POST["update_button"])) // zapisz i zamknij
@@ -771,7 +771,7 @@ class Operator
 
 												// wyświetla komunikat:
 												$this->site_message = array(
-													'INFORMATION', 'Rekord został poprawnie zaktualizowany.'
+													'SUCCESS', 'Rekord został poprawnie zaktualizowany.'
 												);
 											}
 										}
@@ -1094,7 +1094,7 @@ class Operator
 				{
 					// wyświetla komunikat:
 					$this->site_message = array(
-						'INFORMATION', 'Bieżący rekord został poprawnie usunięty.'
+						'SUCCESS', 'Bieżący rekord został poprawnie usunięty.'
 					);
 				}
 				else // zapis się nie powiódł
@@ -1159,7 +1159,7 @@ class Operator
 				{
 					// wyświetla komunikat:
 					$this->site_message = array(
-						'INFORMATION', 'Wszystkie rekordy zostały poprawnie usunięte.'
+						'SUCCESS', 'Wszystkie rekordy zostały poprawnie usunięte.'
 					);
 				}
 				else // zapis się nie powiódł
@@ -1224,7 +1224,7 @@ class Operator
 			{
 				// wyświetla komunikat:
 				$this->site_message = array(
-					'INFORMATION', 'Bieżący rekord został poprawnie zarchiwizowany.'
+					'SUCCESS', 'Bieżący rekord został poprawnie zarchiwizowany.'
 				);
 			}
 			else // zapis się nie powiódł
@@ -1269,7 +1269,7 @@ class Operator
 			{
 				// wyświetla komunikat:
 				$this->site_message = array(
-					'INFORMATION', 'Bieżący rekord został poprawnie przywrócony.'
+					'SUCCESS', 'Bieżący rekord został poprawnie przywrócony.'
 				);
 			}
 			else // zapis się nie powiódł
@@ -1419,7 +1419,7 @@ class Operator
 			{
 				// wyświetla komunikat:
 				$this->site_message = array(
-					'INFORMATION', 'Rekord został poprawnie zaktualizowany.'
+					'SUCCESS', 'Rekord został poprawnie zaktualizowany.'
 				);
 			}
 			else // zapis się nie powiódł
@@ -1462,7 +1462,7 @@ class Operator
 			{
 				// wyświetla komunikat:
 				$this->site_message = array(
-					'INFORMATION', 'Rekord został poprawnie zaktualizowany.'
+					'SUCCESS', 'Rekord został poprawnie zaktualizowany.'
 				);
 			}
 			else // zapis się nie powiódł

@@ -69,7 +69,7 @@ body
 /*
 	background: #ffffff url("http://mvc-project.pl/img/page_background.jpg") repeat-x;
 */
-	background-color: #e6eef6; /* #d6dee6; #98dafc; */
+	background-color: #e0e6ef; /* #e6eef6; #d6dee6; #98dafc; */
 	font-family: sans-serif;
 	font-size: small;
 	color: #666;
@@ -606,38 +606,62 @@ textarea.FormInput
 
 .MessageBoxError
 {
-	border: 1px solid #b0362f; /* #ff0000; */
-	background-color: #ecc0bf; /* #fdd7cd; */
-	color: #900;
-	font-weight: normal;
+	border: 1px solid #f99;
+	background-color: #ffccbb;
+	vertical-align: middle;
+}
+
+.MessageBoxSuccess
+{
+	border: 1px solid #9c3;
+	background-color: #aaee66;
 	vertical-align: middle;
 }
 
 .MessageBoxWarning
 {
-	border: 1px solid #b0362f; /* #00bb00; */
-	background-color: #efc9c9; /* #ffffcc; */
-	color: #900;
-	font-weight: normal;
+	border: 1px solid #fba;
+	background-color: #ffddbb;
 	vertical-align: middle;
 }
 
 .MessageBoxInformation
 {
-	border: 1px solid #369; /* #0000ff; */
-	background-color: #a7cbf7; /* #ddeeff; */
-	color: #00f;
-	font-weight: normal;
+	border: 1px solid #acf;
+	background-color: #ddeeff;
 	vertical-align: middle;
 }
 
 .MessageBoxQuestion
 {
-	border: 1px solid #c6a90a; /* #eeee00; */ 
-	background-color: #fdffb9; /* #ffffdd; */
-	color: #060;
-	font-weight: normal;
+	border: 1px solid #fcc;
+	background-color: #ffeecc;
 	vertical-align: middle;
+}
+
+.MessageBoxError .MsgMessage
+{
+	color: #900;
+}
+
+.MessageBoxSuccess .MsgMessage
+{
+	color: #060;
+}
+
+.MessageBoxWarning .MsgMessage
+{
+	color: #c00;
+}
+
+.MessageBoxInformation .MsgMessage
+{
+	color: #069;
+}
+
+.MessageBoxQuestion .MsgMessage
+{
+	color: #933;
 }
 
 .MsgIcon
@@ -645,37 +669,21 @@ textarea.FormInput
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-bottom: 0px;
 	vertical-align: middle;
+	width: 0;
+	display: none;
 }
 
 .MsgMessage
 {
-	padding: 10px;
-	line-height: 20px;
-	font-size: 1.0em;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: small;
 	text-align: center;
 	vertical-align: middle;
-}
-
-.MessageBoxWarning > tbody > tr > td.MsgMessage
-{
-	color: #900;
-}
-
-.MessageBoxError > tbody > tr > td.MsgMessage
-{
-	color: #900;
-}
-
-.MessageBoxInformation > tbody > tr > td.MsgMessage
-{
-	color: #00f;
-}
-
-.MessageBoxQuestion > tbody > tr > td.MsgMessage
-{
-	color: #060;
+	width: 100%;
+	height: 50px;
 }
 
 .SortIcon
@@ -736,8 +744,8 @@ textarea.FormInput
 .PagePointerCurrent
 {
 	border: 1px solid #999; /* #036; */
-	color: #fff;
-	background-color: #369;
+	color: #060;
+	background-color: #6f3;
 	padding: 5px 10px;
 	text-align: center;
 	line-height: 30px;
@@ -957,4 +965,12 @@ a.PanelLink
 .PageAction > a:hover
 {
 	color: #c00;
+}
+
+textarea#message
+{
+	min-width: 386px;
+	max-width: 390px;
+	min-height: 100px;
+	max-height: 300px;
 }

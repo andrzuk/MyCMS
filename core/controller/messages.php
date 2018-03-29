@@ -157,7 +157,7 @@ if (isset($_GET['action'])) // add, view, edit, delete
 		
 		case 'clear':
 		{
-			$content_options = $page_options->get_options('list');
+			$content_options = $page_options->get_options('simple');
 			
 			$params = array(
 				'content_title' => $content_title,
