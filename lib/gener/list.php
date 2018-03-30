@@ -147,8 +147,8 @@ class ListBuilder
 		{
 			$main_text .= '<span class="FormDates">';
 			$main_text .= '<form action="index.php?route=' . $this->module . '&sort=' . $this->params['sort_column'] . '&order=' . intval(1 - $this->params['sort_order']) . '" method="post">';
-			$main_text .= '<input type="text" id="date_from" name="date_from" value="'.$_SESSION['date_from'].'" class="FormInput" style="width: 80px;" />&nbsp;-&nbsp;';
-			$main_text .= '<input type="text" id="date_to" name="date_to" value="'.$_SESSION['date_to'].'" class="FormInput" style="width: 80px;" />&nbsp;';
+			$main_text .= '<input type="date" id="date_from" name="date_from" value="'.$_SESSION['date_from'].'" class="FormInput" style="width: 120px; padding: 2px;" />&nbsp;-&nbsp;';
+			$main_text .= '<input type="date" id="date_to" name="date_to" value="'.$_SESSION['date_to'].'" class="FormInput" style="width: 120px; padding: 2px;" />&nbsp;';
 			$main_text .= '<input type="submit" id="SetDatesButton" name="SetDatesButton" value="OK" style="width: 40px;" />';
 			$main_text .= '</form>';
 			$main_text .= '</span>';
