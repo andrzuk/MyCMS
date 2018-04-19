@@ -115,7 +115,7 @@ class Dialog
 			$main_dialog_body .= '<td>';
 			$main_dialog_body .= '<form action="'.$link.'" method="post">';
 			$main_dialog_body .= '&nbsp;';
-			$main_dialog_body .= '<input type="submit" value="'.$caption.'" name="confirm_'.$idx.'" onClick="'.$onclick.'" style="width: '.$button_width.'px;" />';
+			$main_dialog_body .= '<input type="submit" value="'.$caption.'" name="confirm_'.$idx.'" id="dialog_button_'.$idx.'" onClick="'.$onclick.'" style="width: '.$button_width.'px;" />';
 			$main_dialog_body .= '</form>';
 			$main_dialog_body .= '</td>';
 		}
@@ -127,6 +127,10 @@ class Dialog
 		$main_dialog_body .= '</table>';
 
 		$main_dialog_body .= '</p>';
+		
+		$main_dialog_body .= '<script>';
+		$main_dialog_body .= 'setTimeout(function() { $("#dialog_button_1").focus(); }, 500);';
+		$main_dialog_body .= '</script>';
 		
 		return $main_dialog_body;
 	}
