@@ -55,7 +55,7 @@ class Logins_View
 			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 		);
 		

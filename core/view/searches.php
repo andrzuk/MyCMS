@@ -41,13 +41,15 @@ class Searches_View
 			array('width' => '20%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '0%', 'align' => 'center', 'visible' => '0'),
+			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 		);
 
 		$main_list->set_attribs($col_attrib);
 				
 		// dostępne akcje:
-		$col_actions = array();
+		$col_actions = array(
+			array('action' => 'view', 'icon' => 'info.png', 'title' => 'Podgląd'),
+		);
 		
 		$main_list->set_actions($col_actions);
 
@@ -84,7 +86,7 @@ class Searches_View
 		
 		$main_view->set_columns($columns);
 		
-		$main_view->set_buttons(array('edit', 'cancel',));
+		$main_view->set_buttons(array('cancel',));
 
 		// render:
 		

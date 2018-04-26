@@ -72,6 +72,8 @@ class Reminds_Model
 		{
 			while ($row = mysqli_fetch_assoc($result))
 			{
+				$row['login'] = str_replace(array("?", "%", "."), array(" ? ", " % ", ". "), $row['login']);
+				$row['email'] = str_replace(array("?", "%", "."), array(" ? ", " % ", ". "), $row['email']);
 				$this->rows_list[] = $row;
 			} 
 			mysqli_free_result($result);

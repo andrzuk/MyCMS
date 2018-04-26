@@ -46,6 +46,8 @@ $record_object = $navi_params['record_object'];
 $db_params = $navi_params['db_params'];
 $list_params = $navi_params['list_params'];
 
+$id = isset($_GET['id']) ? intval($_GET['id']) : NULL;
+
 // dane z bazy potrzebne do kontrolek formularza:
 
 $data_import = array();
@@ -72,36 +74,62 @@ $controller_object = new Operator($objects);
  */
 
 $site_content = NULL;
+$content_options = NULL;
 
-$content_options = array (
-	array (
-		'address' => 'index.php?route=' . MODULE_NAME . '&mode=1',
-		'caption' => 'Przyjęte',
-		'icon' => 'img/accepted.png'
-	),
-	array (
-		'address' => 'index.php?route=' . MODULE_NAME . '&mode=2',
-		'caption' => 'Odrzucone',
-		'icon' => 'img/rejected.png'
-	),
-	array (
-		'address' => 'index.php?route=admin',
-		'caption' => 'Zamknij',
-		'icon' => 'img/stop.png'
-	),
-);
+include APP_DIR . 'view/template/options.php';
 
-$params = array(
-	'content_title' => $content_title,
-	'content_options' => $content_options
-);
+$page_options = new Options(MODULE_NAME, $id);
 
 $access = array(ADMIN);
 
 $acl = new AccessControlList(MODULE_NAME, $db);
+
+if (isset($_GET['action'])) // add, view, edit, delete
+{
+	switch ($_GET['action'])
+	{
+		case 'view': // podgląd
+		{
+			$content_options = $page_options->get_options('details');
 			
-$controller_object->DrawList($params, $access, $acl->available());
+			$params = array(
+				'content_title' => $content_title,
+				'content_options' => $content_options
+			);
 			
+			$controller_object->View($id, $params, $access, $acl->available());
+		}
+		break;
+	}
+}
+else // list
+{
+	$content_options = array (
+		array (
+			'address' => 'index.php?route=' . MODULE_NAME . '&mode=1',
+			'caption' => 'Przyjęte',
+			'icon' => 'img/accepted.png'
+		),
+		array (
+			'address' => 'index.php?route=' . MODULE_NAME . '&mode=2',
+			'caption' => 'Odrzucone',
+			'icon' => 'img/rejected.png'
+		),
+		array (
+			'address' => 'index.php?route=admin',
+			'caption' => 'Zamknij',
+			'icon' => 'img/stop.png'
+		),
+	);
+
+	$params = array(
+		'content_title' => $content_title,
+		'content_options' => $content_options
+	);
+
+	$controller_object->DrawList($params, $access, $acl->available());
+}
+
 $content_title = $controller_object->Get('content_title');
 $content_options = $controller_object->Get('content_options');
 $site_content = $controller_object->Get('site_content');
