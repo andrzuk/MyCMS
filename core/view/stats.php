@@ -26,15 +26,27 @@ class Stats_View
 		$site_content .= '<tr>';
 		$site_content .= '<th width="10%" class="StatHeader right offset">Lp.</th>';
 		$site_content .= '<th width="80%" class="StatHeader left">Adres odnośnika (referer)</th>';
-		$site_content .= '<th width="10%" class="StatHeader right">Odwiedzin</th>';
+		$site_content .= '<th width="1%" class="StatHeader center">Lk</th>';
+		$site_content .= '<th width="9%" class="StatHeader right">Odwiedzin</th>';
 		$site_content .= '</tr>';
 
 		$iter = 0;
+		$sponsored_links = array();
 
 		if (is_array($row))
 		{
+			if (is_array($import))
+			{
+				foreach ($import as $i => $j)
+				{
+					if ($i == 'sponsored_links') $links = $j;
+				}
+				$sponsored_links = explode('; ', $links);
+			}
 			foreach ($row as $k => $v)
 			{
+				$sponsored_link = $k < count($sponsored_links) ? '<a href="'.$sponsored_links[$k].'" target="_blank"><img src="img/16x16/star.png" alt="'.$sponsored_links[$k].'" title="Sponsored link"></a>' : NULL;
+				
 				$site_content .= '<tr>';
 		
 				foreach ($v as $key => $value)
@@ -48,6 +60,7 @@ class Stats_View
 
 				$site_content .= '<td class="StatData right offset">'.$iter.'.'.'</td>';
 				$site_content .= '<td class="StatData left">'.'<a href="'.$caption.'" target="_blank">'.$caption_separated.'</a>'.'</td>';
+				$site_content .= '<td class="StatData center">'.$sponsored_link.'</td>';
 				$site_content .= '<td class="StatData right">'.$counter.'</td>';
 		
 				$site_content .= '</tr>';

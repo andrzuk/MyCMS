@@ -206,7 +206,7 @@ class PageController extends Controller
 		}
 		else
 		{
-			$output .= 'Użytkownik nie zalogowany';
+			$output .= 'Witaj! Nie jesteś zalogowany. Zaloguj się lub zarejestruj.';
 		}
 		
 		return $output;

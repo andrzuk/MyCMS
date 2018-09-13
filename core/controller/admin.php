@@ -180,7 +180,7 @@ if (in_array($user_status, $access)) // są uprawnienia
 
 	$panel_title = 'Zarządzanie aplikacją';
 	$panel_image = 'img/32x32/system.png';
-	$panel_width = '90%';
+	$panel_width = '100%';
 
 	// inicjuje panel:
 	$view_object->init($panel_width, $panel_image, $panel_title);

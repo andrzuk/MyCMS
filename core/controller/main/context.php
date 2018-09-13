@@ -63,7 +63,7 @@ class Context
 					array (
 						'address' => 'index.php?route=stats',
 						'caption' => 'Stats',
-						'icon' => 'img/top/application.png'
+						'icon' => 'img/top/stats.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
@@ -95,7 +95,7 @@ class Context
 					array (
 						'address' => 'index.php?route=stats',
 						'caption' => 'Stats',
-						'icon' => 'img/top/application.png'
+						'icon' => 'img/top/stats.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
@@ -127,7 +127,7 @@ class Context
 					array (
 						'address' => 'index.php?route=stats',
 						'caption' => 'Stats',
-						'icon' => 'img/top/application.png'
+						'icon' => 'img/top/stats.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
@@ -159,7 +159,7 @@ class Context
 					array (
 						'address' => 'index.php?route=stats',
 						'caption' => 'Stats',
-						'icon' => 'img/top/application.png'
+						'icon' => 'img/top/stats.png'
 					),
 					array (
 						'address' => 'index.php?route=contact',
@@ -688,7 +688,7 @@ class Context
 		$output .= $facebook_panel_title;
 		$output .= '</div>';
 
-		$output .= '<a href="https://www.facebook.com/WlasnaStronaInternetowa" target="_blank"><img src="img/facebook.png" style="border: 0px solid #fff;" alt="facebook" title="Znajdź nas na Facebooku" /></a>&nbsp;';
+		$output .= '<a href="https://www.facebook.com/MySiteInWeb/" target="_blank"><img src="img/facebook.png" style="border: 0px solid #fff;" alt="facebook" title="Znajdź nas na Facebooku" /></a>&nbsp;';
 		$output .= '<a href="https://andrzuk.blogspot.com/" target="_blank"><img src="img/blogger.png" style="border: 0px solid #fff;" alt="blogger" title="Znajdź nas na Bloggerze" /></a>&nbsp;';
 		$output .= '<a href="http://www.linkedin.com/in/andrzejzukowski" target="_blank"><img src="img/linkedin.png" style="border: 0px solid #fff;" alt="linkedin" title="Znajdź nas na LinkedIn" /></a>&nbsp;';
 		$output .= '<a href="https://plus.google.com/u/0/113303165754486219878" target="_blank"><img src="img/google_plus.png" style="border: 0px solid #fff;" alt="google+" title="Znajdź nas na Google Plus" /></a>&nbsp;';

@@ -106,40 +106,50 @@ class Visitors_Model
 			}
 			mysqli_free_result($result);
 		}
-		
 		return $this->rows_list;
 	}
 	
 	public function GetParams()
 	{
-		$this->row_item = array();
+		$this->rows_list = array();
 
-		$query = "SELECT * FROM query_params ORDER BY id DESC LIMIT 0, 1";
+		$query = "SELECT * FROM query_set ORDER BY id";
 		$result = mysqli_query($this->db, $query);
 		if ($result)
 		{
-			$row = mysqli_fetch_assoc($result); 
-			$this->row_item = $row;
+			while ($row = mysqli_fetch_assoc($result))
+			{
+				$this->rows_list[] = $row;
+			}
 			mysqli_free_result($result);
 		}
-		return $this->row_item;
+		return $this->rows_list;
 	}
 	
 	public function SetParams($record_item)
 	{
-		$query = "INSERT INTO query_params VALUES (NULL, '" . 
-					$record_item['period_from'] . "', '" . 
-					$record_item['period_to'] . "', '" . 
-					$record_item['condition_field'] . "', '" . 
-					$record_item['condition_operator'] . "', '" . 
-					$record_item['condition_value'] . "', '" . 
-					$record_item['addition_field'] . "', '" . 
-					$record_item['addition_operator'] . "', '" . 
-					$record_item['addition_value'] . "', '" . 
-					addslashes($record_item['exceptions']) . "', '" . 
-					$this->mySqlDateTime . "')";
+		$query = "DELETE FROM query_set";
 		mysqli_query($this->db, $query);
-		
+
+		foreach ($record_item as $key => $value)
+		{
+			if ($key == 'filters')
+			{
+				foreach ($value as $k => $v)
+				{
+					$query = "INSERT INTO query_set (field, operator, value) VALUES ('" . $v['field'] . "', '" . $v['operator'] . "', '" . addslashes($v['value']) . "')";
+					mysqli_query($this->db, $query);
+				}
+			}
+			else
+			{
+				$query = "INSERT INTO query_set (field, operator, value) VALUES ('" . $key . "', '=', '" . addslashes($value) . "')";
+				mysqli_query($this->db, $query);
+			}
+		}		
+		$query = "INSERT INTO query_set (field, operator, value) VALUES ('modified', '=', NOW())";
+		mysqli_query($this->db, $query);
+
 		return mysqli_affected_rows($this->db);
 	}
 	
@@ -147,86 +157,52 @@ class Visitors_Model
 	{
 		$sub_query = NULL;
 		
-		$query = "SELECT * FROM query_params ORDER BY id DESC LIMIT 0, 1";
+		$query = "SELECT * FROM query_set ORDER BY id";
 		$result = mysqli_query($this->db, $query);
 		if ($result)
 		{
-			$row = mysqli_fetch_assoc($result); 
-			switch ($row['condition_operator'])
+			while ($row = mysqli_fetch_assoc($result))
 			{
-				case 1:
-					$main_operator = "=";
-					$type = 1;
-					break;
-				case 2:
-					$main_operator = "LIKE";
-					$type = 2;
-					break;
-				case 3:
-					$main_operator = "<";
-					$type = 1;
-					break;
-				case 4:
-					$main_operator = ">";
-					$type = 1;
-					break;
-				case 5:
-					$main_operator = "BETWEEN";
-					$type = 3;
-					break;
-				case 6:
-					$main_operator = "NOT LIKE";
-					$type = 2;
-					break;
+				if ($row['field'] == 'period_from') $sub_query .= " AND visited >= '" . $row['value'] . " 00:00:00'";
+				if ($row['field'] == 'period_to') $sub_query .= " AND visited <= '" . $row['value'] . " 23:59:59'";
+				if (in_array($row['field'], array('id', 'visitor_ip', 'http_referer', 'request_uri', 'visited')))
+				{
+					switch ($row['operator'])
+					{
+						case 'equal':
+							$main_operator = "=";
+							$type = 1;
+							break;
+						case 'like':
+							$main_operator = "LIKE";
+							$type = 2;
+							break;
+						case 'less':
+							$main_operator = "<";
+							$type = 1;
+							break;
+						case 'great':
+							$main_operator = ">";
+							$type = 1;
+							break;
+						case 'between':
+							$main_operator = "BETWEEN";
+							$type = 3;
+							break;
+						case 'differ':
+							$main_operator = "NOT LIKE";
+							$type = 2;
+							break;
+					}
+					if ($type == 1)
+						$sub_query .= " AND ". $row['field'] ." ". $main_operator ." '". $row['value'] ."'";
+					if ($type == 2)
+						$sub_query .= " AND ". $row['field'] ." ". $main_operator ." '%". $row['value'] ."%'";
+					if ($type == 3)
+						$sub_query .= " AND ". $row['field'] ." ". $main_operator ." ". $row['value'];
+				}
+				if ($row['field'] == 'exceptions') $sub_query .= " AND visitor_ip NOT IN (". $row['value'] .")";
 			}
-			switch ($row['addition_operator'])
-			{
-				case 1:
-					$add_operator = "=";
-					$addtype = 1;
-					break;
-				case 2:
-					$add_operator = "LIKE";
-					$addtype = 2;
-					break;
-				case 3:
-					$add_operator = "<";
-					$addtype = 1;
-					break;
-				case 4:
-					$add_operator = ">";
-					$addtype = 1;
-					break;
-				case 5:
-					$add_operator = "BETWEEN";
-					$addtype = 3;
-					break;
-				case 6:
-					$add_operator = "NOT LIKE";
-					$addtype = 2;
-					break;
-			}
-			if ($row['period_from']) $sub_query .= " AND visited >= '" . $row['period_from'] . " 00:00:00'";
-			if ($row['period_to']) $sub_query .= " AND visited <= '" . $row['period_to'] . " 23:59:59'";
-			if ($row['condition_field'] && $row['condition_operator'] && $row['condition_value'])
-			{
-				if ($type == 1)
-					$sub_query .= " AND ". $row['condition_field'] ." ". $main_operator ." '". $row['condition_value'] ."'";
-				else if ($type == 2)
-					$sub_query .= " AND ". $row['condition_field'] ." ". $main_operator ." '%". $row['condition_value'] ."%'";
-				else if ($type == 3)
-					$sub_query .= " AND ". $row['condition_field'] ." ". $main_operator ." ". $row['condition_value'];
-			}
-			if ($row['addition_field'] && $row['addition_operator'] && $row['addition_value'])
-			{
-				if ($addtype == 1)
-					$sub_query .= " AND ". $row['addition_field'] ." ". $add_operator ." '". $row['addition_value'] ."'";
-				else if ($addtype == 2)
-					$sub_query .= " AND ". $row['addition_field'] ." ". $add_operator ." '%". $row['addition_value'] ."%'";
-				else if ($addtype == 3)
-					$sub_query .= " AND ". $row['addition_field'] ." ". $add_operator ." ". $row['addition_value'];
-			}
-			if ($row['exceptions']) $sub_query .= " AND visitor_ip NOT IN (". $row['exceptions'] .")";
 			mysqli_free_result($result);
 		}
 		return $sub_query;

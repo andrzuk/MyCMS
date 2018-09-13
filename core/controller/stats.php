@@ -25,7 +25,11 @@ $site_path = array (
 
 // dane z bazy potrzebne na stronę:
 
-$data_import = array();
+$setting = new Settings($db);
+
+$sponsored_links = $setting->get_config_key('sponsored_links');
+
+$data_import = array('sponsored_links' => $sponsored_links);
 
 // pobiera statystykę:
 $record_object = $model_object->GetStats();

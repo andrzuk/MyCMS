@@ -52,23 +52,26 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 		$period_to_year = isset($_POST['period_to_year']) ? $_POST['period_to_year'] : NULL;
 		$period_to_month = isset($_POST['period_to_month']) ? $_POST['period_to_month'] : NULL;
 		$period_to_day = isset($_POST['period_to_day']) ? $_POST['period_to_day'] : NULL;
-		$condition_field = isset($_POST['condition_field']) ? $_POST['condition_field'] : NULL;
-		$condition_operator = isset($_POST['condition_operator']) ? $_POST['condition_operator'] : NULL;
-		$condition_value = isset($_POST['condition_value']) ? $_POST['condition_value'] : NULL;
-		$addition_field = isset($_POST['addition_field']) ? $_POST['addition_field'] : NULL;
-		$addition_operator = isset($_POST['addition_operator']) ? $_POST['addition_operator'] : NULL;
-		$addition_value = isset($_POST['addition_value']) ? $_POST['addition_value'] : NULL;
 		$exceptions = isset($_POST['exceptions']) ? $_POST['exceptions'] : NULL;
+
+		$filters = array();
+		$elements = array(false, false, false);
+		foreach ($_POST as $key => $val)
+		{
+			if (substr($key, 0, 6) == 'field-') { $field = $val; $elements[0] = true; }
+			if (substr($key, 0, 9) == 'operator-') { $operator = $val; $elements[1] = true; }
+			if (substr($key, 0, 6) == 'value-') { $value = $val; $elements[2] = true; }
+			if ($elements[0] && $elements[1] && $elements[2])
+			{
+				$filters[] = array('field' => $field, 'operator' => $operator, 'value' => $value);
+				$elements[0] = false; $elements[1] = false; $elements[2] = false;
+			}
+		}
 		
 		$params_record = array(
 			'period_from' => $period_from_year .'-'. $period_from_month .'-'. $period_from_day,
 			'period_to' => $period_to_year .'-'. $period_to_month .'-'. $period_to_day,
-			'condition_field' => $condition_field,
-			'condition_operator' => $condition_operator,
-			'condition_value' => $condition_value,
-			'addition_field' => $addition_field,
-			'addition_operator' => $addition_operator,
-			'addition_value' => $addition_value,
+			'filters' => $filters,
 			'exceptions' => $exceptions,
 		);
 		

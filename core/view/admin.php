@@ -44,7 +44,7 @@ class Admin_View
 				if ($row_k == 'items') $items = $row_v;
 			}
 			
-			$site_content .= '<div style="text-align: left; font-size: 11px; color: #999; border-bottom: 1px dotted #ccc;">';
+			$site_content .= '<div style="text-align: left; font-size: 11px; padding-top: 20px; color: #999; border-bottom: 1px dotted #ccc;">';
 			$site_content .= $group;
 			$site_content .= '</div>';
 			
@@ -59,7 +59,7 @@ class Admin_View
 					if ($key == 'access') $access = $value;
 				}
 
-				$site_content .= '<span class="PanelItem" style="width: 100px; padding: 15px 20px;">';
+				$site_content .= '<span class="PanelItem" style="width: 120px; padding: 15px 20px;">';
 
 				if ($access) // funkcja dostępna
 				{

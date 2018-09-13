@@ -46,8 +46,8 @@ class Messages_View
 		
 		$form_title = 'Edycja wiadomości';
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '600px';
-		$form_widths = Array('30%', '70%');
+		$form_width = '100%';
+		$form_widths = Array('15%', '85%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -191,12 +191,12 @@ class Messages_View
 		$col_attrib = array(
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '20%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '40%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '10%', 'align' => 'center', 'visible' => '0'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
 		);
 		
