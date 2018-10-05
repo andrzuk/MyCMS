@@ -55,7 +55,7 @@ class Visitors_View
 		$form_title = 'Szukaj';
 		$form_image = 'img/32x32/search.png';
 		$form_width = '100%';
-		$form_widths = Array('15%', '85%');
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -193,7 +193,7 @@ class Visitors_View
 		$form_data = Array(
 						Array('type' => 'label', 'id' => '', 'name' => '', 'caption' => '', 'value' => $main_cell, 'style' => 'width: 100%;')
 						);
-		$form_input = Array('caption' => 'Filtr - warunek <br>(typu AND)', 'data' => $form_data);
+		$form_input = Array('caption' => 'Filtr - warunek (typu AND)', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 		
 		// wykluczenia:
@@ -201,7 +201,7 @@ class Visitors_View
 		$form_data = Array(
 						Array('type' => 'textarea', 'id' => 'exceptions', 'name' => 'exceptions', 'value' => $exceptions, 'style' => '')
 						);
-		$form_input = Array('caption' => 'Wykluczenia', 'data' => $form_data);
+		$form_input = Array('caption' => 'Wykluczenia adresów', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		// inputs:

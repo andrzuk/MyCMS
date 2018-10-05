@@ -28,17 +28,17 @@ $status = new Status($db);
 $user_id = $status->get_value('user_id');
 
 $list_columns = array(
-	array('db_name' => 'id', 					'column_name' => 'Id', 				'sorting' => 1),
-	array('db_name' => 'section_id',			'column_name' => 'Sekcja',			'sorting' => 1),
-	array('db_name' => 'owner_id',				'column_name' => 'Autor',			'sorting' => 1),
-	array('db_name' => 'file_format', 			'column_name' => 'Format',			'sorting' => 1),
-	array('db_name' => 'file_name', 			'column_name' => 'Nazwa', 			'sorting' => 1),
-	array('db_name' => 'file_size', 			'column_name' => 'Rozmiar', 		'sorting' => 1),
-	array('db_name' => 'picture_width', 		'column_name' => 'Szerokość', 		'sorting' => 1),
-	array('db_name' => 'picture_height', 		'column_name' => 'Wysokość', 		'sorting' => 1),
-	array('db_name' => 'picture_description',	'column_name' => 'Opis', 			'sorting' => 1),
-	array('db_name' => 'active', 				'column_name' => 'Aktywny', 		'sorting' => 1),
-	array('db_name' => 'modified', 				'column_name' => 'Modyfikacja', 	'sorting' => 1),
+	array('db_name' => 'id',                  'column_name' => 'Id',          'sorting' => 1),
+	array('db_name' => 'section_id',          'column_name' => 'Podgląd',     'sorting' => 0),
+	array('db_name' => 'owner_id',            'column_name' => 'Autor',       'sorting' => 1),
+	array('db_name' => 'file_format',         'column_name' => 'Format',      'sorting' => 1),
+	array('db_name' => 'file_name',           'column_name' => 'Nazwa pliku', 'sorting' => 1),
+	array('db_name' => 'file_size',           'column_name' => 'Rozmiar',     'sorting' => 1),
+	array('db_name' => 'picture_width',       'column_name' => 'Szer.',       'sorting' => 1),
+	array('db_name' => 'picture_height',      'column_name' => 'Wys.',        'sorting' => 1),
+	array('db_name' => 'picture_description', 'column_name' => 'Opis',        'sorting' => 1),
+	array('db_name' => 'active',              'column_name' => 'Aktywny',     'sorting' => 1),
+	array('db_name' => 'modified',            'column_name' => 'Modyfikacja', 'sorting' => 1),
 );
 
 if (isset($_GET['mode'])) $_SESSION['mode'] = intval($_GET['mode']);

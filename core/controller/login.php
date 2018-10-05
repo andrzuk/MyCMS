@@ -110,7 +110,7 @@ if (!isset($_SESSION['user_status']) || !$_SESSION['user_status']) // nie zalogo
 									'index.php?route=admin', 'Panel'
 								),
 								array(
-									'index.php?route=profile', 'Profil'
+									'index.php?route=visitors', 'Odwiedziny'
 								),
 							)
 						);

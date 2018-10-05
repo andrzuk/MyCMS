@@ -460,18 +460,18 @@ class Images_View
 		
 		// kolumny wyświetlane:
 		$col_attrib = array(
+			array('width' => '4%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '15%', 'align' => 'center', 'visible' => '1', 'image' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
-			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
-			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'right', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
-			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '15%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '8%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '12%', 'align' => 'center', 'visible' => '1'),
 		);
 		
 		$main_list->set_attribs($col_attrib);

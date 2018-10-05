@@ -77,6 +77,7 @@ class Images_Model
 			while ($row = mysqli_fetch_assoc($result))
 			{
 				$row['file_size'] = number_format($row['file_size'] / 1024, 0, ',', '.') .' KB';
+				$row['section_id'] = $row['id'];
 				$this->rows_list[] = $row;
 			} 
 			mysqli_free_result($result);
