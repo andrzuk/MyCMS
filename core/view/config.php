@@ -129,7 +129,7 @@ class Config_View
 		else if ($field_type == 2) // obszar
 		{
 			$form_data = Array(
-							Array('type' => 'textarea', 'id' => 'key_value', 'name' => 'key_value', 'value' => $key_value, 'style' => 'height: 90px; width: 96%;')
+							Array('type' => 'textarea', 'id' => 'key_value', 'name' => 'key_value', 'value' => $key_value, 'style' => 'height: 300px; width: 96%;')
 							);
 		}
 		else if ($field_type == 3) // opcja

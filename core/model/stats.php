@@ -22,14 +22,19 @@ class Stats_Model
 	{
 		$this->rows_list = array();
 
-		// odczytuje z konfiguracji domenę serwisu:
-		$base_domain = $this->setting->get_config_key('base_domain');
-		$base_domain = str_replace(array('http:', 'https:', '/'), array(NULL, NULL, NULL), $base_domain);
+		// odczytuje z konfiguracji wykluczone domeny raportu:
+		$excluded_domains = $this->setting->get_config_key('excluded_domains');
+		$domains = explode(', ', $excluded_domains);
+		$condition = '';
+		foreach ($domains as $key => $value)
+		{
+			$condition .= " AND http_referer NOT LIKE '%". $value ."%'";
+		}
 
 		$query = "
 			SELECT DISTINCT http_referer AS caption, COUNT(*) AS licznik FROM " . $this->table_name . "
 			WHERE http_referer LIKE 'http%'
-			AND http_referer NOT LIKE '%". $base_domain ."%'
+			". $condition ."
 			GROUP BY http_referer
 			ORDER BY Licznik DESC
 		";

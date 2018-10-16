@@ -107,7 +107,7 @@ if (!isset($_SESSION['user_status']) || !$_SESSION['user_status']) // nie zalogo
 							'Zostałeś poprawnie zalogowany do serwisu.',
 							array(
 								array(
-									'index.php?route=admin', 'Panel'
+									'index.php?route=admin', 'Admin Panel'
 								),
 								array(
 									'index.php?route=visitors', 'Odwiedziny'

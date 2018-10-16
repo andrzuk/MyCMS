@@ -149,6 +149,16 @@ if (isset($_GET['action'])) // add, view, edit, delete, download, preview
 		{
 			$content_options = $page_options->get_options('edit');
 
+			$mode_options = array (
+				array (
+					'address' => 'index.php?route=' . MODULE_NAME . '&action=download&id=' . $id,
+					'caption' => 'Pobierz',
+					'icon' => 'img/save.png'
+				),
+			);
+			
+			$content_options = array_merge($mode_options, $content_options);
+			
 			$params = array(
 				'content_title' => $content_title,
 				'content_options' => $content_options,
@@ -173,6 +183,16 @@ if (isset($_GET['action'])) // add, view, edit, delete, download, preview
 		case 'view':
 		{
 			$content_options = $page_options->get_options('view');
+			
+			$mode_options = array (
+				array (
+					'address' => 'index.php?route=' . MODULE_NAME . '&action=download&id=' . $id,
+					'caption' => 'Pobierz',
+					'icon' => 'img/save.png'
+				),
+			);
+			
+			$content_options = array_merge($mode_options, $content_options);
 			
 			$params = array(
 				'content_title' => $content_title,
@@ -211,6 +231,16 @@ if (isset($_GET['action'])) // add, view, edit, delete, download, preview
 		case 'preview':
 		{
 			$content_options = $page_options->get_options('preview');
+			
+			$mode_options = array (
+				array (
+					'address' => 'index.php?route=' . MODULE_NAME . '&action=download&id=' . $id,
+					'caption' => 'Pobierz',
+					'icon' => 'img/save.png'
+				),
+			);
+			
+			$content_options = array_merge($mode_options, $content_options);
 			
 			$params = array(
 				'content_title' => $content_title,

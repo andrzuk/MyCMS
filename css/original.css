@@ -108,14 +108,14 @@ pasek nawigacji
 {
 	display: block;
 	text-decoration: none;
-	background: #f2f2f2 url('http://mycms.pl/img/buttons/btn_grey_off_35.jpg') repeat-x;
+	background: #f2f2f2 url('http://fast-cms.pl/img/buttons/btn_grey_off_35.jpg') repeat-x;
 	color: #a00;
 	border: 1px solid #bbb;
 }
 
 .NavItem a:hover
 {
-	background: #f2f2f2 url('http://mycms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
+	background: #f2f2f2 url('http://fast-cms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
 	color: #a00;
 	text-decoration: none;
 }
@@ -126,7 +126,7 @@ a.NavLink
 
 a.NavLinkSelected
 {
-	background: #f2f2f2 url('http://mycms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
+	background: #f2f2f2 url('http://fast-cms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
 	color: #a00;
 }
 
@@ -700,10 +700,9 @@ textarea.FormInput
 
 .NaviPointersLeft
 {
-	font-size: small;
-	text-align: right;
+	text-align: left;
 	vertical-align: middle;
-	width: 20%;
+	width: 15%;
 }
 
 .NaviPointers
@@ -712,15 +711,14 @@ textarea.FormInput
 	padding: 10px;
 	vertical-align: middle;
 	text-align: center;
-	width: 60%;
+	width: 70%;
 }
 
 .NaviPointersRight
 {
-	font-size: small;
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
-	width: 20%;
+	width: 15%;
 }
 
 .NaviPointersCount
@@ -826,7 +824,7 @@ textarea.FormInput
 	vertical-align: middle;
 	font-size: 1.0em;
 	border: 1px solid #999; /* #C0D0E0; */
-	color: #d63;
+	color: #c33;
 	background-color: #ffeebb;
 }
 
@@ -848,7 +846,7 @@ textarea.FormInput
 	vertical-align: middle;
 	font-size: 1.0em;
 	border: 1px solid #999; /* #C0D0E0; */
-	color: #c90;
+	color: #393;
 	background-color: #fff8f0;
 }
 
@@ -980,8 +978,8 @@ div#multi select.month { width: 64px; }
 div#multi select.day { width: 64px; }
 div#filters div.condition-item { padding: 5px 0; }
 div#filters select { width: 170px; margin-right: 21px; }
-div#filters input { width: 345px; margin-right: 21px; }
+div#filters input { width: 297px; margin-right: 21px; }
 div#filters button { width: 50px; }
 div#add-button { padding: 10px 0; }
 div#add-button button { width: 170px; }
-textarea#exceptions { width: 793px; height: 60px; min-width: 793px; max-width: 793px; min-height: 60px; max-height: 60px; font-family: inherit; font-size: inherit; }
+textarea#exceptions { width: 745px; height: 60px; min-width: 745px; max-width: 745px; min-height: 60px; max-height: 60px; font-family: inherit; font-size: inherit; }
