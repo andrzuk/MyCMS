@@ -1319,6 +1319,57 @@ class Operator
 		}
 	}
 	
+	// dopisanie wykluczenia:
+	
+	public function AddExclude($id, $params, $access, $acl)
+	{
+		$this->content_title = $params['content_title'];
+		
+		if (in_array($this->user_status, $access) && $acl) // są uprawnienia
+		{
+			$this->content_options = $params['content_options'];
+			
+			// ograniczenia dla usera:
+			$restrict_id = isset($params['restrict']) ? $params['restrict'] : NULL;
+			
+			$id = $restrict_id ? $restrict_id : $id;
+			
+			// pobiera rekord o danym Id:
+			$this->record_object = $this->model_object->GetOne($id);
+			
+			// dopisuje adres IP do wykluczen:
+			$result = $this->model_object->AddExclude($this->record_object);
+			
+			if ($result) // zapis się powiódł
+			{
+				// wyświetla komunikat:
+				$this->site_message = array(
+					'SUCCESS', 'Adres został poprawnie dopisany do wykluczeń.'
+				);
+			}
+			else // zapis się nie powiódł
+			{
+				// wyświetla komunikat:
+				$this->site_message = array(
+					'ERROR', 'Zapis rekordu się nie powiódł. Proszę spróbować ponownie.'
+				);
+			}
+			
+			// pobiera listę rekordów:
+			$record_list = $this->model_object->GetAll($restrict_id, $this->db_params);
+			
+			// aktualizuje statystykę listy:
+			$this->navi_object->update($this->model_object, $this->list_params);
+			
+			// wyświetla listę rekordów:
+			$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+		}
+		else // brak uprawnień
+		{
+			$this->AccessDenied();
+		}
+	}
+		
 	// lista:
 	
 	public function DrawList($params, $access, $acl)

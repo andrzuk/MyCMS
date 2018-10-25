@@ -105,6 +105,7 @@ class Sites_Model
 		{
 			while ($row = mysqli_fetch_assoc($result))
 			{
+				$row['main_page'] = 'img/16x16/page_type_'.$row['main_page'].'.png';
 				$this->rows_list[] = $row;
 			} 
 			mysqli_free_result($result);

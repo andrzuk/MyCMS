@@ -148,6 +148,11 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 				$controller_object->View($id, $params, $access, $acl->available());
 			}
 			break;
+			case 'exclude': // wyklucz
+			{
+				$controller_object->AddExclude($id, $params, $access, $acl->available());
+			}
+			break;
 		}
 	}
 	else // list

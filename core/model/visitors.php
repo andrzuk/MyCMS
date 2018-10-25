@@ -207,6 +207,21 @@ class Visitors_Model
 		}
 		return $sub_query;
 	}	
+	
+	public function AddExclude($record_item)
+	{
+		$query = "UPDATE query_set" .
+		         " SET value = CONCAT(value, ', \'". $record_item['visitor_ip']['ip'] ."\'')" .
+		         " WHERE field = 'exceptions'";
+		mysqli_query($this->db, $query);
+		
+		$query = "UPDATE query_set" .
+		         " SET value = NOW()" .
+		         " WHERE field = 'modified'";
+		mysqli_query($this->db, $query);
+
+		return mysqli_affected_rows($this->db);
+	}
 }
 
 ?>

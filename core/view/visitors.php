@@ -257,8 +257,8 @@ class Visitors_View
 			array('width' => '30%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '7%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '7%', 'align' => 'center', 'visible' => '1'),
 		);
 		
 		$main_list->set_attribs($col_attrib);
@@ -266,6 +266,7 @@ class Visitors_View
 		// dostępne akcje:
 		$col_actions = array(
 			array('action' => 'view', 'icon' => 'info.png', 'title' => 'Podgląd'),
+			array('action' => 'exclude', 'icon' => 'stop.png', 'title' => 'Wyklucz'),
 		);
 		
 		$main_list->set_actions($col_actions);
