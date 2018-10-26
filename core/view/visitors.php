@@ -266,7 +266,7 @@ class Visitors_View
 		// dostępne akcje:
 		$col_actions = array(
 			array('action' => 'view', 'icon' => 'info.png', 'title' => 'Podgląd'),
-			array('action' => 'exclude', 'icon' => 'stop.png', 'title' => 'Wyklucz'),
+			array('action' => 'exclude', 'icon' => 'exclude.png', 'title' => 'Wyklucz'),
 		);
 		
 		$main_list->set_actions($col_actions);
