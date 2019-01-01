@@ -58,18 +58,21 @@ class Visitors_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			$row['visitor_ip'] = array(
-				'ip' => $row['visitor_ip'],
-				'host' => $this->host_name->find_host_name($row['visitor_ip']),
-			);
-			$row['http_referer'] = array(
-				'original' => $row['http_referer'],
-				'converted' => str_replace(array("=", "%", ","), array(" = ", " % ", ", "), $row['http_referer']),
-			);
-			$row['request_uri'] = array(
-				'original' => $row['request_uri'],
-				'converted' => str_replace(array("=", "%", ","), array(" = ", " % ", ", "), $row['request_uri']),
-			);
+			if (count($row))
+			{
+				$row['visitor_ip'] = array(
+					'ip' => $row['visitor_ip'],
+					'host' => $this->host_name->find_host_name($row['visitor_ip']),
+				);
+				$row['http_referer'] = array(
+					'original' => $row['http_referer'],
+					'converted' => str_replace(array("=", "%", ",", "X", "Y", "Z"), array(" = ", " % ", ", ", "X ", "Y ", "Z "), $row['http_referer']),
+				);
+				$row['request_uri'] = array(
+					'original' => $row['request_uri'],
+					'converted' => str_replace(array("=", "%", ",", "X", "Y", "Z"), array(" = ", " % ", ", ", "X ", "Y ", "Z "), $row['request_uri']),
+				);
+			}
 			$this->row_item = $row;
 			mysqli_free_result($result);
 		}

@@ -116,8 +116,8 @@ pasek nawigacji
 .NavItem a:hover
 {
 	background: #f2f2f2 url('http://fast-cms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
-	color: #a00;
-	text-decoration: none;
+	color: #c00;
+	text-decoration: underline;
 }
 
 a.NavLink
@@ -127,7 +127,8 @@ a.NavLink
 a.NavLinkSelected
 {
 	background: #f2f2f2 url('http://fast-cms.pl/img/buttons/btn_grey_on_35.jpg') repeat-x;
-	color: #a00;
+	color: #c00;
+	text-decoration: underline;
 }
 
 /*
@@ -553,12 +554,12 @@ a.PathLink:hover
 
 .DataRowBright:hover
 {
-	background-color: #f7f8f9;
+	background-color: #d0e5fa;
 }
 
 .DataRowDark:hover
 {
-	background-color: #f7f8f9;
+	background-color: #d0e5fa;
 }
 
 .DetailsCell

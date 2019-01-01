@@ -28,7 +28,7 @@ class Hosts
 			}
 			mysqli_free_result($result);
 		}
-		if (empty($host_name)) // nie znalazł w tablicy - trzeba dopisać
+		if (!empty($host_address) && empty($host_name)) // nie znalazł w tablicy - trzeba dopisać
 		{
 			$host_name = gethostbyaddr($host_address);
 			$query = "INSERT INTO hosts VALUES (NULL, '". $host_address ."', '". $host_name ."')";

@@ -346,7 +346,7 @@ class Categories_View
 		// kolumny wyświetlane:
 		$col_attrib = array(
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '5%', 'align' => 'center', 'visible' => '1', 'icon' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),

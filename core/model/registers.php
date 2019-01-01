@@ -47,7 +47,10 @@ class Registers_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			$row['password'] = PASS_MASK;
+			if (count($row))
+			{
+				$row['password'] = PASS_MASK;
+			}
 			$this->row_item = $row;
 			mysqli_free_result($result);
 		}

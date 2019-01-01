@@ -81,6 +81,7 @@ class Categories_Model
 		{
 			while ($row = mysqli_fetch_assoc($result))
 			{
+				$row['type'] = 'img/16x16/menu_type_'.$row['type'].'.png';
 				$this->rows_list[] = $row;
 			} 
 			mysqli_free_result($result);

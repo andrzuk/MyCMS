@@ -2,6 +2,12 @@
 
 session_start();
 
+if (isset($_SESSION['last_request_timestamp']))
+{
+	if (microtime(true) - $_SESSION['last_request_timestamp'] < 0.1) exit();
+}
+$_SESSION['last_request_timestamp'] = microtime(true);
+
 include 'config/config.php';
 include LIB_DIR . 'database.php';
 

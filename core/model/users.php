@@ -48,21 +48,24 @@ class Users_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			switch ($row['status'])
+			if (count($row))
 			{
-				case 1:
-					$status = 'Administratorzy';
-					break;
-				case 2:
-					$status = 'Operatorzy';
-					break;
-				case 3:
-					$status = 'Użytkownicy';
-					break;
+				switch ($row['status'])
+				{
+					case 1:
+						$status = 'Administratorzy';
+						break;
+					case 2:
+						$status = 'Operatorzy';
+						break;
+					case 3:
+						$status = 'Użytkownicy';
+						break;
+				}
+				$row['status'] = $status;
+				$row['active'] = $row['active'] ? 'Tak' : 'Nie';
+				$row['user_password'] = PASS_MASK;
 			}
-			$row['status'] = $status;
-			$row['active'] = $row['active'] ? 'Tak' : 'Nie';
-			$row['user_password'] = PASS_MASK;
 			$this->row_item = $row;
 			mysqli_free_result($result);
 		}
@@ -255,6 +258,8 @@ class Users_Model
 	
 	public function AllowProfile($id)
 	{
+		$status = 0;
+		
 		if (!isset($_SESSION['user_id'])) return FALSE;
 		if (!isset($_SESSION['user_status'])) return FALSE;
 		
@@ -265,7 +270,10 @@ class Users_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			$status = $row['status'];
+			if (count($row))
+			{
+				$status = $row['status'];
+			}
 			mysqli_free_result($result);
 		}
 		

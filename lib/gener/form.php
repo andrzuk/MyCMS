@@ -130,7 +130,7 @@ class FormBuilder
 		$main_text .= '<tr>';
 		$main_text .= '<th class="FormTitleBar" colspan="'. $this->columns .'">';
 		$main_text .= '<span class="FormIcon">';
-		$main_text .= '<img src="'.$this->image.'" alt="'.$this->title.'" />';
+		$main_text .= '<img src="'.$this->image.'" width="32" height="32" alt="" />';
 		$main_text .= '</span>';
 		$main_text .= '<span class="FormTitle">';
 		$main_text .= $this->title;

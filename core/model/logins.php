@@ -24,7 +24,7 @@ class Logins_Model
 		$data_type = isset($_SESSION['mode']) ? ($_SESSION['mode'] == 1 ? ' AND user_id > 0' : ' AND user_id = 0') : NULL;
 		
 		$date_range = isset($_SESSION['date_from']) && isset($_SESSION['date_to']) ? " AND login_time >= '" . $_SESSION['date_from'] . " 00:00:00' AND login_time <= '" . $_SESSION['date_to'] . " 23:59:59'" : NULL;
-
+		
 		$filter = empty($value) ? NULL : " AND (login LIKE '%" . $value . "%' OR agent LIKE '%" . $value . "%' OR user_ip LIKE '%" . $value . "%' OR password LIKE '%" . $value . "%')";
 
 		$query = "SELECT COUNT(*) AS licznik FROM " . $this->table_name . " WHERE 1" . $condition . $data_type . $filter . $date_range;
@@ -47,7 +47,10 @@ class Logins_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			$row['password'] = PASS_MASK;
+			if (count($row))
+			{
+				$row['password'] = PASS_MASK;
+			}
 			$this->row_item = $row;
 			mysqli_free_result($result);
 		}
@@ -61,7 +64,7 @@ class Logins_Model
 		$data_type = isset($_SESSION['mode']) ? ($_SESSION['mode'] == 1 ? ' AND user_id > 0' : ' AND user_id = 0') : NULL;
 		
 		$date_range = isset($_SESSION['date_from']) && isset($_SESSION['date_to']) ? " AND login_time >= '" . $_SESSION['date_from'] . " 00:00:00' AND login_time <= '" . $_SESSION['date_to'] . " 23:59:59'" : NULL;
-
+		
 		$filter = empty($_SESSION['list_filter']) ? NULL : " AND (login LIKE '%" . $_SESSION['list_filter'] . "%' OR agent LIKE '%" . $_SESSION['list_filter'] . "%' OR user_ip LIKE '%" . $_SESSION['list_filter'] . "%' OR password LIKE '%" . $_SESSION['list_filter'] . "%')";
 
 		$this->rows_list = array();

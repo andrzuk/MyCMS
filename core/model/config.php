@@ -72,6 +72,7 @@ class Config_Model
 		{
 			while ($row = mysqli_fetch_assoc($result))
 			{
+				$row['field_type'] = 'img/16x16/setting_type_'.$row['field_type'].'.png';
 				$this->rows_list[] = $row;
 			} 
 			mysqli_free_result($result);

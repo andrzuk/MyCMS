@@ -132,7 +132,7 @@ class ListBuilder
 		$main_text .= '<tr>';
 		$main_text .= '<th class="FormTitleBar" colspan="'.$cols_count.'">';
 		$main_text .= '<span class="FormIcon">';
-		$main_text .= '<img src="'.$this->image.'" alt="'.$this->title.'" />';
+		$main_text .= '<img src="'.$this->image.'" width="32" height="32" alt="" />';
 		$main_text .= '</span>';
 		$main_text .= '<span class="FormTitle">';
 		$main_text .= $this->title;
@@ -170,7 +170,7 @@ class ListBuilder
 			$main_text .= '<span class="FormSearchValue">" <b>' . $_SESSION['list_filter'] . '</b> "</span>';
 			$main_text .= '<span class="FormSearchClose">';
 			$main_text .= '<input type="hidden" name="ListSearchClose" value="Close" />';
-			$main_text .= '<img src="img/16x16/cross_button.png" onclick="document.getElementById(\'form_search_close\').submit();" alt="close" title="Usuń filtr" />';
+			$main_text .= '<img src="img/16x16/cross_button.png" onclick="document.getElementById(\'form_search_close\').submit();" title="Usuń filtr" />';
 			$main_text .= '</span>'; 
 			$main_text .= '</form>';
 			$main_text .= '</td>';
@@ -191,8 +191,8 @@ class ListBuilder
 			
 			if (++$idx == $this->params['sort_column']) // kolumna aktualnie sortowana
 			{
-				if ($this->params['sort_order'] == 1) $sort_ico = ' <img src="img/16x16/sort_ascending.png" class="SortIcon" />';
-				else $sort_ico = ' <img src="img/16x16/sort_descending.png" class="SortIcon" />';
+				if ($this->params['sort_order'] == 1) $sort_ico = ' <img src="img/16x16/sort_ascending.png" width="16" height="16" class="SortIcon" />';
+				else $sort_ico = ' <img src="img/16x16/sort_descending.png" width="16" height="16" class="SortIcon" />';
 			}
 			else // pozostałe kolumny
 			{
@@ -297,7 +297,7 @@ class ListBuilder
 							if ($key == 'icon') $icon = $value;
 							if ($key == 'title') $title = $value;
 						}
-						$main_text .= '<a href="index.php?route=' . $this->module . '&action=' . $action . '&id=' . $row['id'] . '"><img src="img/16x16/' . $icon . '" class="ActionIcon" width="16px" height="16px" alt="' . $title . '" title="' . $title . '" /></a>';
+						$main_text .= '<a href="index.php?route=' . $this->module . '&action=' . $action . '&id=' . $row['id'] . '"><img src="img/16x16/' . $icon . '" class="ActionIcon" width="16" height="16" alt="" title="' . $title . '" /></a>';
 					}
 									
 					$main_text .= '</td>';
@@ -311,7 +311,7 @@ class ListBuilder
 			{
 				$main_text .= '<tr>';
 				$main_text .= '<td class="DataCellMsg" colspan="'.$cols_count.'">';
-				$main_text .= '<div><img src="img/32x32/warning.png" alt="empty result" /></div>';
+				$main_text .= '<div><img src="img/32x32/warning.png" width="32" height="32" alt="" /></div>';
 				$main_text .= '<div>(brak wyników)</div>';
 				$main_text .= '</td>';
 				$main_text .= '</tr>';
@@ -354,7 +354,7 @@ class ListBuilder
 		$main_text .= '<tr>';
 		$main_text .= '<th class="FormTitleBar" colspan="'.$cols_count.'">';
 		$main_text .= '<span class="FormIcon">';
-		$main_text .= '<img src="'.$this->image.'" alt="'.$this->title.'" />';
+		$main_text .= '<img src="'.$this->image.'" width="32" height="32" alt="" />';
 		$main_text .= '</span>';
 		$main_text .= '<span class="FormTitle">';
 		$main_text .= $this->title;
@@ -414,7 +414,7 @@ class ListBuilder
 			{
 				$main_text .= '<tr>';
 				$main_text .= '<td class="DataCellMsg" colspan="'.$cols_count.'">';
-				$main_text .= '<div><img src="img/32x32/warning.png" alt="empty result" /></div>';
+				$main_text .= '<div><img src="img/32x32/warning.png" width="32" height="32" alt="" /></div>';
 				$main_text .= '<div>(brak wyników)</div>';
 				$main_text .= '</td>';
 				$main_text .= '</tr>';
