@@ -352,7 +352,8 @@ $sql = array(
 				(14, 'logins', 'Logowania', 'logins'),
 				(15, 'passwords', 'Hasła', 'reminds'),
 				(16, 'script', 'Działanie', 'script'),
-				(17, 'style', 'Wygląd', 'style');
+				(17, 'style', 'Wygląd', 'style'),
+				(18, 'layout', 'Układ', 'layout');
 			",
 			"
 				INSERT INTO `configuration` (`id`, `key_name`, `key_value`, `meaning`, `field_type`, `active`, `modified`) VALUES
@@ -398,7 +399,7 @@ $sql = array(
 				(40, 'send_restricted_report', 'false', 'wysyłanie e-mailem raportów do admina o użyciu zabronionego słowa w formularzu', 3, 1, '$save_time'),
 				(41, 'send_new_comment_report', 'false', 'wysyłanie e-mailem raportów do admina o pojawieniu się nowego komentarza', 3, 1, '$save_time'),
 				(42, 'send_new_message_report', 'true', 'wysyłanie e-mailem raportów do admina o pojawieniu się nowej wiadomości', 3, 1, '$save_time'),
-				(43, 'sponsored_links', 'https://java-blog-cms.herokuapp.com; https://mean-stack-web.herokuapp.com; https://mean-stack-web.herokuapp.com', 'linki do innych stron wstrzyknięte do raportu statystyk', 2, 1, '$save_time'),
+				(43, 'sponsored_links', 'https://java-blog-cms.herokuapp.com; https://mean-stack-web.herokuapp.com; https://java-cms.herokuapp.com; http://metodycznie.com.pl', 'linki do innych stron wstrzyknięte do raportu statystyk', 2, 1, '$save_time'),
 				(44, 'excluded_domains', 'mycms.pl, fast-cms.pl, metodycznie.pl, swoja-strona.eu, active-cms.eu, mvc.net.pl, cms-jfrmwrk.rhcloud.com', 'domeny wyłączone z raportu statystyk', 2, 1, '$save_time'),
 				(45, 'email_sender_name', 'Serwis $short_title - Mail Manager', 'nazwa konta e-mailowego serwisu', 1, 1, '$save_time'),
 				(46, 'email_sender_address', '$email_sender_address', 'adres konta e-mailowego serwisu', 1, 1, '$save_time'),
@@ -447,7 +448,15 @@ $sql = array(
 				(14, 1, 14, 1),
 				(15, 1, 15, 1),
 				(16, 1, 16, 1),
-				(17, 1, 17, 1);
+				(17, 1, 17, 1),
+				(18, 1, 18, 1);
+			",
+			"
+				INSERT INTO `query_set` (`id`, `field`, `operator`, `value`) VALUES
+				(1, 'period_from', '=', '2019-01-01'),
+				(2, 'period_to', '=', '2019-12-31'),
+				(3, 'exceptions', '=', '\'localhost\''),
+				(4, 'modified', '=', '$save_time');
 			",
 		),
 	),

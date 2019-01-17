@@ -55,11 +55,11 @@ $page_elements->set_footer();
 
 if (isset($installation)) // folder "install" istnieje (etap instalacji)
 {
-	include APP_DIR . 'view/template/install.php';	
+	include LAYOUT_DIR . 'install.php';
 }
 else // folder "install" nie istnieje (etap eksploatacji)
 {
-	include APP_DIR . 'view/template/layout.php';
+	include LAYOUT_DIR . 'default.php';
 }
 
 ?>

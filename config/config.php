@@ -12,6 +12,7 @@ define ('DOC_DIR', 'docs/');         // documents directory
 define ('SND_DIR', 'sounds/');       // sounds directory
 define ('HELP_DIR', 'help/');        // help directory
 define ('INSTALL_DIR', 'install/');  // install directory
+define ('LAYOUT_DIR', 'layout/');    // layout directory
 
 /*
  * Database connection

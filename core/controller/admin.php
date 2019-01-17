@@ -54,6 +54,10 @@ if (in_array($user_status, $access)) // są uprawnienia
 
 	// wczytuje dodatkowe statystyki:
 	
+	include APP_DIR . 'model' . '/' . 'layout.php';
+	$additional_object = new Layout_Model($db);
+	$layout_record = $additional_object->GetSize();
+	
 	include APP_DIR . 'model' . '/' . 'style.php';
 	$additional_object = new Style_Model($db);
 	$style_record = $additional_object->GetSize();
@@ -73,6 +77,12 @@ if (in_array($user_status, $access)) // są uprawnienia
 					'label' => 'Konfiguracja'.' ('.$record_object[0].')',
 					'icon' => 'img/48x48/14.png',
 					'access' => in_array($user_status, array(ADMIN)),
+				),
+				array(
+					'address' => 'index.php?route=layout',
+					'label' => 'Układ'.' ('.$layout_record.')',
+					'icon' => 'img/48x48/40.png',
+					'access' => in_array($user_status, array(ADMIN, OPERATOR)),
 				),
 				array(
 					'address' => 'index.php?route=style',
