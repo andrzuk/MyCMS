@@ -30,7 +30,7 @@ class Navi
 
 		if (isset($_GET['page_rows']))
 		{
-			$_SESSION['page_list_rows'] = intval($_GET['page_rows']);
+			$_SESSION['page_list_rows'] = intval($_GET['page_rows']) > 0 ? intval($_GET['page_rows']) : 10;
 			unset($_SESSION['keep_paginator']);
 		}
 		

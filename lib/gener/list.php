@@ -127,7 +127,7 @@ class ListBuilder
 			$i++;
 		}
 
-		$main_text .= '<table class="Table" width="100%" cellpadding="5" cellspacing="0">';
+		$main_text .= '<table class="Table" id="systemList" width="100%" cellpadding="5" cellspacing="0">';
 		
 		$main_text .= '<tr>';
 		$main_text .= '<th class="FormTitleBar" colspan="'.$cols_count.'">';
@@ -349,7 +349,7 @@ class ListBuilder
 		$line = 0;
 		$cols_count = 1;
 		
-		$main_text .= '<table class="Table" width="100%" cellpadding="5" cellspacing="0">';
+		$main_text .= '<table class="Table" id="systemList" width="100%" cellpadding="5" cellspacing="0">';
 		
 		$main_text .= '<tr>';
 		$main_text .= '<th class="FormTitleBar" colspan="'.$cols_count.'">';

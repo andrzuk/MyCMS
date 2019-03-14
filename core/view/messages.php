@@ -97,7 +97,7 @@ class Messages_View
 		$form_inputs[] = $form_input;
 
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'message_content', 'name' => 'message_content', 'value' => $message_content, 'style' => 'height: 200px; width: 97%;')
+						Array('type' => 'textarea', 'id' => 'message_content', 'name' => 'message_content', 'value' => $message_content, 'style' => 'height: 300px; width: 97%;')
 						);
 		$form_input = Array('caption' => 'Treść wiadomości (pytanie, opinia, komentarz, uwagi itp.)', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -191,11 +191,11 @@ class Messages_View
 		$col_attrib = array(
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '40%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '20%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '30%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '5%', 'align' => 'center', 'visible' => '0'),
-			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '0'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
 		);

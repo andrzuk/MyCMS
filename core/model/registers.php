@@ -81,10 +81,10 @@ class Registers_Model
 			while ($row = mysqli_fetch_assoc($result))
 			{
 				$row['password'] = PASS_MASK;
-				$row['login'] = substr($row['login'], 0, 10);
-				$row['imie'] = substr($row['imie'], 0, 12);
-				$row['nazwisko'] = substr($row['nazwisko'], 0, 16);
-				$row['email'] = substr($row['email'], 0, 20);
+				$row['login'] = substr($row['login'], 0, 50);
+				$row['imie'] = substr($row['imie'], 0, 50);
+				$row['nazwisko'] = substr($row['nazwisko'], 0, 50);
+				$row['email'] = substr($row['email'], 0, 50);
 				$this->rows_list[] = $row;
 			} 
 			mysqli_free_result($result);

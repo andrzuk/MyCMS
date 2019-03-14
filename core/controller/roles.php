@@ -131,7 +131,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 
 								// wyświetla komunikat:
 								$site_message = array(
-									'INFORMATION', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
+									'SUCCESS', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
 								);
 							}
 							if (isset($_POST["update_button"])) // zapisz i zamknij
@@ -147,7 +147,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 
 								// wyświetla komunikat:
 								$site_message = array(
-									'INFORMATION', 'Rekord został poprawnie dopisany do bazy.'
+									'SUCCESS', 'Rekord został poprawnie dopisany do bazy.'
 								);
 							}
 						}
@@ -258,7 +258,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 
 								// wyświetla komunikat:
 								$site_message = array(
-									'INFORMATION', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
+									'SUCCESS', 'Szczegóły bieżącego rekordu zostały poprawnie zapisane.'
 								);
 							}
 							if (isset($_POST["update_button"])) // zapisz i zamknij
@@ -274,7 +274,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 
 								// wyświetla komunikat:
 								$site_message = array(
-									'INFORMATION', 'Rekord został poprawnie zaktualizowany.'
+									'SUCCESS', 'Rekord został poprawnie zaktualizowany.'
 								);
 							}
 						}
@@ -366,7 +366,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 					{
 						// wyświetla komunikat:
 						$site_message = array(
-							'INFORMATION', 'Bieżący rekord został poprawnie usunięty.'
+							'SUCCESS', 'Bieżący rekord został poprawnie usunięty.'
 						);
 					}
 					else // zapis się nie powiódł

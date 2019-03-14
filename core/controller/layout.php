@@ -125,7 +125,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 			$site_dialog = array(
 				'WARNING',
 				'Zmiana układu',
-				'Wygląd strony nie został zmieniony.',
+				'Układ strony nie został zmieniony.',
 				array(
 					array(
 						'index.php?route=admin', 'Zamknij'

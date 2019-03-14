@@ -90,8 +90,8 @@ class ViewBuilder
 		}
 		
 		$col_attrib = array(
-			array('width' => '35%', 'align' => 'left'),
-			array('width' => '65%', 'align' => 'left'),
+			array('width' => '25%', 'align' => 'left'),
+			array('width' => '75%', 'align' => 'left'),
 		);
 		
 		$main_text .= '<table class="Table" width="'.$this->width.'" cellpadding="2" cellspacing="1" align="center">';
