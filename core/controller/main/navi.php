@@ -53,7 +53,7 @@ class Navi
 		{
 			$_SESSION['sort_order'] = 1;
 		}
-		if (isset($_POST['ListSearchButton']) || isset($_POST['SetDatesButton']))
+		if (isset($_POST['ListSearchButton']) || isset($_POST['SetDatesButton']) || isset($_GET['confirm']))
 		{
 			unset($_SESSION['keep_paginator']);
 		}
