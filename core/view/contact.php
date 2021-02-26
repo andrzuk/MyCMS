@@ -41,7 +41,7 @@ class Contact_View
 		
 		$form_title = 'Napisz do nas';
 		$form_image = 'img/32x32/mail.png';
-		$form_width = '600px';
+		$form_width = '500px';
 		$form_widths = Array('30%', '70%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
@@ -68,19 +68,19 @@ class Contact_View
 		$form_data = Array(
 						Array('type' => 'text', 'id' => 'autor', 'name' => 'autor', 'caption' => '', 'value' => $autor, 'style' => 'width: 97%;')
 						);
-		$form_input = Array('caption' => 'Imię (nick)', 'data' => $form_data);
+		$form_input = Array('caption' => 'Imię', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		$form_data = Array(
 						Array('type' => 'text', 'id' => 'email', 'name' => 'email', 'caption' => '', 'value' => $email, 'style' => 'width: 97%;')
 						);
-		$form_input = Array('caption' => 'Adres e-mail', 'data' => $form_data);
+		$form_input = Array('caption' => 'E-mail', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'message', 'name' => 'message', 'value' => $message, 'style' => 'height: 200px; width: 97%;')
+						Array('type' => 'textarea', 'id' => 'message', 'name' => 'message', 'value' => $message, 'style' => 'height: 300px; width: 97%;')
 						);
-		$form_input = Array('caption' => 'Treść wiadomości', 'data' => $form_data);
+		$form_input = Array('caption' => 'Wiadomość', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 		
 		$form_data = Array(
@@ -90,6 +90,15 @@ class Contact_View
 		$form_inputs[] = $form_input;
 		
 		$main_form->set_inputs($form_inputs);
+
+		// hiddens (dodatkowe informacje fomularza):
+		
+		$form_data = Array(
+						Array('type' => 'hidden', 'id' => 'robot', 'name' => 'robot', 'value' => NULL),
+						);
+		$form_hiddens[] = $form_data;
+		
+		$main_form->set_hiddens($form_hiddens);
 
 		// buttons:
 				

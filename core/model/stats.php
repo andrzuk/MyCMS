@@ -30,11 +30,13 @@ class Stats_Model
 		{
 			$condition .= " AND http_referer NOT LIKE '%". $value ."%'";
 		}
+		$links_length_min = $this->setting->get_config_key('links_length_min');
+		$links_length_max = $this->setting->get_config_key('links_length_max');
 
 		$query = "
 			SELECT DISTINCT http_referer AS caption, COUNT(*) AS licznik FROM " . $this->table_name . "
 			WHERE http_referer LIKE 'http%'
-			". $condition ."
+			". $condition ." AND LENGTH(http_referer) >= ". $links_length_min ." AND LENGTH(http_referer) <= ". $links_length_max ."
 			GROUP BY http_referer
 			ORDER BY Licznik DESC
 		";

@@ -28,14 +28,16 @@ $site_path = array (
 $setting = new Settings($db);
 
 $sponsored_links = $setting->get_config_key('sponsored_links');
-
 $data_import = array('sponsored_links' => $sponsored_links);
+
+$redirect_stats = $setting->get_config_key('redirect_stats');
+$redirect_link = array('redirect_stats' => $redirect_stats);
 
 // pobiera statystykę:
 $record_object = $model_object->GetStats();
 
 // wyświetla zawartość strony:
-$site_content = $view_object->ShowPage($record_object, $data_import);
+$site_content = $view_object->ShowPage($record_object, $data_import, $redirect_link);
 
 // opcje dla podstrony:
 $content_options = array();

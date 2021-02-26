@@ -76,6 +76,8 @@ class Contact_Model
 			if ($k == 'server') $server_item = $v;
 			if ($k == 'session') $session_item = $v;
 		}
+		
+		if ($record_item['robot'] != NULL) return 0; // anti-robots protection
 
 		$query = "INSERT INTO " . $this->table_name . " VALUES (NULL, '" . 
 					$server_item['REMOTE_ADDR'] . "', '" . 
