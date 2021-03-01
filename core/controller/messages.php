@@ -81,7 +81,7 @@ include APP_DIR . 'view/template/options.php';
 
 $page_options = new Options(MODULE_NAME, $id);
 
-if (isset($_GET['action'])) // add, view, edit, delete
+if (isset($_GET['action'])) // add, view, edit, delete, blacklist
 {
 	switch ($_GET['action'])
 	{
@@ -171,6 +171,25 @@ if (isset($_GET['action'])) // add, view, edit, delete
 			$controller_object->Clear($params, $access, $acl->available());
 		}
 		break;
+
+		// dopisanie do czarnej listy:
+		
+		case 'blacklist':
+		{
+			$content_options = $page_options->get_options('simple');
+			
+			$params = array(
+				'content_title' => $content_title,
+				'content_options' => $content_options
+			);
+			
+			$access = array(ADMIN, OPERATOR);
+			
+			$acl = new AccessControlList(MODULE_NAME, $db);
+			
+			$controller_object->AddExclude($id, $params, $access, $acl->available());
+		}
+		break;
 	}
 }
 else // list of all
@@ -209,7 +228,7 @@ else // list of all
 			
 	$controller_object->DrawList($params, $access, $acl->available());
 }
-			
+
 $content_title = $controller_object->Get('content_title');
 $content_options = $controller_object->Get('content_options');
 $site_content = $controller_object->Get('site_content');
