@@ -18,6 +18,18 @@ $db = $connection->open();
 include LIB_DIR . 'settings.php';
 include LIB_DIR . 'visitors.php';
 
+$visitor_ip = $_SERVER['REMOTE_ADDR'];
+
+$setting = new Settings($db);
+$black_list_visitors = $setting->get_config_key('black_list_visitors');
+$black_list_ip = explode(',', $black_list_visitors);
+foreach ($black_list_ip AS $black_list_item)
+	if ($visitor_ip == trim(str_replace('\'', '', $black_list_item)))
+	{
+		$connection->close($db);
+		exit();
+	}
+
 if (isset($_GET['route'])) 
 {
 	$routing = explode('&', $_GET['route']);
