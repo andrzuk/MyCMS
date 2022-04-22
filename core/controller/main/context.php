@@ -445,6 +445,7 @@ class Context
 	{
 		$output = NULL;
 
+		if (!is_array($this->site_options)) return $output;
 		if (!sizeof($this->site_options)) return $output;
 		
 		$setting = new Settings($this->db);

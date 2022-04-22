@@ -1,38 +1,42 @@
 <?php
 
-echo '<!DOCTYPE html>';
+$render_template = '
 
-echo '<html lang="pl">';
+<!DOCTYPE html>
 
-echo '<head>';
+<html lang="pl">
 
-echo '<link rel="stylesheet" type="text/css" href="css/default.css" />';
-echo '<link rel="stylesheet" type="text/css" href="css/install.css" />';
-echo '<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">';
-echo '<link rel="icon" href="img/favicon.ico" type="image/x-icon">';
-echo '<meta http-equiv="Content-Language" content="pl" />';
-echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-echo '<title>'.$content_title.'</title>';
+<head>
 
-echo '</head>';
+	<link rel="stylesheet" type="text/css" href="css/default.css" />
+	<link rel="stylesheet" type="text/css" href="css/install.css" />
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+	<meta http-equiv="Content-Language" content="pl" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>'.$content_title.'</title>
 
-echo '<body>';
+</head>
 
-echo '<div id="container" style="width: 1000px;">';
+<body>
 
-	echo '<div class="HelpHeader">'. '<h1>'. $content_title .'</h1>' .'</div>';
+	<div id="container" style="width: 1000px;">
 
-	echo '<div class="HelpContent">';
-	echo $site_content;
-	echo '</div>';
+		<div class="HelpHeader">'. '<h1>'. $content_title .'</h1>' .'</div>
 
-	echo '<div class="Clear"></div>';
+		<div class="HelpContent">
+			'. $site_content .'
+		</div>
 
-	echo '<div class="HelpFooter">'. '<h4>Copyright © '.date('Y').' MyMVC Andrzej Żukowski</h4>' .'</div>';
+		<div class="HelpFooter">'. '<h4>Copyright © '.date('Y').' MyMVC Andrzej Żukowski</h4>' .'</div>
 
-echo '</div>';
+	</div>
 
-echo '</body>';
-echo '</html>';
+</body>
+
+</html>
+
+';
+
+echo $render_template;
 
 ?>

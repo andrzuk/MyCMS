@@ -60,7 +60,7 @@ class Message
 				break;
 		}
 
-		$main_message_body .= '<p class="Message">';
+		$main_message_body .= '<div class="Message">';
 
 		$main_message_body .= '<table class="'. $class_name .'" width="100%" cellspacing="0" cellpadding="0" align="left">';
 		$main_message_body .= '<tr>';
@@ -73,7 +73,7 @@ class Message
 		$main_message_body .= '</tr>';
 		$main_message_body .= '</table>';
 
-		$main_message_body .= '</p>';
+		$main_message_body .= '</div>';
 
 		return $main_message_body;
 	}

@@ -402,7 +402,7 @@ $sql = array(
 				(43, 'sponsored_links', 'https://java-blog-cms.herokuapp.com; https://mean-stack-web.herokuapp.com; https://java-cms.herokuapp.com; http://metodycznie.com.pl', 'linki do innych stron wstrzyknięte do raportu statystyk', 2, 1, '$save_time'),
 				(44, 'excluded_domains', 'mycms.pl, fast-cms.pl, metodycznie.pl, swoja-strona.eu, active-cms.eu, mvc.net.pl, cms-jfrmwrk.rhcloud.com', 'domeny wyłączone z raportu statystyk', 2, 1, '$save_time'),
 				(45, 'black_list_visitors', '\'255.255.255.255\', \'1.1.1.1\'', 'lista zabronionych adresów IP', 2, 1, '$save_time'),
-				(46, 'black_list_messages_limit', '10', 'limit wiadomości wysyłanych seryjnie powodujący dopisanie do czarnej listy', 1, 1, '$save_time'),
+				(46, 'black_list_messages_limit', '5', 'limit wiadomości wysyłanych seryjnie powodujący dopisanie do czarnej listy', 1, 1, '$save_time'),
 				(47, 'links_length_min', '50', 'minimalna długość linku wyświetlanego w raporcie statystyk', 1, 1, '$save_time'),
 				(48, 'links_length_max', '600', 'maksymalna długość linku wyświetlanego w raporcie statystyk', 1, 1, '$save_time'),
 				(49, 'email_sender_name', 'Serwis $short_title - Mail Manager', 'nazwa konta e-mailowego serwisu', 1, 1, '$save_time'),

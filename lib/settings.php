@@ -22,7 +22,7 @@ class Settings
 		if ($result) 
 		{
 			$row = mysqli_fetch_assoc($result);
-			$config_value = $row['key_value'];
+			$config_value = isset($row['key_value']) ? $row['key_value'] : NULL;
 			mysqli_free_result($result);
 		}
 		return $config_value;

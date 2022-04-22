@@ -36,8 +36,8 @@ class Visitors
 		if ($result) 
 		{
 			$row = mysqli_fetch_assoc($result);
-			$guest_id = $row['id'];
-			$guest_time = $row['time'];
+			$guest_id = isset($row['id']) ? $row['id'] : NULL;
+			$guest_time = isset($row['time']) ? $row['time'] : NULL;
 			mysqli_free_result($result);
 		}
 		if (empty($guest_id) && empty($guest_time)) // nie znalazl w tablicy - trzeba dopisac

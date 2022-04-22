@@ -14,4 +14,17 @@ include 'controller/init.php';
 
 $connection->close($db);
 
+if (isset($_SESSION['install_completed']))
+{
+	unset ($_SESSION['install_completed']);
+
+	unlink ('../' . INSTALL_DIR . 'controller/init.php');
+	unlink ('../' . INSTALL_DIR . 'controller/route.php');
+	unlink ('../' . INSTALL_DIR . 'model/init.php');
+	unlink ('../' . INSTALL_DIR . 'model/script.php');
+	unlink ('../' . INSTALL_DIR . 'view/init.php');
+	unlink ('../' . INSTALL_DIR . 'view/layout.php');
+	unlink ('../' . INSTALL_DIR . 'index.php');
+}
+
 ?>

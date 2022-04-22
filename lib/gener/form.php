@@ -142,6 +142,7 @@ class FormBuilder
 		foreach ($this->widths as $k => $v) $main_text .= '<th class="" style="width: '.$v.';"></th>';		
 		$main_text .= '</tr>';
 		
+		$iterator = 0;
 		foreach ($this->inputs as $k => $v)
 		{
 			$main_text .= '<tr class="FormRow">';
@@ -150,6 +151,10 @@ class FormBuilder
 				if ($key == 'caption')
 				{
 					$main_text .= '<td class="FormCell"> '. $value .': </td>';
+				}
+				else if ($key == 'iterator')
+				{
+					$main_text .= '<td class="FormCell"> '. ++$iterator .'. </td>';
 				}
 				else if ($key == 'data' || $key == 'caption_data')
 				{

@@ -31,7 +31,7 @@ class AccessControlList
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			$this->access = $row['access'];
+			$this->access = isset($row['access']) ? $row['access'] : NULL;
 			mysqli_free_result($result);
 		}
 		

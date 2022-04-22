@@ -136,7 +136,7 @@ class Roles_View
 					$form_data = Array(
 									Array('type' => 'checkbox', 'id' => 'function_'.$f_id, 'name' => 'function_'.$f_id, 'caption' => $f_nazwa . ' (' . $f_znaczenie . ')', $checked => $checked, 'onclick' => '')
 									);
-					$form_input = Array('caption_data' => $form_data, 'empty' => '');
+					$form_input = Array('iterator' => '', 'data' => $form_data);
 					$form_inputs[] = $form_input;
 				}
 			}

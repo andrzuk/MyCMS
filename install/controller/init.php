@@ -119,6 +119,7 @@ if (isset($_POST['save_button'])) // obsługa formularza
 						),
 					)
 				);
+				$_SESSION['install_completed'] = TRUE;
 			}
 			else // inicjalizacja się nie powiodła
 			{

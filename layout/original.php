@@ -1,88 +1,89 @@
 <?php
 
-echo '<!DOCTYPE html>';
+$render_template = '
 
-echo '<html lang="pl">';
+<!DOCTYPE html>
 
-echo '<head>';
+<html lang="pl">
 
-echo '<meta charset="utf-8">';
-echo '<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'css/default.css" />';
-echo '<link rel="shortcut icon" href="'.$page_data->get_domain().'img/favicon.ico" type="image/x-icon">';
-echo '<link rel="icon" href="'.$page_data->get_domain().'img/favicon.ico" type="image/x-icon">';
-echo '<script type="text/javascript" src="'.$page_data->get_domain().'js/jquery.1.10.2.js"></script>';
-echo '<script type="text/javascript" src="'.$page_data->get_domain().'js/default.js"></script>';
-echo '<meta name="keywords" content="'.$page_data->get_keywords().'" />';
-echo '<meta name="description" content="'.$page_data->get_description().'" />';
-echo '<meta name="author" content="'.$page_data->get_author().'" />';
-echo '<meta name="robots" content="index, follow, all" />';
-echo '<meta name="googlebot" content="index, follow, all" />';
-echo '<meta name="copyright" content="'.$page_data->get_copyright().'" />';
-echo '<meta name="classification" content="'.$page_data->get_classification().'" />';
-echo '<meta name="publisher" content="'.$page_data->get_publisher().'" />';
-echo '<meta name="page-topic" content="'.$page_data->get_topic().'" />';
-echo '<title>'.$page_data->get_title().'</title>';
-echo '<base href="'.$page_data->get_domain().'" target="_self" />';
+<head>
 
-echo "<script type=\"text/javascript\">";
-echo "  var _gaq = _gaq || [];";
-echo "  _gaq.push(['_setAccount', 'UA-16941734-5']);";
-echo "  _gaq.push(['_trackPageview']);";
-echo "  (function() {";
-echo "    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;";
-echo "    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';";
-echo "    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);";
-echo "  })();";
-echo "</script>";
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'css/default.css" />
+	<link rel="icon" href="'.$page_data->get_domain().'img/favicon.ico" type="image/x-icon">
+	<script type="text/javascript" src="'.$page_data->get_domain().'js/jquery.1.10.2.js"></script>
+	<script type="text/javascript" src="'.$page_data->get_domain().'js/default.js"></script>
+	<meta name="keywords" content="'.$page_data->get_keywords().'" />
+	<meta name="description" content="'.$page_data->get_description().'" />
+	<meta name="author" content="'.$page_data->get_author().'" />
+	<meta name="robots" content="index, follow, all" />
+	<meta name="googlebot" content="index, follow, all" />
+	<meta name="copyright" content="'.$page_data->get_copyright().'" />
+	<meta name="classification" content="'.$page_data->get_classification().'" />
+	<meta name="publisher" content="'.$page_data->get_publisher().'" />
+	<meta name="page-topic" content="'.$page_data->get_topic().'" />
+	<title>'.$page_data->get_title().'</title>
+	<base href="'.$page_data->get_domain().'" target="_self" />
 
-echo '</head>';
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-16941734-21"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag() { dataLayer.push(arguments); }
+	  gtag("js", new Date());
+	  gtag("config", "UA-16941734-21");
+	</script>
 
-echo '<body>';
+</head>
 
-echo '<div id="container" style="width: '.$page_data->get_site_width().';">';
-	echo '<div id="header">';
-		echo '<div class="PageHeader">';
-			echo '<span class="PageLogo">';
-				echo $page_elements->show_header();
-			echo '</span>';
-			echo '<span class="PageUtilities">';
-				echo '<div class="PageLinks">';
-					echo $page_data->get_links();
-				echo '</div>';
-				echo '<div class="PageUser">';
-					echo $page_data->get_user();
-				echo '</div>';
-				echo '<div class="PagePath">';
-					echo $page_data->get_path();
-				echo '</div>';
-			echo '</span>';
-		echo '</div>';
-		echo '<div class="Clear"></div>';
-	echo '</div>';
-	echo '<div id="navbar">';
-		echo $page_data->get_navbar();
-	echo '</div>';
-	echo '<div id="center">';
-		echo '<div id="menu" style="width: '.$page_data->get_menu_width().';">';
-			echo '<div class="PageMenu">';
-				echo $page_data->get_menu();
-			echo '</div>';
-		echo '</div>';
-		echo '<div id="content" style="width: '.$page_data->get_content_width().';">';
-			echo '<div class="PageContent">';
-				echo $page_data->get_content();
-			echo '</div>';
-		echo '</div>';
-		echo '<div class="Clear"></div>';
-	echo '</div>';
-	echo '<div id="footer">';
-		echo '<div class="PageFooter">';
-			echo $page_elements->show_footer();
-		echo '</div>';
-	echo '</div>';
-echo '</div>';
+<body>
 
-echo '</body>';
-echo '</html>';
+	<div id="container" style="width: '.$page_data->get_site_width().';">
+		<div id="header">
+			<div class="PageHeader">
+				<span class="PageLogo">
+					'. $page_elements->show_header() .'
+				</span>
+				<span class="PageUtilities">
+					<div class="PageLinks">
+						'. $page_data->get_links() .'
+					</div>
+					<div class="PageUser">
+						'. $page_data->get_user() .'
+					</div>
+					<div class="PagePath">
+						'. $page_data->get_path() .'
+					</div>
+				</span>
+			</div>
+		</div>
+		<div id="navbar">
+			'. $page_data->get_navbar() .'
+		</div>
+		<div id="center">
+			<div id="menu" style="width: '.$page_data->get_menu_width().';">
+				<div class="PageMenu">
+					'. $page_data->get_menu() .'
+				</div>
+			</div>
+			<div id="content" style="width: '.$page_data->get_content_width().';">
+				<div class="PageContent">
+					'. $page_data->get_content() .'
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="PageFooter">
+				'. $page_elements->show_footer() .'
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+';
+
+echo $render_template;
 
 ?>

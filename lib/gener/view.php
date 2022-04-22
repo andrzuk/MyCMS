@@ -161,7 +161,7 @@ class ViewBuilder
 						foreach ($this->row[$db_name] as $ik => $iv)
 						{
 							$main_text .= '<div>';
-							$main_text .= $this->get_split_text(strip_tags($iv), 10);
+							$main_text .= $this->get_split_text(strip_tags($iv), 100);
 							$main_text .= '</div>';
 						}
 					}
@@ -173,7 +173,7 @@ class ViewBuilder
 			}
 			else // zwykłe dane
 			{
-				$main_text .= $this->get_split_text(strip_tags($this->row[$db_name]), 10);
+				$main_text .= $this->get_split_text(strip_tags($this->row[$db_name]), 100);
 			}
 			$main_text .= '</td>';
 			$main_text .= '</tr>';

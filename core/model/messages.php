@@ -116,10 +116,23 @@ class Messages_Model
 	
 	public function AddExclude($record_item)
 	{
-		$query = "UPDATE configuration" .
-		         " SET key_value = CONCAT(key_value, ', \'". $record_item['client_ip'] ."\'')" .
-		         " WHERE key_name = 'black_list_visitors'";
-		mysqli_query($this->db, $query);
+		$this->row_item = array();
+
+		$query = "SELECT key_value FROM configuration WHERE key_name = 'black_list_visitors'";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result); 
+			$this->row_item = $row;
+			mysqli_free_result($result);
+		}
+		if (strpos($this->row_item['key_value'], $record_item['client_ip']) === FALSE)
+		{
+			$query = "UPDATE configuration" .
+					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_ip'] ."\'')" .
+					 " WHERE key_name = 'black_list_visitors'";
+			mysqli_query($this->db, $query);			
+		}
 
 		return mysqli_affected_rows($this->db);
 	}

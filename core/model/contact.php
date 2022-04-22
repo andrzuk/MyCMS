@@ -101,7 +101,7 @@ class Contact_Model
 			if ($k == 'session') $session_item = $v;
 		}
 		
-		if ($record_item['robot'] != NULL) return 0; // anti-robots protection
+		if (isset($record_item['robot']) && $record_item['robot'] != NULL) return 0; // anti-robots protection
 
 		// odczytuje z konfiguracji liczbę wiadomości blokującą nadawcę:
 		$black_list_messages_limit = intval($this->setting->get_config_key('black_list_messages_limit'));

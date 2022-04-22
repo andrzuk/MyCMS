@@ -1,52 +1,57 @@
 <?php
 
-echo '<!DOCTYPE html>';
+$render_template = '
 
-echo '<html lang="pl">';
+<!DOCTYPE html>
 
-echo '<head>';
+<html lang="pl">
 
-echo '<link rel="stylesheet" type="text/css" href="css/default.css" />';
-echo '<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">';
-echo '<link rel="icon" href="img/favicon.ico" type="image/x-icon">';
-echo '<meta http-equiv="Content-Language" content="pl" />';
-echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-echo '<meta name="robots" content="index, follow, all" />';
-echo '<meta name="googlebot" content="index, follow, all" />';
-echo '<title>'.$page_data->get_title().'</title>';
+<head>
 
-echo '</head>';
+	<link rel="stylesheet" type="text/css" href="css/default.css" />
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+	<meta http-equiv="Content-Language" content="pl" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="index, follow, all" />
+	<meta name="googlebot" content="index, follow, all" />
+	<title>'.$page_data->get_title().'</title>
 
-echo '<body>';
+</head>
 
-echo '<div id="container" style="width: 1000px;">';
+<body>
 
-	echo '<div id="header">';
-		echo '<div class="PageLinks">';
-		echo $page_data->get_links();
-		echo '</div>';
-		echo '<div class="PageHeader">'. $page_elements->show_header() .'</div>';
-		echo '<div class="PagePath">';
-		echo $page_data->get_path();
-		echo '</div>';
-	echo '</div>';
-	
-	echo '<div id="center">';
-		echo '<div id="content" style="width: 100%;">';
-			echo '<div class="PageContent">';
-			echo $page_data->get_content();
-			echo '</div>';
-		echo '</div>';
-		echo '<div class="Clear"></div>';
-	echo '</div>';
+	<div id="container" style="width: 1000px;">
 
-	echo '<div id="footer">';
-		echo '<div class="PageFooter">'. $page_elements->show_footer() .'</div>';
-	echo '</div>';
+		<div id="header">
+			<div class="PageLinks">
+				'. $page_data->get_links() .'
+			</div>
+			<div class="PageHeader">'. $page_elements->show_header() .'</div>
+			<div class="PagePath">
+				'. $page_data->get_path() .'
+			</div>
+		</div>
+		
+		<div id="center">
+			<div id="content" style="width: 100%;">
+				<div class="PageContent">
+					'. $page_data->get_content() .'
+				</div>
+			</div>
+		</div>
 
-echo '</div>';
+		<div id="footer">
+			<div class="PageFooter">'. $page_elements->show_footer() .'</div>
+		</div>
 
-echo '</body>';
-echo '</html>';
+	</div>
+
+</body>
+
+</html>
+
+';
+
+echo $render_template;
 
 ?>
