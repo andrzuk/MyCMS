@@ -69,6 +69,30 @@ class Contact_Model
 		return mysqli_affected_rows($this->db);
 	}
 	
+	private function LockRobots($author_ip, $max_messages)
+	{
+		$counter = 0;
+		$query = "SELECT client_ip FROM " . $this->table_name .
+				 " ORDER BY id DESC LIMIT " . $max_messages;
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			while ($row = mysqli_fetch_assoc($result))
+			{
+				if ($row['client_ip'] == $author_ip) $counter++;
+			} 
+			mysqli_free_result($result);
+		}
+		if ($counter == $max_messages)
+		{
+			$query = "UPDATE configuration" .
+					 " SET key_value = CONCAT(key_value, ', \'". $author_ip ."\'')" .
+					 " WHERE key_name = 'black_list_visitors'";
+			mysqli_query($this->db, $query);
+		}
+		return $counter == $max_messages;
+	}
+	
 	public function Receive($record_item, $send_object, $send_copy)
 	{
 		foreach ($send_object as $k => $v)
@@ -79,6 +103,14 @@ class Contact_Model
 		
 		if ($record_item['robot'] != NULL) return 0; // anti-robots protection
 
+		// odczytuje z konfiguracji liczbę wiadomości blokującą nadawcę:
+		$black_list_messages_limit = intval($this->setting->get_config_key('black_list_messages_limit'));
+
+		// sprawdza, czy nadawca jest seryjnym autorem wiadomości, i jeśli tak, dopisuje go do czarnej listy:
+		if ($black_list_messages_limit)
+			if ($this->LockRobots($server_item['REMOTE_ADDR'], $black_list_messages_limit))
+				return 0;
+		
 		$query = "INSERT INTO " . $this->table_name . " VALUES (NULL, '" . 
 					$server_item['REMOTE_ADDR'] . "', '" . 
 					mysqli_real_escape_string($this->db, trim($record_item['autor'])) . "', '" . 

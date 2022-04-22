@@ -207,6 +207,7 @@ class Messages_View
 			array('action' => 'view', 'icon' => 'info.png', 'title' => 'Podgląd'),
 			array('action' => 'edit', 'icon' => 'edit.png', 'title' => 'Edytuj'),
 			array('action' => 'delete', 'icon' => 'trash.png', 'title' => 'Usuń'),
+			array('action' => 'blacklist', 'icon' => 'exclude.png', 'title' => 'Wyklucz'),
 		);
 		
 		$main_list->set_actions($col_actions);

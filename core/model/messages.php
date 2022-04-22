@@ -113,6 +113,16 @@ class Messages_Model
 
 		return mysqli_affected_rows($this->db);
 	}
+	
+	public function AddExclude($record_item)
+	{
+		$query = "UPDATE configuration" .
+		         " SET key_value = CONCAT(key_value, ', \'". $record_item['client_ip'] ."\'')" .
+		         " WHERE key_name = 'black_list_visitors'";
+		mysqli_query($this->db, $query);
+
+		return mysqli_affected_rows($this->db);
+	}
 }
 
 ?>
