@@ -153,7 +153,7 @@ class ViewBuilder
 							if ($ik == 'converted') $converted = $iv;
 						}
 						$main_text .= '<div>';
-						$main_text .= '<a href="' . $original . '" target="_blank">' . $converted . '</a>';
+						$main_text .= '<a href="' . strip_tags($original) . '" target="_blank">' . strip_tags($converted) . '</a>';
 						$main_text .= '</div>';
 					}
 					else // zwykłe dane
@@ -169,7 +169,7 @@ class ViewBuilder
 			}
 			else if (substr($this->row[$db_name], 0, 4) == '<img') // obrazek
 			{
-				$main_text .= $this->row[$db_name];
+				$main_text .= strip_tags($this->row[$db_name]);
 			}
 			else // zwykłe dane
 			{
