@@ -124,7 +124,7 @@ $sql = array(
 				CREATE TABLE IF NOT EXISTS `configuration` (
 				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				  `key_name` varchar(30) NOT NULL,
-				  `key_value` varchar(1024) NOT NULL,
+				  `key_value` mediumtext NOT NULL,
 				  `meaning` varchar(128) DEFAULT NULL,
 				  `field_type` int(11) NOT NULL,
 				  `active` tinyint(1) NOT NULL,
