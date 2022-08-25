@@ -279,6 +279,9 @@ class Operator
 												// wyświetla listę rekordów:
 												$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
 
+												// przywraca opcje dla listy:
+												$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
+
 												// wyświetla komunikat:
 												$this->site_message = array(
 													'SUCCESS', 'Rekord został poprawnie dopisany do bazy.'
@@ -377,6 +380,9 @@ class Operator
 
 						// wyświetla listę rekordów:
 						$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+						
+						// przywraca opcje dla listy:
+						$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 					}
 					
 					// wyświetla komunikat:
@@ -398,6 +404,9 @@ class Operator
 
 				// wyświetla listę rekordów:
 				$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+				
+				// przywraca opcje dla listy:
+				$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 			}
 			else // pusty formularz
 			{
@@ -497,6 +506,9 @@ class Operator
 							// wyświetla listę rekordów:
 							$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
 
+							// przywraca opcje dla listy:
+							$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
+
 							// wyświetla komunikat:
 							$this->site_message = array(
 								'SUCCESS', 'Rekordy zostały poprawnie dopisane do bazy.'
@@ -538,6 +550,9 @@ class Operator
 					// wyświetla listę rekordów:
 					$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
 					
+					// przywraca opcje dla listy:
+					$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
+
 					// wyświetla komunikat:
 					$this->site_message = array(
 						'WARNING', 'Formularz został już wysłany i nie należy go odświeżać.'
@@ -557,6 +572,9 @@ class Operator
 
 				// wyświetla listę rekordów:
 				$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+				
+				// przywraca opcje dla listy:
+				$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 			}
 			else // pusty formularz
 			{
@@ -769,6 +787,9 @@ class Operator
 												// wyświetla listę rekordów:
 												$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
 
+												// przywraca opcje dla listy:
+												$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
+
 												// wyświetla komunikat:
 												$this->site_message = array(
 													'SUCCESS', 'Rekord został poprawnie zaktualizowany.'
@@ -888,6 +909,9 @@ class Operator
 
 						// wyświetla listę rekordów:
 						$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+						
+						// przywraca opcje dla listy:
+						$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 					}
 					
 					// wyświetla komunikat:
@@ -909,6 +933,9 @@ class Operator
 
 				// wyświetla listę rekordów:
 				$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+				
+				// przywraca opcje dla listy:
+				$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 			}
 			else // formularz z danymi wejściowymi
 			{
@@ -1113,6 +1140,9 @@ class Operator
 			
 				// wyświetla listę rekordów:
 				$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+				
+				// przywraca opcje dla listy:
+				$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 			}
 			else // przystąpienie do usuwania
 			{
@@ -1178,6 +1208,9 @@ class Operator
 			
 				// wyświetla listę rekordów:
 				$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+				
+				// przywraca opcje dla listy:
+				$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 			}
 			else // przystąpienie do usuwania
 			{
@@ -1240,6 +1273,9 @@ class Operator
 			
 			// wyświetla listę rekordów:
 			$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+			
+			// przywraca opcje dla listy:
+			$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 		}
 		else // brak uprawnień
 		{
@@ -1285,6 +1321,9 @@ class Operator
 			
 			// wyświetla listę rekordów:
 			$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+			
+			// przywraca opcje dla listy:
+			$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 		}
 		else // brak uprawnień
 		{
@@ -1363,6 +1402,9 @@ class Operator
 			
 			// wyświetla listę rekordów:
 			$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+			
+			// przywraca opcje dla listy:
+			$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 		}
 		else // brak uprawnień
 		{
@@ -1379,6 +1421,7 @@ class Operator
 		if (in_array($this->user_status, $access) && $acl) // są uprawnienia
 		{
 			$this->content_options = $params['content_options'];
+			$_SESSION['content_options'] = $this->content_options;
 			
 			// ograniczenia dla usera:
 			$restrict_id = isset($params['restrict']) ? $params['restrict'] : NULL;
@@ -1412,6 +1455,9 @@ class Operator
 			
 			// wyświetla listę rekordów:
 			$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+			
+			// przywraca opcje dla listy:
+			$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 		}
 		else // brak uprawnień
 		{
@@ -1489,6 +1535,9 @@ class Operator
 			
 			// wyświetla listę rekordów:
 			$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+			
+			// przywraca opcje dla listy:
+			$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 		}
 		else // brak uprawnień
 		{
@@ -1532,6 +1581,9 @@ class Operator
 			
 			// wyświetla listę rekordów:
 			$this->site_content = $this->view_object->ShowList($record_list, $this->list_columns, $this->list_params);
+			
+			// przywraca opcje dla listy:
+			$this->content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $this->content_options;
 		}
 		else // brak uprawnień
 		{
