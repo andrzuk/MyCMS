@@ -72,8 +72,9 @@ class Contact_Model
 	private function LockRobots($author_ip, $max_messages)
 	{
 		$counter = 0;
+		$max_range = $max_messages * 10;
 		$query = "SELECT client_ip FROM " . $this->table_name .
-				 " ORDER BY id DESC LIMIT " . $max_messages;
+				 " ORDER BY id DESC LIMIT " . $max_range;
 		$result = mysqli_query($this->db, $query);
 		if ($result)
 		{
@@ -83,14 +84,28 @@ class Contact_Model
 			} 
 			mysqli_free_result($result);
 		}
-		if ($counter == $max_messages)
+		if ($counter >= $max_messages)
 		{
 			$query = "UPDATE configuration" .
-					 " SET key_value = CONCAT(key_value, ', \'". $author_ip ."\'')" .
+					 " SET key_value = CONCAT(key_value, ', \'". $author_ip ."\''), modified='". $this->mySqlDateTime ."'".
 					 " WHERE key_name = 'black_list_visitors'";
 			mysqli_query($this->db, $query);
 		}
 		return $counter == $max_messages;
+	}
+	
+	private function CheckAuthors($author_name)
+	{
+		$query = "SELECT key_value FROM configuration" .
+				 " WHERE key_name = 'black_list_messages_authors'";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result);
+			$this->row_item = $row;
+			mysqli_free_result($result);
+		}
+		return strpos($this->row_item['key_value'], $author_name);
 	}
 	
 	public function Receive($record_item, $send_object, $send_copy)
@@ -101,7 +116,7 @@ class Contact_Model
 			if ($k == 'session') $session_item = $v;
 		}
 		
-		if (isset($record_item['robot']) && $record_item['robot'] != NULL) return 0; // anti-robots protection
+		if ($record_item['robot'] != NULL) return 0; // anti-robots protection
 
 		// odczytuje z konfiguracji liczbę wiadomości blokującą nadawcę:
 		$black_list_messages_limit = intval($this->setting->get_config_key('black_list_messages_limit'));
@@ -111,6 +126,18 @@ class Contact_Model
 			if ($this->LockRobots($server_item['REMOTE_ADDR'], $black_list_messages_limit))
 				return 0;
 		
+		// odczytuje z konfiguracji listę zablokowanych nadawców:
+		$black_list_messages_authors = $this->setting->get_config_key('black_list_messages_authors');
+
+		// sprawdza, czy nadawca jest seryjnym autorem wiadomości, i jeśli tak, dopisuje go do czarnej listy:
+		if ($black_list_messages_authors)
+		{
+			if ($this->CheckAuthors(trim($record_item['autor'])))
+				return 0;
+			if ($this->CheckAuthors(trim($record_item['email'])))
+				return 0;
+		}
+
 		$query = "INSERT INTO " . $this->table_name . " VALUES (NULL, '" . 
 					$server_item['REMOTE_ADDR'] . "', '" . 
 					mysqli_real_escape_string($this->db, trim($record_item['autor'])) . "', '" . 

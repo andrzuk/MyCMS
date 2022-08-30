@@ -28,7 +28,7 @@ class Messages_Model
 				
 		$data_type = isset($_SESSION['mode']) ? ($_SESSION['mode'] == 1 ? ' AND requested = 1' : ' AND requested = 0') : NULL;
 		
-		$filter = empty($value) ? NULL : " AND (message_content LIKE '%" . $value . "%' OR client_name LIKE '%" . $value . "%' OR client_email LIKE '%" . $value . "%')";
+		$filter = empty($value) ? NULL : " AND (client_ip LIKE '%" . $value . "%' OR message_content LIKE '%" . $value . "%' OR client_name LIKE '%" . $value . "%' OR client_email LIKE '%" . $value . "%')";
 
 		$query = "SELECT COUNT(*) AS licznik FROM " . $this->table_name . " WHERE 1" . $condition . $data_type . $filter;
 		$result = mysqli_query($this->db, $query);
@@ -62,7 +62,7 @@ class Messages_Model
 		
 		$data_type = isset($_SESSION['mode']) ? ($_SESSION['mode'] == 1 ? ' AND requested = 1' : ' AND requested = 0') : NULL;
 		
-		$filter = empty($_SESSION['list_filter']) ? NULL : " AND (message_content LIKE '%" . $_SESSION['list_filter'] . "%' OR client_name LIKE '%" . $_SESSION['list_filter'] . "%' OR client_email LIKE '%" . $_SESSION['list_filter'] . "%')";
+		$filter = empty($_SESSION['list_filter']) ? NULL : " AND (client_ip LIKE '%" . $_SESSION['list_filter'] . "%' OR message_content LIKE '%" . $_SESSION['list_filter'] . "%' OR client_name LIKE '%" . $_SESSION['list_filter'] . "%' OR client_email LIKE '%" . $_SESSION['list_filter'] . "%')";
 
 		$this->rows_list = array();
 
@@ -132,6 +132,29 @@ class Messages_Model
 					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_ip'] ."\'')" .
 					 " WHERE key_name = 'black_list_visitors'";
 			mysqli_query($this->db, $query);			
+		}
+
+		$query = "SELECT key_value FROM configuration WHERE key_name = 'black_list_messages_authors'";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result);
+			$this->row_item = $row;
+			mysqli_free_result($result);
+		}
+		if (strpos($this->row_item['key_value'], $record_item['client_name']) === FALSE)
+		{
+			$query = "UPDATE configuration" .
+					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_name'] ."\'')".
+					 " WHERE key_name = 'black_list_messages_authors'";
+			mysqli_query($this->db, $query);
+		}
+		if (strpos($this->row_item['key_value'], $record_item['client_email']) === FALSE)
+		{
+			$query = "UPDATE configuration" .
+					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_email'] ."\'')".
+					 " WHERE key_name = 'black_list_messages_authors'";
+			mysqli_query($this->db, $query);
 		}
 
 		return mysqli_affected_rows($this->db);
