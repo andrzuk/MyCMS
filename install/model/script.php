@@ -62,6 +62,7 @@ $sql = array(
 			'DROP TABLE IF EXISTS `pages`;',
 			'DROP TABLE IF EXISTS `query_set`;',
 			'DROP TABLE IF EXISTS `registers`;',
+			'DROP TABLE IF EXISTS `rejectors`;',
 			'DROP TABLE IF EXISTS `reminds`;',
 			'DROP TABLE IF EXISTS `searches`;',
 			'DROP TABLE IF EXISTS `users`;',
@@ -226,6 +227,16 @@ $sql = array(
 				  `register_time` datetime NOT NULL,
 				  UNIQUE KEY `id` (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			",
+			"
+				CREATE TABLE IF NOT EXISTS `rejectors` (
+				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				  `visitor_ip` varchar(20) COLLATE utf8_general_ci NOT NULL,
+				  `request_uri` text COLLATE utf8_general_ci NOT NULL,
+				  `visited` datetime NOT NULL,
+				  UNIQUE KEY `id` (`id`),
+				  KEY `visitor_ip` (`visitor_ip`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 			",
 			"
 				CREATE TABLE IF NOT EXISTS `reminds` (

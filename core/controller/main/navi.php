@@ -23,14 +23,14 @@ class Navi
 		$this->display_rows = $setting->get_config_key('display_list_rows');
 		$this->pointer_band = $setting->get_config_key('page_pointer_band');
 
-		if (isset($_GET['mode']))
-		{
-			unset($_SESSION['keep_paginator']);
-		}
-
 		if (isset($_GET['page_rows']))
 		{
 			$_SESSION['page_list_rows'] = intval($_GET['page_rows']) > 0 ? intval($_GET['page_rows']) : 10;
+			unset($_SESSION['keep_paginator']);
+		}
+
+		if (isset($_GET['user']) || isset($_GET['mode']))
+		{
 			unset($_SESSION['keep_paginator']);
 		}
 		

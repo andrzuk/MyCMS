@@ -11,6 +11,8 @@ $render_template = '
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="'.$page_data->get_domain().'css/default.css" />
 	<link rel="icon" href="'.$page_data->get_domain().'img/favicon.ico" type="image/x-icon">
+	<script type="text/javascript" src="'.$page_data->get_domain().'js/chart/Chart.js"></script>
+	<script type="text/javascript" src="'.$page_data->get_domain().'js/chart/Ajax.js"></script>
 	<script type="text/javascript" src="'.$page_data->get_domain().'js/jquery.1.10.2.js"></script>
 	<script type="text/javascript" src="'.$page_data->get_domain().'js/default.js"></script>
 	<meta name="keywords" content="'.$page_data->get_keywords().'" />

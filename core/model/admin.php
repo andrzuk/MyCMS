@@ -91,6 +91,11 @@ class Admin_Model
 				'table' => 'user_roles',
 				'condition' => 'access = 1',
 			),
+			array(
+				'module' => 'Odrzucenia',
+				'table' => 'rejectors',
+				'condition' => '1',
+			),
 		);
 	}
 	

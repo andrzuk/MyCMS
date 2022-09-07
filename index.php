@@ -26,6 +26,8 @@ $black_list_ip = explode(',', $black_list_visitors);
 foreach ($black_list_ip AS $black_list_item)
 	if ($visitor_ip == trim(str_replace('\'', '', $black_list_item)))
 	{
+		$visitor = new Visitors($db);
+		$visitor->reject();
 		$connection->close($db);
 		exit();
 	}

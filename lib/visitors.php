@@ -27,6 +27,16 @@ class Visitors
 		mysqli_query($this->db, $query);
 	}
 	
+	public function reject()
+	{
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$uri = $_SERVER["REQUEST_URI"];
+
+		$query = "INSERT INTO rejectors VALUES (NULL, '".$ip."', '".$uri."', '".$this->mySqlDateTime."')";
+		// dopisanie odrzucenia połączenia do bazy:
+		mysqli_query($this->db, $query);
+	}
+	
 	public function get_licznik_info()
 	{
 		$CResult = array();
@@ -36,8 +46,8 @@ class Visitors
 		if ($result) 
 		{
 			$row = mysqli_fetch_assoc($result);
-			$guest_id = isset($row['id']) ? $row['id'] : NULL;
-			$guest_time = isset($row['time']) ? $row['time'] : NULL;
+			$guest_id = $row['id'];
+			$guest_time = $row['time'];
 			mysqli_free_result($result);
 		}
 		if (empty($guest_id) && empty($guest_time)) // nie znalazl w tablicy - trzeba dopisac
