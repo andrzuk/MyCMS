@@ -128,6 +128,11 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 
 	$content_options = array(
 		array(
+			'address' => 'index.php?route=rejectors',
+			'caption' => 'Odrzucenia',
+			'icon' => 'img/chart_pie.png'
+		),
+		array(
 			'address' => 'index.php?route=admin',
 			'caption' => 'Zamknij',
 			'icon' => 'img/stop.png'

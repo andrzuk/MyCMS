@@ -131,30 +131,52 @@ class Rejectors_View
 	public function ShowStatsReport($data)
 	{
 		$report = '';
-		$idx = 0;
+		$counters = array('range' => array(), 'total' => array());
 		
 		$report .= '<table class="Table" width="100%" cellpadding="5" cellspacing="1">';
 		$report .= '<tr style="font-size: larger;">';
-		$report .= '<th>Lp.</th><th>Adres IP</th><th>Liczba odrzuceń</th>';
+		$report .= '<th>Lp.</th><th>Adres IP</th><th>Liczba ostatnich</th><th>Liczba wszystkich</th>';
 		$report .= '</tr>';
 		
-		foreach ($data as $k => $v)
+		foreach ($data as $i => $j)
 		{
-			foreach ($v as $key => $value)
+			if ($i == 'range')
 			{
-				if ($key == 'visitor_ip') $visitor_ip = $value;
-				if ($key == 'counter') $counter = $value;
+				foreach ($j as $k => $v)
+				{
+					foreach ($v as $key => $value)
+					{
+						if ($key == 'visitor_ip') $visitor_ip = $value;
+						if ($key == 'counter') $counters['range'][$k]['count'] = $value;
+					}
+					$counters['range'][$k]['ip'] = $visitor_ip;
+				}
 			}
-			$idx++;
+			if ($i == 'total')
+			{
+				foreach ($j as $k => $v)
+				{
+					foreach ($v as $key => $value)
+					{
+						if ($key == 'visitor_ip') $visitor_ip = $value;
+						if ($key == 'counter') $counters['total'][$k]['count'] = $value;
+					}
+					$counters['total'][$k]['ip'] = $visitor_ip;
+				}
+			}
+		}
+		for ($idx = 0; $idx < count($counters['total']); $idx++)
+		{
 			$report .= '<tr class="DataRowBright">';
-			$report .= '<td class="DataCell">' . $idx . '.</td>';
-			$report .= '<td class="DataCell">' . $visitor_ip . '</td>';
-			$report .= '<td class="DataCell">' . $counter . '</td>';
+			$report .= '<td class="DataCell">' . strval($idx + 1) . '.</td>';
+			$report .= '<td class="DataCell">' . $counters['total'][$idx]['ip'] . '</td>';
+			$report .= '<td class="DataCell">' . $counters['range'][$idx]['count'] . '</td>';
+			$report .= '<td class="DataCell">' . $counters['total'][$idx]['count'] . '</td>';
 			$report .= '</tr>';
 		}
 
 		$report .= '</table>';
-
+		
 		return $report;
 	}
 }

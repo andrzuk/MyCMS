@@ -19,7 +19,10 @@ class Index_Model
 	
 	public function GetPageContent()
 	{
+		$visitor_ip = $_SERVER['REMOTE_ADDR'];
 		$this->row_item = array();
+
+		if ($this->DetectRobots($visitor_ip, 32)) return $this->row_item;
 
 		$this->UpdatePreviews();
 
@@ -59,6 +62,27 @@ class Index_Model
 		mysqli_query($this->db, $query);
 		
 		return mysqli_affected_rows($this->db);
+	}
+	
+	private function DetectRobots($author_ip, $max_range)
+	{
+		$query = "SELECT COUNT(*) AS counter FROM visitors" .
+				 " WHERE visitor_ip = '". $author_ip ."' AND request_uri IN ('/', '/index.php') AND visited > DATE_SUB(NOW(), INTERVAL 12 HOUR)";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result);
+			$this->row_item = $row;
+			mysqli_free_result($result);
+			if (intval($this->row_item['counter']) > $max_range)
+			{
+				$query = "UPDATE configuration" .
+						" SET key_value = CONCAT(key_value, ', \'". $author_ip ."\''), modified='". $this->mySqlDateTime ."'".
+						" WHERE key_name = 'black_list_visitors'";
+				mysqli_query($this->db, $query);
+			}
+		}
+		return intval($this->row_item['counter']) > $max_range;
 	}
 	
 	public function GetAuthors()

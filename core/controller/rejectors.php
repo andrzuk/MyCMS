@@ -92,6 +92,11 @@ $page_options = new Options(MODULE_NAME, $id);
 
 $content_options = array (
 	array (
+		'address' => 'index.php?route=visitors',
+		'caption' => 'Odwiedziny',
+		'icon' => 'img/reports_stack.png'
+	),
+	array (
 		'address' => 'index.php?route=admin',
 		'caption' => 'Zamknij',
 		'icon' => 'img/stop.png'
@@ -110,7 +115,7 @@ $acl = new AccessControlList(MODULE_NAME, $db);
 $controller_object->DrawList($params, $access, $acl->available());
 $component_left = $controller_object->Get('site_content');
 
-$days_range = 7;
+$days_range = 10;
 
 $record_object = $model_object->GetSummaryData($days_range);
 $component_right = $view_object->ShowSummaryChart($record_object);
