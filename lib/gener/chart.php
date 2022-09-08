@@ -67,7 +67,7 @@ class ChartBuilder
 		$cols_count = 1;
 
 		$this->chart_width = 650;
-		$this->chart_height = 350;
+		$this->chart_height = 300;
 		
 		$main_text .= '<table class="Table" width="100%" cellpadding="5" cellspacing="0">';
 		

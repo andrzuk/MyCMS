@@ -110,10 +110,15 @@ $acl = new AccessControlList(MODULE_NAME, $db);
 $controller_object->DrawList($params, $access, $acl->available());
 $component_left = $controller_object->Get('site_content');
 
-$record_object = $model_object->GetSummaryData();
+$days_range = 7;
+
+$record_object = $model_object->GetSummaryData($days_range);
 $component_right = $view_object->ShowSummaryChart($record_object);
 
-$site_content = $view_object->ShowComponents($component_left, $component_right);
+$record_object = $model_object->GetStatsData($days_range);
+$component_below = $view_object->ShowStatsReport($record_object);
+
+$site_content = $view_object->ShowComponents($component_left, $component_right, $component_below);
 
 $content_title = $controller_object->Get('content_title');
 $content_options = $controller_object->Get('content_options');

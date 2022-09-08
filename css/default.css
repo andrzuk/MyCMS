@@ -425,6 +425,7 @@ a.PathLink:hover
 	float: right;
 	padding-right: 5px;
 	padding-top: 5px;
+	padding-left: 20px;
 }
 
 .FormSearchBar
@@ -467,7 +468,7 @@ a.PathLink:hover
 .FormDates
 {
 	float: right;
-	padding-right: 35px;
+	padding-right: 5px;
 	padding-top: 5px;
 }
 

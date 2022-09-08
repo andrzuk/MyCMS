@@ -331,7 +331,7 @@ a.PathLink:hover
 	vertical-align: middle;
 	border-bottom: 1px solid #999;
 	color: #369;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 
 .MenuIco
@@ -425,6 +425,7 @@ a.PathLink:hover
 	float: right;
 	padding-right: 5px;
 	padding-top: 5px;
+	padding-left: 20px;
 }
 
 .FormSearchBar
@@ -467,7 +468,7 @@ a.PathLink:hover
 .FormDates
 {
 	float: right;
-	padding-right: 35px;
+	padding-right: 5px;
 	padding-top: 5px;
 }
 
@@ -917,6 +918,7 @@ li.IpItem
 .PanelItem
 {
 	padding: 20px;
+	width: 140px !important;
 	text-align: center;
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 11px;
@@ -983,4 +985,4 @@ div#filters input { width: 458px; margin-right: 21px; padding-left: 5px; border:
 div#filters button { width: 50px; }
 div#add-button { padding: 10px 0; }
 div#add-button button { width: 170px; }
-textarea#exceptions { width: 906px; height: 60px; min-width: 906px; max-width: 906px; min-height: 500px; max-height: 60px; font-family: inherit; font-size: inherit; }
+textarea#exceptions { width: 906px; height: 60px; min-width: 906px; max-width: 906px; min-height: 60px; max-height: 500px; font-family: inherit; font-size: inherit; }

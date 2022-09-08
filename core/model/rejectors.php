@@ -76,16 +76,16 @@ class Rejectors_Model
 		return $this->rows_list;
 	}
 	
-	public function GetSummaryData()
+	public function GetSummaryData($range_days)
 	{
-		$range_days = 7;
-		
 		$this->rows_list = array('index' => array(), 'contact' => array());
 
 		for ($day = $range_days; $day > 0; $day--)
 		{
-			$query = "SELECT COUNT(*) AS counter, NOW() - INTERVAL " . strval(($day - 1) * 24) . " HOUR AS visited FROM " . $this->table_name . 
-			         " WHERE request_uri IN ('/', '/index.php') AND visited > NOW() - INTERVAL " . strval($day * 24) . " HOUR AND visited <= NOW() - INTERVAL " . strval(($day - 1) * 24) . " HOUR";
+			$str_days = '-' . strval($day - 1) . ' days';
+			$date_range = date("Y-m-d", strtotime($str_days));
+			$query = "SELECT COUNT(*) AS counter, '" . $date_range . "' AS visited FROM " . $this->table_name . 
+			         " WHERE request_uri IN ('/', '/index.php') AND visited BETWEEN '" . $date_range . " 00:00:00' AND '" . $date_range . " 23:59:59'";
 			$result = mysqli_query($this->db, $query);
 			if ($result)
 			{
@@ -96,8 +96,10 @@ class Rejectors_Model
 		}
 		for ($day = $range_days; $day > 0; $day--)
 		{
-			$query = "SELECT COUNT(*) AS counter, NOW() - INTERVAL " . strval(($day - 1) * 24) . " HOUR AS visited FROM " . $this->table_name . 
-			         " WHERE request_uri LIKE '%route=contact' AND visited > NOW() - INTERVAL " . strval($day * 24) . " HOUR AND visited <= NOW() - INTERVAL " . strval(($day - 1) * 24) . " HOUR";
+			$str_days = '-' . strval($day - 1) . ' days';
+			$date_range = date("Y-m-d", strtotime($str_days));
+			$query = "SELECT COUNT(*) AS counter, '" . $date_range . "' AS visited FROM " . $this->table_name . 
+			         " WHERE request_uri LIKE '%route=contact' AND visited BETWEEN '" . $date_range . " 00:00:00' AND '" . $date_range . " 23:59:59'";
 			$result = mysqli_query($this->db, $query);
 			if ($result)
 			{
@@ -105,6 +107,28 @@ class Rejectors_Model
 				$this->rows_list['contact'][] = $row;
 				mysqli_free_result($result);
 			}
+		}
+		
+		return $this->rows_list;
+	}
+
+	public function GetStatsData($range_days)
+	{
+		$this->rows_list = array();
+
+		$str_days = '-' . strval($range_days) . ' days';
+		$date_range = date("Y-m-d", strtotime($str_days));
+		$query = "SELECT visitor_ip, COUNT(*) AS counter FROM " . $this->table_name . 
+				 " WHERE visited > '" . $date_range . " 00:00:00'" . 
+				 " GROUP BY visitor_ip ORDER BY counter DESC";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			while ($row = mysqli_fetch_assoc($result))
+			{
+				$this->rows_list[] = $row;
+			}
+			mysqli_free_result($result);
 		}
 		
 		return $this->rows_list;
