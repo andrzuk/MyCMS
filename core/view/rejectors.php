@@ -132,6 +132,7 @@ class Rejectors_View
 	{
 		$report = '';
 		$counters = array('range' => array(), 'total' => array());
+		$summary = array('range' => 0, 'total' => 0);
 		
 		$report .= '<table class="Table" width="100%" cellpadding="5" cellspacing="1">';
 		$report .= '<tr style="font-size: larger;">';
@@ -150,6 +151,7 @@ class Rejectors_View
 						if ($key == 'counter') $counters['range'][$k]['count'] = $value;
 					}
 					$counters['range'][$k]['ip'] = $visitor_ip;
+					$summary['range'] += $counters['range'][$k]['count'];
 				}
 			}
 			if ($i == 'total')
@@ -162,6 +164,7 @@ class Rejectors_View
 						if ($key == 'counter') $counters['total'][$k]['count'] = $value;
 					}
 					$counters['total'][$k]['ip'] = $visitor_ip;
+					$summary['total'] += $counters['total'][$k]['count'];
 				}
 			}
 		}
@@ -174,6 +177,12 @@ class Rejectors_View
 			$report .= '<td class="DataCell">' . $counters['total'][$idx]['count'] . '</td>';
 			$report .= '</tr>';
 		}
+		$report .= '<tr class="DataRow">';
+		$report .= '<td class="DataCell"></td>';
+		$report .= '<td class="DataCell"><b>Razem:</b></td>';
+		$report .= '<td class="DataCell"><b>' . $summary['range'] . '</b></td>';
+		$report .= '<td class="DataCell"><b>' . $summary['total'] . '</b></td>';
+		$report .= '</tr>';
 
 		$report .= '</table>';
 		
