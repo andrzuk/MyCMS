@@ -108,27 +108,51 @@ $params = array(
 	'content_options' => $content_options
 );
 
+$status = new Status($db);
+$user_status = $status->get_value('user_status');
+
 $access = array(ADMIN, OPERATOR);
 
-$acl = new AccessControlList(MODULE_NAME, $db);
+if (in_array($user_status, $access)) // są uprawnienia
+{
+	$acl = new AccessControlList(MODULE_NAME, $db);
 
-$controller_object->DrawList($params, $access, $acl->available());
-$component_left = $controller_object->Get('site_content');
+	$controller_object->DrawList($params, $access, $acl->available());
+	$component_left = $controller_object->Get('site_content');
 
-$days_range = 10;
+	$days_range = 10;
 
-$record_object = $model_object->GetSummaryData($days_range);
-$component_right = $view_object->ShowSummaryChart($record_object);
+	$record_object = $model_object->GetSummaryData($days_range);
+	$component_right = $view_object->ShowSummaryChart($record_object);
 
-$record_object = $model_object->GetStatsData($days_range);
-$component_below = $view_object->ShowStatsReport($record_object);
+	$record_object = $model_object->GetStatsData($days_range);
+	$component_below = $view_object->ShowStatsReport($record_object);
 
-$site_content = $view_object->ShowComponents($component_left, $component_right, $component_below);
+	$site_content = $view_object->ShowComponents($component_left, $component_right, $component_below);
 
-$content_title = $controller_object->Get('content_title');
-$content_options = $controller_object->Get('content_options');
-$site_message = $controller_object->Get('site_message');
-$site_dialog = $controller_object->Get('site_dialog');
+	$content_title = $controller_object->Get('content_title');
+	$content_options = $controller_object->Get('content_options');
+	$site_message = $controller_object->Get('site_message');
+	$site_dialog = $controller_object->Get('site_dialog');
+}
+else // brak uprawnień
+{
+	$content_options = $page_options->get_options(NULL);
+
+	$site_dialog = array(
+		'ERROR',
+		'Brak uprawnień',
+		'Uruchomiona funkcja wymaga zalogowania do serwisu na konto o profilu administratora lub posiadania uprawnień określonych za pomocą systemu Access Control List.',
+		array(
+			array(
+				'index.php?route=login', 'Zaloguj'
+			),
+			array(
+				'index.php', 'Zamknij'
+			),
+		)
+	);
+}
 
 /*
  * Przechodzi do wygenerowania strony
