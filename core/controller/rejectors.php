@@ -31,6 +31,15 @@ $list_columns = array(
 	array('db_name' => 'visited', 			'column_name' => 'Godzina', 			'sorting' => 1),
 );
 
+if (isset($_POST['ListSearchButton']))
+{
+	$_SESSION['list_filter'] = htmlspecialchars(substr(trim($_POST['ListSearchText']), 0, 32));
+}
+if (isset($_POST['ListSearchClose']))
+{
+	$_SESSION['list_filter'] = NULL;
+}
+
 $date_from = isset($_SESSION['date_from']) ? $_SESSION['date_from'] : date("Y-m-d");
 $date_to = isset($_SESSION['date_to']) ? $_SESSION['date_to'] : date("Y-m-d");
 $days_range = isset($_SESSION['days_range']) ? $_SESSION['days_range'] : 10;
@@ -63,8 +72,6 @@ $record_object = $navi_params['record_object'];
 $db_params = $navi_params['db_params'];
 $list_params = $navi_params['list_params'];
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : NULL;
-
 // dane z bazy potrzebne do kontrolek formularza:
 
 $data_import = array();
@@ -95,7 +102,7 @@ $content_options = NULL;
 
 include APP_DIR . 'view/template/options.php';
 
-$page_options = new Options(MODULE_NAME, $id);
+$page_options = new Options(MODULE_NAME, NULL);
 
 $content_options = array (
 	array (
@@ -110,22 +117,18 @@ $content_options = array (
 	),
 );
 
-$params = array(
-	'content_title' => $content_title,
-	'content_options' => $content_options
-);
-
 $status = new Status($db);
 $user_status = $status->get_value('user_status');
 
 $access = array(ADMIN, OPERATOR);
 
-if (in_array($user_status, $access)) // są uprawnienia
+$acl = new AccessControlList(MODULE_NAME, $db);
+			
+if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 {
-	$acl = new AccessControlList(MODULE_NAME, $db);
-
-	$controller_object->DrawList($params, $access, $acl->available());
-	$component_left = $controller_object->Get('site_content');
+	$record_list = $model_object->GetAll(NULL, $db_params);
+	$navi_object->update($model_object, $list_params);
+	$component_left = $view_object->ShowList($record_list, $list_columns, $list_params);
 
 	$record_object = $model_object->GetSummaryData($days_range);
 	$component_right = $view_object->ShowSummaryChart($record_object);
@@ -135,8 +138,6 @@ if (in_array($user_status, $access)) // są uprawnienia
 
 	$site_content = $view_object->ShowComponents($component_left, $component_right, $component_below);
 
-	$content_title = $controller_object->Get('content_title');
-	$content_options = $controller_object->Get('content_options');
 	$site_message = $controller_object->Get('site_message');
 	$site_dialog = $controller_object->Get('site_dialog');
 }
