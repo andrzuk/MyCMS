@@ -66,8 +66,8 @@ class ChartBuilder
 		
 		$cols_count = 1;
 
-		$this->chart_width = 650;
-		$this->chart_height = 300;
+		$this->chart_width = 600;
+		$this->chart_height = 250;
 		
 		$main_text .= '<table class="Table" width="100%" cellpadding="5" cellspacing="0">';
 		
@@ -83,13 +83,16 @@ class ChartBuilder
 		{
 			$main_text .= '<span class="FormDates">';
 			$main_text .= '<form action="index.php?route=' . $this->module . '" method="post">';
-			$main_text .= '<input type="date" id="date_from" name="date_from" value="'.$_SESSION['date_from'].'" class="FormInput" style="width: 125px;" />&nbsp;-&nbsp;';
-			$main_text .= '<input type="date" id="date_to" name="date_to" value="'.$_SESSION['date_to'].'" class="FormInput" style="width: 125px;" />&nbsp;';
-			$main_text .= '<input type="submit" id="SetDatesButton" name="SetDatesButton" value="OK" style="width: 40px;" />';
+			$main_text .= '<select id="days_range" name="days_range" class="FormInput" style="width: 80px; margin: 0 3px;" />';
+			$main_text .= '<option value="10" '. ($_SESSION['days_range'] == 10 ? "selected" : NULL) .'>10 dni</option>';
+			$main_text .= '<option value="20" '. ($_SESSION['days_range'] == 20 ? "selected" : NULL) .'>20 dni</option>';
+			$main_text .= '<option value="30" '. ($_SESSION['days_range'] == 30 ? "selected" : NULL) .'>30 dni</option>';
+			$main_text .= '</select>';
+			$main_text .= '<input type="submit" id="SetPeriodButton" name="SetPeriodButton" value="OK" style="width: 40px;" />';
 			$main_text .= '</form>';
 			$main_text .= '</span>';
 			$main_text .= '<span class="UserSelLabel">';
-			$main_text .= 'Data:';
+			$main_text .= 'Okres:';
 			$main_text .= '</span>';
 		}
 		$main_text .= '</th>';

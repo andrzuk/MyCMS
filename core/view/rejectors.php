@@ -113,7 +113,7 @@ class Rejectors_View
 		$main_chart->set_import(NULL);
 			
 		// dostępne ustawianie daty:
-		$main_chart->set_dates(FALSE);
+		$main_chart->set_dates(TRUE);
 
 		// render:
 		

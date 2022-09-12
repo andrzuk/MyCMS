@@ -33,6 +33,7 @@ $list_columns = array(
 
 $date_from = isset($_SESSION['date_from']) ? $_SESSION['date_from'] : date("Y-m-d");
 $date_to = isset($_SESSION['date_to']) ? $_SESSION['date_to'] : date("Y-m-d");
+$days_range = isset($_SESSION['days_range']) ? $_SESSION['days_range'] : 10;
 
 if (isset($_POST['date_from']))
 {
@@ -45,6 +46,12 @@ if (isset($_POST['date_to']))
 	$date_to = preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_POST['date_to']) ? trim($_POST['date_to']) : date("Y-m-d");
 }
 $_SESSION['date_to'] = $date_to;
+
+if (isset($_POST['days_range']))
+{
+	$days_range = $_POST['days_range'];
+}
+$_SESSION['days_range'] = $days_range;
 
 include 'main/navi.php';
 
@@ -119,8 +126,6 @@ if (in_array($user_status, $access)) // są uprawnienia
 
 	$controller_object->DrawList($params, $access, $acl->available());
 	$component_left = $controller_object->Get('site_content');
-
-	$days_range = 10;
 
 	$record_object = $model_object->GetSummaryData($days_range);
 	$component_right = $view_object->ShowSummaryChart($record_object);
