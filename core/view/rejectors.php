@@ -173,15 +173,15 @@ class Rejectors_View
 			$report .= '<tr class="DataRowBright">';
 			$report .= '<td class="DataCell">' . strval($idx + 1) . '.</td>';
 			$report .= '<td class="DataCell">' . $counters['total'][$idx]['ip'] . '</td>';
-			$report .= '<td class="DataCell">' . $counters['range'][$idx]['count'] . '</td>';
-			$report .= '<td class="DataCell">' . $counters['total'][$idx]['count'] . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['range'][$idx]['count'], 0, ',', ' ') . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['total'][$idx]['count'], 0, ',', ' ') . '</td>';
 			$report .= '</tr>';
 		}
 		$report .= '<tr class="DataRow">';
 		$report .= '<td class="DataCell"></td>';
 		$report .= '<td class="DataCell"><b>Razem:</b></td>';
-		$report .= '<td class="DataCell"><b>' . $summary['range'] . '</b></td>';
-		$report .= '<td class="DataCell"><b>' . $summary['total'] . '</b></td>';
+		$report .= '<td class="DataCell"><b>' . number_format($summary['range'], 0, ',', ' ') . '</b></td>';
+		$report .= '<td class="DataCell"><b>' . number_format($summary['total'], 0, ',', ' ') . '</b></td>';
 		$report .= '</tr>';
 
 		$report .= '</table>';

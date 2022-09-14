@@ -22,7 +22,7 @@ class Index_Model
 		$visitor_ip = $_SERVER['REMOTE_ADDR'];
 		$this->row_item = array();
 
-		if ($this->DetectRobots($visitor_ip, 32)) return $this->row_item;
+		if ($this->DetectRobots($visitor_ip, 20)) return $this->row_item;
 
 		$this->UpdatePreviews();
 
@@ -67,7 +67,7 @@ class Index_Model
 	private function DetectRobots($author_ip, $max_range)
 	{
 		$query = "SELECT COUNT(*) AS counter FROM visitors" .
-				 " WHERE visitor_ip = '". $author_ip ."' AND request_uri IN ('/', '/index.php') AND visited > DATE_SUB(NOW(), INTERVAL 12 HOUR)";
+				 " WHERE visitor_ip = '". $author_ip ."' AND request_uri IN ('/', '/index.php') AND visited > DATE_SUB(NOW(), INTERVAL 24 HOUR)";
 		$result = mysqli_query($this->db, $query);
 		if ($result)
 		{

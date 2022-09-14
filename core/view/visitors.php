@@ -253,11 +253,11 @@ class Visitors_View
 		
 		// kolumny wyświetlane:
 		$col_attrib = array(
-			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
-			array('width' => '32%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '22%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '22%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '6%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '30%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '25%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '7%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '7%', 'align' => 'center', 'visible' => '1'),
 		);
 		
