@@ -29,7 +29,8 @@ foreach ($black_list_ip AS $black_list_item)
 		$visitor = new Visitors($db);
 		$visitor->reject();
 		$connection->close($db);
-		exit();
+		http_response_code(401);
+		exit;
 	}
 
 if (isset($_GET['route'])) 
