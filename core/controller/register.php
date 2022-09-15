@@ -37,232 +37,258 @@ $content_options = $page_options->get_options('register');
 // brakujące pola:
 $failed = array();
 
-if (isset($_POST['register_button'])) // obsługa formularza
+$status = new Status($db);
+$user_status = $status->get_value('user_status');
+
+$access = array(GUEST);
+
+if (in_array($user_status, $access)) // uprawnienie dla gości
 {
-	if (!isset($_SESSION['form_sent']) || $_POST['form_hash'] != $_SESSION['form_sent']) // wysłano formularz
+	if (isset($_POST['register_button'])) // obsługa formularza
 	{
-		$_SESSION['form_sent'] = $_POST['form_hash'];
-
-		$imie = isset($_POST['imie']) ? htmlspecialchars(trim($_POST['imie'])) : NULL;
-		$nazwisko = isset($_POST['nazwisko']) ? htmlspecialchars(trim($_POST['nazwisko'])) : NULL;
-		$email = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : NULL;
-		$login = isset($_POST['login']) ? htmlspecialchars(trim($_POST['login'])) : NULL;
-		$password = isset($_POST['password']) ? htmlspecialchars(trim($_POST['password'])) : NULL;
-		$pesel = isset($_POST['pesel']) ? htmlspecialchars(trim($_POST['pesel'])) : NULL;
-		
-		// resetuje ustawienia uzytkownika:
-		$_SESSION['user_id'] = 0;
-		$_SESSION['user_status'] = 0;
-		$_SESSION['user_login'] = NULL;
-		$_SESSION['user_name'] = NULL;
-		
-		// zapamiętuje dane w formularzu:
-		$_SESSION['form_fields']['imie'] = $imie;
-		$_SESSION['form_fields']['nazwisko'] = $nazwisko;
-		$_SESSION['form_fields']['email'] = $email;
-		$_SESSION['form_fields']['login'] = $login;
-		$_SESSION['form_fields']['password'] = $password;
-		$_SESSION['form_fields']['pesel'] = $pesel;
-		
-		// wymagane pola:
-		$required = array(
-			'imie' => $imie, 
-			'nazwisko' => $nazwisko, 
-			'email' => $email, 
-			'pesel' => $pesel, 
-			'login' => $login, 
-			'password' => $password,
-		);
-
-		foreach ($required as $k => $v)
-			if (empty($v)) $failed[] = $k;
-		
-		// sprawdzanie czy uzupełniono wszystkie dane:
-		if (empty($failed))
+		if (!isset($_SESSION['form_sent']) || $_POST['form_hash'] != $_SESSION['form_sent']) // wysłano formularz
 		{
-			$record_object = array(
+			$_SESSION['form_sent'] = $_POST['form_hash'];
+
+			$imie = isset($_POST['imie']) ? htmlspecialchars(trim($_POST['imie'])) : NULL;
+			$nazwisko = isset($_POST['nazwisko']) ? htmlspecialchars(trim($_POST['nazwisko'])) : NULL;
+			$email = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : NULL;
+			$login = isset($_POST['login']) ? htmlspecialchars(trim($_POST['login'])) : NULL;
+			$password = isset($_POST['password']) ? htmlspecialchars(trim($_POST['password'])) : NULL;
+			$pesel = isset($_POST['pesel']) ? htmlspecialchars(trim($_POST['pesel'])) : NULL;
+			
+			// resetuje ustawienia uzytkownika:
+			$_SESSION['user_id'] = 0;
+			$_SESSION['user_status'] = 0;
+			$_SESSION['user_login'] = NULL;
+			$_SESSION['user_name'] = NULL;
+			
+			// zapamiętuje dane w formularzu:
+			$_SESSION['form_fields']['imie'] = $imie;
+			$_SESSION['form_fields']['nazwisko'] = $nazwisko;
+			$_SESSION['form_fields']['email'] = $email;
+			$_SESSION['form_fields']['login'] = $login;
+			$_SESSION['form_fields']['password'] = $password;
+			$_SESSION['form_fields']['pesel'] = $pesel;
+			
+			// wymagane pola:
+			$required = array(
 				'imie' => $imie, 
 				'nazwisko' => $nazwisko, 
 				'email' => $email, 
 				'pesel' => $pesel, 
-				'user_login' => $login, 
-				'user_password' => $password,
+				'login' => $login, 
+				'password' => $password,
 			);
 
-			$input_check = NULL;
-			foreach ($record_object as $k => $v) 
-				$input_check .= $v .' ';
-
-			include LIB_DIR . 'validator.php';
+			foreach ($required as $k => $v)
+				if (empty($v)) $failed[] = $k;
 			
-			$validator_object = new Validator();
-			
-			$check_result = $validator_object->check_security($input_check);
-			
-			$check_email = $validator_object->check_email($email);
-			
-			$check_pesel = $validator_object->check_pesel($pesel);
-			
-			$check_exist = $model_object->Exist($record_object);
-			
-			if ($check_result) // kontrola bezpieczeństwa poprawna
+			// sprawdzanie czy uzupełniono wszystkie dane:
+			if (empty($failed))
 			{
-				if ($check_email) // email poprawny
+				$record_object = array(
+					'imie' => $imie, 
+					'nazwisko' => $nazwisko, 
+					'email' => $email, 
+					'pesel' => $pesel, 
+					'user_login' => $login, 
+					'user_password' => $password,
+				);
+
+				$input_check = NULL;
+				foreach ($record_object as $k => $v) 
+					$input_check .= $v .' ';
+
+				include LIB_DIR . 'validator.php';
+				
+				$validator_object = new Validator();
+				
+				$check_result = $validator_object->check_security($input_check);
+				
+				$check_email = $validator_object->check_email($email);
+				
+				$check_pesel = $validator_object->check_pesel($pesel);
+				
+				$check_exist = $model_object->Exist($record_object);
+				
+				if ($check_result) // kontrola bezpieczeństwa poprawna
 				{
-					if ($check_pesel) // pesel poprawny
+					if ($check_email) // email poprawny
 					{
-						if (!$check_exist) // nie istnieje jeszcze taki login ani email ani pesel
+						if ($check_pesel) // pesel poprawny
 						{
-							// zapisuje użytkownika do bazy:
-							
-							$result = $model_object->Register($record_object);
-							
-							if ($result) // zapis się powiódł
+							if (!$check_exist) // nie istnieje jeszcze taki login ani email ani pesel
 							{
-								// ustawia użytkownika:
-								$_SESSION['user_id'] = $result['id'];
-								$_SESSION['user_status'] = $result['status'];
-								$_SESSION['user_imie'] = $result['imie'];
-								$_SESSION['user_nazwisko'] = $result['nazwisko'];
-								$_SESSION['user_login'] = $result['user_login'];
-								$_SESSION['user_email'] = $result['email'];
+								// zapisuje użytkownika do bazy:
 								
-								// pokazuje user-details:
+								$result = $model_object->Register($record_object);
 								
-								$page_options = new Options('users', $result['id']);
+								if ($result) // zapis się powiódł
+								{
+									// ustawia użytkownika:
+									$_SESSION['user_id'] = $result['id'];
+									$_SESSION['user_status'] = $result['status'];
+									$_SESSION['user_imie'] = $result['imie'];
+									$_SESSION['user_nazwisko'] = $result['nazwisko'];
+									$_SESSION['user_login'] = $result['user_login'];
+									$_SESSION['user_email'] = $result['email'];
+									
+									// pokazuje user-details:
+									
+									$page_options = new Options('users', $result['id']);
 
-								$content_options = $page_options->get_options('view');
+									$content_options = $page_options->get_options('view');
 
-								$list_columns = array(
-									array('db_name' => 'user_login', 		'column_name' => 'Login',		'color' => '#900'),
-									array('db_name' => 'imie', 				'column_name' => 'Imię', 		'color' => '#369'),
-									array('db_name' => 'nazwisko', 			'column_name' => 'Nazwisko', 	'color' => '#369'),
-									array('db_name' => 'email', 			'column_name' => 'E-mail', 		'color' => '#69c'),
-									array('db_name' => 'data_rejestracji', 	'column_name' => 'Rejestracja', 'color' => '#090'),
-									array('db_name' => 'data_logowania', 	'column_name' => 'Logowanie', 	'color' => '#369'),
-									array('db_name' => 'data_modyfikacji', 	'column_name' => 'Modyfikacja', 'color' => '#036'),
-									array('db_name' => 'data_wylogowania', 	'column_name' => 'Wylogowanie',	'color' => '#d00'),
-								);
+									$list_columns = array(
+										array('db_name' => 'user_login', 		'column_name' => 'Login',		'color' => '#900'),
+										array('db_name' => 'imie', 				'column_name' => 'Imię', 		'color' => '#369'),
+										array('db_name' => 'nazwisko', 			'column_name' => 'Nazwisko', 	'color' => '#369'),
+										array('db_name' => 'email', 			'column_name' => 'E-mail', 		'color' => '#69c'),
+										array('db_name' => 'data_rejestracji', 	'column_name' => 'Rejestracja', 'color' => '#090'),
+										array('db_name' => 'data_logowania', 	'column_name' => 'Logowanie', 	'color' => '#369'),
+										array('db_name' => 'data_modyfikacji', 	'column_name' => 'Modyfikacja', 'color' => '#036'),
+										array('db_name' => 'data_wylogowania', 	'column_name' => 'Wylogowanie',	'color' => '#d00'),
+									);
 
-								// pobiera rekord o danym Id:
-								$login_object = $model_object->GetOne($result['id']);
-								
-								// wyświetla formularz wypełniony danymi:
-								$site_content = $view_object->ShowDetails($login_object, $list_columns);
+									// pobiera rekord o danym Id:
+									$login_object = $model_object->GetOne($result['id']);
+									
+									// wyświetla formularz wypełniony danymi:
+									$site_content = $view_object->ShowDetails($login_object, $list_columns);
 
-								// user-details.
+									// user-details.
 
-								// wyświetla komunikat:
-								$site_message = array(
-									'INFORMATION', 'Zostałeś poprawnie zarejestrowany w serwisie.'
-								);
+									// wyświetla komunikat:
+									$site_message = array(
+										'INFORMATION', 'Zostałeś poprawnie zarejestrowany w serwisie.'
+									);
+								}
+								else // rejestracja się nie powiodła
+								{
+									// wyświetla pusty formularz:
+									$site_content = $view_object->ShowForm(NULL, $failed);
+									
+									// wyświetla komunikat:
+									$site_message = array(
+										'ERROR', 'Rejestracja zakończyła się niepowodzeniem.'
+									);
+								}
 							}
-							else // rejestracja się nie powiodła
+							else // już istnieje taki login lub email lub pesel
 							{
 								// wyświetla pusty formularz:
 								$site_content = $view_object->ShowForm(NULL, $failed);
 								
 								// wyświetla komunikat:
 								$site_message = array(
-									'ERROR', 'Rejestracja zakończyła się niepowodzeniem.'
+									'ERROR', 'Użytkownik o takim loginie lub adresie e-mail lub numerze PESEL już istnieje.'
 								);
 							}
 						}
-						else // już istnieje taki login lub email lub pesel
+						else // pesel niepoprawny
 						{
+							// oznacza niepoprawne pole:
+							$failed[] = 'pesel';
+							
 							// wyświetla pusty formularz:
 							$site_content = $view_object->ShowForm(NULL, $failed);
 							
 							// wyświetla komunikat:
 							$site_message = array(
-								'ERROR', 'Użytkownik o takim loginie lub adresie e-mail lub numerze PESEL już istnieje.'
+								'ERROR', 'Nieprawidłowy numer PESEL. Proszę poprawić.'
 							);
 						}
 					}
-					else // pesel niepoprawny
+					else // email niepoprawny
 					{
 						// oznacza niepoprawne pole:
-						$failed[] = 'pesel';
+						$failed[] = 'email';
 						
 						// wyświetla pusty formularz:
 						$site_content = $view_object->ShowForm(NULL, $failed);
 						
 						// wyświetla komunikat:
 						$site_message = array(
-							'ERROR', 'Nieprawidłowy numer PESEL. Proszę poprawić.'
+							'ERROR', 'Nieprawidłowy adres e-mail. Proszę poprawić.'
 						);
 					}
-				}
-				else // email niepoprawny
-				{
-					// oznacza niepoprawne pole:
-					$failed[] = 'email';
 					
+					$result = isset($result) ? $result : NULL;
+					$login_object = array('server' => $_SERVER, 'session' => $_SESSION, 'result' => $result);
+					
+					// rejestruje próbę rejestracji:
+					$model_object->Store($record_object, $login_object);
+				}
+				else // nie przeszło kontroli bezpieczeństwa
+				{
 					// wyświetla pusty formularz:
 					$site_content = $view_object->ShowForm(NULL, $failed);
 					
 					// wyświetla komunikat:
 					$site_message = array(
-						'ERROR', 'Nieprawidłowy adres e-mail. Proszę poprawić.'
+						'ERROR', 'Do pól formularza wprowadzono zabronione wyrażenia.'
 					);
 				}
-				
-				$result = isset($result) ? $result : NULL;
-				$login_object = array('server' => $_SERVER, 'session' => $_SESSION, 'result' => $result);
-				
-				// rejestruje próbę rejestracji:
-				$model_object->Store($record_object, $login_object);
 			}
-			else // nie przeszło kontroli bezpieczeństwa
+			else // nie uzupełniono wszystkich pól
 			{
 				// wyświetla pusty formularz:
 				$site_content = $view_object->ShowForm(NULL, $failed);
 				
 				// wyświetla komunikat:
 				$site_message = array(
-					'ERROR', 'Do pól formularza wprowadzono zabronione wyrażenia.'
+					'WARNING', 'Nie wypełniono wszystkich wymaganych pól. Proszę uzupełnić.'
 				);
 			}
 		}
-		else // nie uzupełniono wszystkich pól
+		else // odświeżono formularz
 		{
-			// wyświetla pusty formularz:
-			$site_content = $view_object->ShowForm(NULL, $failed);
-			
-			// wyświetla komunikat:
-			$site_message = array(
-				'WARNING', 'Nie wypełniono wszystkich wymaganych pól. Proszę uzupełnić.'
+			$content_options = $page_options->get_options(NULL);
+
+			$site_dialog = array(
+				'WARNING',
+				'Niedozwolona operacja',
+				'Formularz został już wysłany i nie należy go odświeżać.',
+				array(
+					array(
+						'index.php', 'Zamknij'
+					),
+				)
 			);
 		}
 	}
-	else // odświeżono formularz
+	else // pusty formularz
 	{
-		$content_options = $page_options->get_options(NULL);
-
-		$site_dialog = array(
-			'WARNING',
-			'Niedozwolona operacja',
-			'Formularz został już wysłany i nie należy go odświeżać.',
-			array(
-				array(
-					'index.php', 'Zamknij'
-				),
-			)
-		);
+		// czyści dane w formularzu:
+		$_SESSION['form_fields']['imie'] = NULL;
+		$_SESSION['form_fields']['nazwisko'] = NULL;
+		$_SESSION['form_fields']['email'] = NULL;
+		$_SESSION['form_fields']['pesel'] = NULL;
+		$_SESSION['form_fields']['login'] = NULL;
+		$_SESSION['form_fields']['password'] = NULL;
+		
+		// wyświetla pusty formularz:
+		$site_content = $view_object->ShowForm(NULL, $failed);
 	}
 }
-else // pusty formularz
+else // zablokowane dla zalogowanych
 {
-	// czyści dane w formularzu:
-	$_SESSION['form_fields']['imie'] = NULL;
-	$_SESSION['form_fields']['nazwisko'] = NULL;
-	$_SESSION['form_fields']['email'] = NULL;
-	$_SESSION['form_fields']['pesel'] = NULL;
-	$_SESSION['form_fields']['login'] = NULL;
-	$_SESSION['form_fields']['password'] = NULL;
-	
-	// wyświetla pusty formularz:
-	$site_content = $view_object->ShowForm(NULL, $failed);
+	$content_options = $page_options->get_options(NULL);
+
+	$site_dialog = array(
+		'ERROR',
+		'Niewłaściwy kontekst',
+		'Uruchomiona funkcja jest dostępna tylko dla użytkowników nie zalogowanych. Aby funkcja była dostępna, musisz się wylogować.',
+		array(
+			array(
+				'index.php?route=logout', 'Wyloguj'
+			),
+			array(
+				'index.php', 'Zamknij'
+			),
+		)
+	);
 }
 
 /*

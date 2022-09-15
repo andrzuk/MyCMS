@@ -123,7 +123,7 @@ $user_status = $status->get_value('user_status');
 $access = array(ADMIN, OPERATOR);
 
 $acl = new AccessControlList(MODULE_NAME, $db);
-			
+
 if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 {
 	$record_list = $model_object->GetAll(NULL, $db_params);
