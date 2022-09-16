@@ -55,8 +55,8 @@ class Docs_View
 			$form_title = 'Nowy dokument';
 		}
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '100%';
-		$form_widths = Array('15%', '85%');
+		$form_width = '600px';
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -159,7 +159,7 @@ class Docs_View
 		// opis:
 		
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'doc_description', 'name' => 'doc_description', 'value' => $doc_description, 'style' => 'height: 90px; width: 96%;')
+						Array('type' => 'textarea', 'id' => 'doc_description', 'name' => 'doc_description', 'value' => $doc_description, 'style' => 'height: 90px; width: 96%; min-width: 400px; min-height: 100px;')
 						);
 
 		$form_input = Array('caption' => 'Opis dokumentu', 'data' => $form_data);
@@ -262,7 +262,7 @@ class Docs_View
 		$form_title = 'Upload';
 		$form_image = 'img/32x32/upload.png';
 		$form_width = '600px';
-		$form_widths = Array('30%', '70%');
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		

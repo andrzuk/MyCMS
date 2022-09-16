@@ -199,7 +199,7 @@ class Visitors_View
 		// wykluczenia:
 		
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'exceptions', 'name' => 'exceptions', 'value' => $exceptions, 'style' => '')
+						Array('type' => 'textarea', 'id' => 'exceptions', 'name' => 'exceptions', 'value' => $exceptions, 'style' => 'min-width: 800px; min-height: 100px;')
 						);
 		$form_input = Array('caption' => 'Wykluczenia adresów', 'data' => $form_data);
 		$form_inputs[] = $form_input;

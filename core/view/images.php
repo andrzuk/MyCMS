@@ -57,8 +57,8 @@ class Images_View
 			$form_title = 'Nowy obrazek';
 		}
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '100%';
-		$form_widths = Array('30%', '70%');
+		$form_width = '600px';
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -170,7 +170,7 @@ class Images_View
 		// opis:
 		
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'picture_description', 'name' => 'picture_description', 'value' => $picture_description, 'style' => 'height: 90px; width: 96%;')
+						Array('type' => 'textarea', 'id' => 'picture_description', 'name' => 'picture_description', 'value' => $picture_description, 'style' => 'height: 90px; width: 96%; min-width: 400px; min-height: 100px;')
 						);
 
 		$form_input = Array('caption' => 'Opis zdjęcia', 'data' => $form_data);
@@ -273,7 +273,7 @@ class Images_View
 		$form_title = 'Upload';
 		$form_image = 'img/32x32/upload.png';
 		$form_width = '600px';
-		$form_widths = Array('30%', '70%');
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -536,7 +536,7 @@ class Images_View
 	
 	public function PreviewRecord($row, $columns)
 	{
-		$max_width = 700;
+		$max_width = 900;
 		$pic_width = $row['picture_width'];
 		
 		$image_width = $pic_width < $max_width ? $pic_width : $max_width;

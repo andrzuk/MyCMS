@@ -41,8 +41,8 @@ class Roles_View
 			$form_title = 'Nowa rola';
 		}
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '100%';
-		$form_widths = Array('15%', '85%');
+		$form_width = '600px';
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		

@@ -61,7 +61,7 @@ class Pages_View
 		}
 		$form_image = 'img/32x32/list_edit.png';
 		$form_width = '100%';
-		$form_widths = Array('15%', '85%');
+		$form_widths = Array('10%', '90%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -130,7 +130,7 @@ class Pages_View
 		// tytuł:
 
 		$form_data = Array(
-						Array('type' => 'text', 'id' => 'title', 'name' => 'title', 'caption' => '', 'value' => $title, 'style' => 'width: 96%;')
+						Array('type' => 'text', 'id' => 'title', 'name' => 'title', 'caption' => '', 'value' => $title, 'style' => 'width: 99%;')
 						);
 		$form_input = Array('caption' => 'Tytuł', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -160,7 +160,7 @@ class Pages_View
 		}		
 
 		$form_data = Array(
-						Array('type' => 'select', 'id' => 'category_id', 'name' => 'category_id', 'option' => $main_options, 'description' => '', 'style' => 'width: 96%;')
+						Array('type' => 'select', 'id' => 'category_id', 'name' => 'category_id', 'option' => $main_options, 'description' => '', 'style' => 'width: 99%;')
 						);
 		$form_input = Array('caption' => 'Kategoria', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -168,7 +168,7 @@ class Pages_View
 		// treść:
 
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'contents', 'name' => 'contents', 'value' => $contents, 'style' => 'height: 400px; width: 96%;')
+						Array('type' => 'textarea', 'id' => 'contents', 'name' => 'contents', 'value' => $contents, 'style' => 'height: 500px; width: 99%; min-width: 800px; min-height: 400px;')
 						);
 		$form_input = Array('caption' => 'Treść', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -265,10 +265,10 @@ class Pages_View
 		$col_attrib = array(
 			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '35%', 'align' => 'left', 'visible' => '1'),
+			array('width' => '40%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '15%', 'align' => 'left', 'visible' => '1'),
 			array('width' => '10%', 'align' => 'left', 'visible' => '1'),
-			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
+			array('width' => '5%', 'align' => 'center', 'visible' => '1'),
 			array('width' => '0%', 'align' => 'center', 'visible' => '0'),
 			array('width' => '10%', 'align' => 'center', 'visible' => '1'),
 		);

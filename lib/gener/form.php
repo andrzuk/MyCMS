@@ -229,7 +229,7 @@ class FormBuilder
 							if (isset($this->required))
 								foreach ($this->required as $req_key => $req_val)
 									if ($req_val == $input_name)
-										$main_text .= '<a style="color: #f00;">*</a>';
+										$main_text .= '';
 						}	
 						else if ($arr_val['type'] == 'select')
 						{
@@ -258,7 +258,7 @@ class FormBuilder
 							if (isset($this->required))
 								foreach ($this->required as $req_key => $req_val)
 									if ($req_val == $input_name)
-										$main_text .= '<a style="color: #f00;">*</a>';
+										$main_text .= '';
 							$main_text .= '&nbsp; '. $arr_val['description'];
 						}	
 						else if ($arr_val['type'] == 'label')
@@ -315,7 +315,7 @@ class FormBuilder
 							if (isset($this->required))
 								foreach ($this->required as $req_key => $req_val)
 									if ($req_val == $input_name)
-										$main_text .= '<a style="color: #f00;">*</a>';
+										$main_text .= '';
 						}
 					}
 					$main_text .= '</td>';

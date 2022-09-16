@@ -34,7 +34,7 @@ class Layout_View
 		$form_title = 'Układ';
 		$form_image = 'img/32x32/table_tab_resize.png';
 		$form_width = '100%';
-		$form_widths = Array('15%', '85%');
+		$form_widths = Array('10%', '90%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -54,7 +54,7 @@ class Layout_View
 		// inputs:
 		
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'contents', 'name' => 'contents', 'value' => $contents, 'style' => 'height: 500px; width: 96%;')
+						Array('type' => 'textarea', 'id' => 'contents', 'name' => 'contents', 'value' => $contents, 'style' => 'height: 500px; width: 99%; min-width: 800px; min-height: 400px;')
 						);
 		$form_input = Array('caption' => 'Treść', 'data' => $form_data);
 		$form_inputs[] = $form_input;

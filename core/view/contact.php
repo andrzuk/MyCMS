@@ -78,7 +78,7 @@ class Contact_View
 		$form_inputs[] = $form_input;
 
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'message', 'name' => 'message', 'value' => $message, 'style' => 'height: 300px; width: 97%;')
+						Array('type' => 'textarea', 'id' => 'message', 'name' => 'message', 'value' => $message, 'style' => 'height: 300px; width: 97%; min-width: 300px; min-height: 100px;')
 						);
 		$form_input = Array('caption' => 'Wiadomość', 'data' => $form_data);
 		$form_inputs[] = $form_input;

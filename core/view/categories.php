@@ -69,8 +69,8 @@ class Categories_View
 			$form_title = 'Nowa kategoria';
 		}
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '100%';
-		$form_widths = Array('30%', '70%');
+		$form_width = '600px';
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -123,7 +123,7 @@ class Categories_View
 		$form_data = Array(
 						Array('type' => 'select', 'id' => 'type', 'name' => 'type', 'option' => $main_options, 'description' => '', 'style' => 'width: 96%;')
 						);
-		$form_input = Array('caption' => 'Rodzaj (która sekcja)', 'data' => $form_data);
+		$form_input = Array('caption' => 'Sekcja', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		// rodzic:
@@ -183,7 +183,7 @@ class Categories_View
 		$form_data = Array(
 						Array('type' => 'select', 'id' => 'permission', 'name' => 'permission', 'option' => $main_options, 'description' => '', 'style' => 'width: 96%;')
 						);
-		$form_input = Array('caption' => 'Dostępność (dla grup użytkowników)', 'data' => $form_data);
+		$form_input = Array('caption' => 'Dostępność', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		// kolejność:
@@ -216,7 +216,7 @@ class Categories_View
 		$form_data = Array(
 						Array('type' => 'select', 'id' => 'item_order', 'name' => 'item_order', 'option' => $main_options, 'description' => '', 'style' => 'width: 96%;')
 						);
-		$form_input = Array('caption' => 'Kolejność (położenie na liście)', 'data' => $form_data);
+		$form_input = Array('caption' => 'Kolejność', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		// tekst:

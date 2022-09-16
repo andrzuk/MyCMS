@@ -53,8 +53,8 @@ class Config_View
 			$form_title = 'Nowa konfiguracja';
 		}
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '100%';
-		$form_widths = Array('30%', '70%');
+		$form_width = '600px';
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -92,13 +92,13 @@ class Config_View
 		}
 
 		$form_data = Array(
-						Array('type' => 'text', 'id' => 'key_name', 'name' => 'key_name', 'caption' => '', 'value' => $key_name, 'style' => 'width: 96%;')
+						Array('type' => 'text', 'id' => 'key_name', 'name' => 'key_name', 'caption' => '', 'value' => $key_name, 'style' => 'width: 98%;')
 						);
 		$form_input = Array('caption' => 'Nazwa klucza', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		$form_data = Array(
-						Array('type' => 'text', 'id' => 'meaning', 'name' => 'meaning', 'caption' => '', 'value' => $meaning, 'style' => 'width: 96%;')
+						Array('type' => 'text', 'id' => 'meaning', 'name' => 'meaning', 'caption' => '', 'value' => $meaning, 'style' => 'width: 98%;')
 						);
 		$form_input = Array('caption' => 'Znaczenie', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -115,7 +115,7 @@ class Config_View
 		$main_options[] = $main_option;
 		
 		$form_data = Array(
-						Array('type' => 'select', 'id' => 'field_type', 'name' => 'field_type', 'option' => $main_options, 'description' => '', 'style' => 'width: 96%;')
+						Array('type' => 'select', 'id' => 'field_type', 'name' => 'field_type', 'option' => $main_options, 'description' => '', 'style' => 'width: 98%;')
 						);
 		$form_input = Array('caption' => 'Typ wartości', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -123,13 +123,13 @@ class Config_View
 		if ($field_type == 1) // pole tekstowe
 		{
 			$form_data = Array(
-							Array('type' => 'text', 'id' => 'key_value', 'name' => 'key_value', 'caption' => '', 'value' => $key_value, 'style' => 'width: 96%;')
+							Array('type' => 'text', 'id' => 'key_value', 'name' => 'key_value', 'caption' => '', 'value' => $key_value, 'style' => 'width: 98%;')
 							);
 		}
 		else if ($field_type == 2) // obszar
 		{
 			$form_data = Array(
-							Array('type' => 'textarea', 'id' => 'key_value', 'name' => 'key_value', 'value' => $key_value, 'style' => 'height: 300px; width: 96%;')
+							Array('type' => 'textarea', 'id' => 'key_value', 'name' => 'key_value', 'value' => $key_value, 'style' => 'height: 300px; width: 98%; min-width: 400px; min-height: 100px;')
 							);
 		}
 		else if ($field_type == 3) // opcja
@@ -146,10 +146,10 @@ class Config_View
 		else // domyślnie
 		{
 			$form_data = Array(
-							Array('type' => 'text', 'id' => 'key_value', 'name' => 'key_value', 'caption' => '', 'value' => $key_value, 'style' => 'width: 96%;')
+							Array('type' => 'text', 'id' => 'key_value', 'name' => 'key_value', 'caption' => '', 'value' => $key_value, 'style' => 'width: 98%;')
 							);
 		}
-		$form_input = Array('caption' => 'Wartość (ustawienie)', 'data' => $form_data);
+		$form_input = Array('caption' => 'Ustawienie', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 		
 		$actv = Array('', '');

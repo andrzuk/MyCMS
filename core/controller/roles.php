@@ -80,6 +80,11 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 			{
 				$content_options = $page_options->get_options('add');
 
+				if (isset($_POST['update_button']) || isset($_POST['cancel_button'])) 
+				{
+					$content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $page_options->get_options('add');
+				}
+				
 				// dane z bazy potrzebne do kontrolek formularza:
 				$data_import = array(
 					'users' => $model_object->GetNewUsers(),
@@ -173,18 +178,8 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 				}
 				else if (isset($_POST['cancel_button'])) // obsługa formularza
 				{
-					$list_options = $page_options->get_options('list');
-
-					$function_options = array (
-						array (
-							'address' => 'index.php?route=functions',
-							'caption' => 'Funkcje serwisu',
-							'icon' => 'img/tree.png'
-						),
-					);
-
-					$content_options = array_merge($list_options, $function_options);
-
+					$content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $page_options->get_options('add');
+					
 					// pobiera listę rekordów:
 					$record_list = $model_object->GetAll(NULL, $db_params);
 					
@@ -207,6 +202,11 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 			{
 				$content_options = $page_options->get_options('edit');
 
+				if (isset($_POST['update_button']) || isset($_POST['cancel_button'])) 
+				{
+					$content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $page_options->get_options('edit');
+				}
+				
 				// dane z bazy potrzebne do kontrolek formularza:
 				$data_import = array(
 					'users' => $model_object->GetAllUsers(),
@@ -306,18 +306,8 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 				}
 				else if (isset($_POST['cancel_button'])) // obsługa formularza
 				{
-					$list_options = $page_options->get_options('list');
-
-					$function_options = array (
-						array (
-							'address' => 'index.php?route=functions',
-							'caption' => 'Funkcje serwisu',
-							'icon' => 'img/tree.png'
-						),
-					);
-
-					$content_options = array_merge($list_options, $function_options);
-
+					$content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $page_options->get_options('edit');
+					
 					// pobiera listę rekordów:
 					$record_list = $model_object->GetAll(NULL, $db_params);
 					
@@ -419,7 +409,9 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 		);
 
 		$content_options = array_merge($function_options, $list_options);
-
+		
+		$_SESSION['content_options'] = $content_options;
+		
 		// pobiera listę rekordów:
 		$record_list = $model_object->GetAll(NULL, $db_params);
 		
@@ -427,7 +419,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 		$navi_object->update($model_object, $list_params);
 		
 		// wyświetla listę rekordów:
-		$site_content = $view_object->ShowList($record_list, $list_columns, $list_params);
+		$site_content = $view_object->ShowList($record_list, $list_columns, $list_params);		
 	}
 }
 else // brak uprawnień

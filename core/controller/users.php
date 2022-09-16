@@ -112,6 +112,11 @@ if (isset($_GET['action'])) // add, view, edit, delete
 		{
 			$content_options = $page_options->get_options('add');
 			
+			if (isset($_POST['update_button']) || isset($_POST['cancel_button'])) 
+			{
+				$content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $page_options->get_options('add');
+			}
+
 			$params = array(
 				'content_title' => $content_title,
 				'content_options' => $content_options,
@@ -155,6 +160,11 @@ if (isset($_GET['action'])) // add, view, edit, delete
 		case 'edit':
 		{
 			$content_options = $page_options->get_options('edit');
+
+			if (isset($_POST['update_button']) || isset($_POST['cancel_button'])) 
+			{
+				$content_options = isset($_SESSION['content_options']) ? $_SESSION['content_options'] : $page_options->get_options('edit');
+			}
 
 			$params = array(
 				'content_title' => $content_title,

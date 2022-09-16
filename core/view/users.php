@@ -94,8 +94,8 @@ class Users_View
 			$form_title = 'Nowe konto';
 		}
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '100%';
-		$form_widths = Array('30%', '70%');
+		$form_width = '600px';
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -182,7 +182,7 @@ class Users_View
 						Array('type' => 'text', 'id' => 'kod', 'name' => 'kod', 'caption' => '', 'value' => $kod, 'style' => 'width: 17%;'),
 						Array('type' => 'text', 'id' => 'miasto', 'name' => 'miasto', 'caption' => '&nbsp;', 'value' => $miasto, 'style' => 'width: 76%;')
 						);
-		$form_input = Array('caption' => 'Kod pocztowy, miasto', 'data' => $form_data);
+		$form_input = Array('caption' => 'Kod, miasto', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 		
 		$form_data = Array(

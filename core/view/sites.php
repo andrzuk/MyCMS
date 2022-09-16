@@ -61,7 +61,7 @@ class Sites_View
 		}
 		$form_image = 'img/32x32/list_edit.png';
 		$form_width = '100%';
-		$form_widths = Array('15%', '85%');
+		$form_widths = Array('10%', '90%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -130,7 +130,7 @@ class Sites_View
 		// tytuł:
 
 		$form_data = Array(
-						Array('type' => 'text', 'id' => 'title', 'name' => 'title', 'caption' => '', 'value' => $title, 'style' => 'width: 96%;')
+						Array('type' => 'text', 'id' => 'title', 'name' => 'title', 'caption' => '', 'value' => $title, 'style' => 'width: 99%;')
 						);
 		$form_input = Array('caption' => 'Tytuł', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -149,7 +149,7 @@ class Sites_View
 		$main_options[] = $main_option;
 		
 		$form_data = Array(
-						Array('type' => 'select', 'id' => 'main_page', 'name' => 'main_page', 'option' => $main_options, 'description' => '', 'style' => 'width: 96%;')
+						Array('type' => 'select', 'id' => 'main_page', 'name' => 'main_page', 'option' => $main_options, 'description' => '', 'style' => 'width: 99%;')
 						);
 		$form_input = Array('caption' => 'Typ strony', 'data' => $form_data);
 		$form_inputs[] = $form_input;
@@ -157,7 +157,7 @@ class Sites_View
 		// treść:
 
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'contents', 'name' => 'contents', 'value' => $contents, 'style' => 'height: 400px; width: 96%;')
+						Array('type' => 'textarea', 'id' => 'contents', 'name' => 'contents', 'value' => $contents, 'style' => 'height: 500px; width: 99%; min-width: 800px; min-height: 400px;')
 						);
 		$form_input = Array('caption' => 'Treść', 'data' => $form_data);
 		$form_inputs[] = $form_input;

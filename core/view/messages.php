@@ -46,8 +46,8 @@ class Messages_View
 		
 		$form_title = 'Edycja wiadomości';
 		$form_image = 'img/32x32/list_edit.png';
-		$form_width = '100%';
-		$form_widths = Array('15%', '85%');
+		$form_width = '600px';
+		$form_widths = Array('20%', '80%');
 		
 		$main_form->init($form_title, $form_image, $form_width, $form_widths);
 		
@@ -85,19 +85,19 @@ class Messages_View
 		}
 
 		$form_data = Array(
-						Array('type' => 'text', 'id' => 'client_name', 'name' => 'client_name', 'caption' => '', 'value' => $client_name, 'style' => 'width: 97%;')
+						Array('type' => 'text', 'id' => 'client_name', 'name' => 'client_name', 'caption' => '', 'value' => $client_name, 'style' => 'width: 98%;')
 						);
 		$form_input = Array('caption' => 'Imię (nick)', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		$form_data = Array(
-						Array('type' => 'text', 'id' => 'client_email', 'name' => 'client_email', 'caption' => '', 'value' => $client_email, 'style' => 'width: 97%;')
+						Array('type' => 'text', 'id' => 'client_email', 'name' => 'client_email', 'caption' => '', 'value' => $client_email, 'style' => 'width: 98%;')
 						);
 		$form_input = Array('caption' => 'Adres e-mail', 'data' => $form_data);
 		$form_inputs[] = $form_input;
 
 		$form_data = Array(
-						Array('type' => 'textarea', 'id' => 'message_content', 'name' => 'message_content', 'value' => $message_content, 'style' => 'height: 300px; width: 97%;')
+						Array('type' => 'textarea', 'id' => 'message_content', 'name' => 'message_content', 'value' => $message_content, 'style' => 'height: 300px; width: 98%; min-width: 400px; min-height: 100px;')
 						);
 		$form_input = Array('caption' => 'Treść wiadomości (pytanie, opinia, komentarz, uwagi itp.)', 'data' => $form_data);
 		$form_inputs[] = $form_input;
