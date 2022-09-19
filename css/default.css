@@ -697,7 +697,7 @@ textarea.FormInput
 .NaviBar
 {
 	text-align: center;
-	padding: 0px;
+	padding: 10px 0px;
 }
 
 .NaviPointersLeft
@@ -705,15 +705,18 @@ textarea.FormInput
 	text-align: left;
 	vertical-align: middle;
 	width: 15%;
+	display: ruby;
+	padding-right: 5px;
 }
 
 .NaviPointers
 {
 	font-size: small;
-	padding: 10px;
+	padding: 10px 20px;
 	vertical-align: middle;
 	text-align: center;
 	width: 70%;
+	display: contents;
 }
 
 .NaviPointersRight
@@ -721,12 +724,14 @@ textarea.FormInput
 	text-align: right;
 	vertical-align: middle;
 	width: 15%;
+	display: ruby;
+	padding-left: 5px;
 }
 
 .NaviPointersCount
 {
 	font-size: small;
-	padding: 0px;
+	padding: 5px;
 	vertical-align: middle;
 	text-align: center;
 }
