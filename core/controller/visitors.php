@@ -130,7 +130,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 		array(
 			'address' => 'index.php?route=rejectors',
 			'caption' => 'Odrzucenia',
-			'icon' => 'img/chart_pie.png'
+			'icon' => 'img/firewall.png'
 		),
 		array(
 			'address' => 'index.php?route=admin',

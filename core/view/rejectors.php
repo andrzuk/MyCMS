@@ -46,7 +46,7 @@ class Rejectors_View
 		$main_list = new ListBuilder();
 		
 		$list_title = 'Odrzucone żądania';
-		$list_image = 'img/32x32/logout.png';
+		$list_image = 'img/32x32/firewall.png';
 
 		$main_list->init($list_title, $list_image);
 

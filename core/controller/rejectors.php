@@ -108,7 +108,7 @@ $content_options = array (
 	array (
 		'address' => 'index.php?route=visitors',
 		'caption' => 'Odwiedziny',
-		'icon' => 'img/reports_stack.png'
+		'icon' => 'img/globe.png'
 	),
 	array (
 		'address' => 'index.php?route=admin',

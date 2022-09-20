@@ -181,13 +181,13 @@ if (in_array($user_status, $access)) // są uprawnienia
 				array(
 					'address' => 'index.php?route=visitors',
 					'label' => 'Odwiedziny'.' ('.$record_object[2].')',
-					'icon' => 'img/48x48/24.png',
+					'icon' => 'img/48x48/69.png',
 					'access' => in_array($user_status, array(ADMIN, OPERATOR)),
 				),
 				array(
 					'address' => 'index.php?route=rejectors',
 					'label' => 'Odrzucenia'.' ('.$record_object[15].')',
-					'icon' => 'img/48x48/69.png',
+					'icon' => 'img/48x48/71.png',
 					'access' => in_array($user_status, array(ADMIN, OPERATOR)),
 				),
 			),
