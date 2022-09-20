@@ -137,6 +137,12 @@ class Navi
 				else // zmieniono pole sortowania
 					$_SESSION['sort_order'] = intval($_GET['order']);
 			}
+
+			if ($_SESSION['page_pointer'] >= $_SESSION['page_counter'] - 1)
+			{
+				$_SESSION['page_pointer'] = 0;
+				$_SESSION['starting_position'] = 0;
+			}
 		}
 		if (isset($_GET['sort']))
 		{

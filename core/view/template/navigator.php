@@ -15,7 +15,7 @@ class List_Navigator
 	
 	function __construct()
 	{
-		$this->page_rows = Array(NULL, 5, 10, 15, 20, 50, 100);
+		$this->page_rows = Array(NULL, 5, 10, 15, 20, 25, 30, 50, 100);
 	}
 	
 	public function init($link, $current, $count, $band)
@@ -39,7 +39,7 @@ class List_Navigator
 		
 		$output .= '<td class="NaviPointersLeft">';
 		$output .= '<form action="'.$this->base_link.'" method="get" class="FormShowRows">';
-		$output .= 'wierszy: ';
+	//	$output .= 'wierszy: ';
 		$output .= '<input type="hidden" name="route" value="'.$this->route.'" />';
 		$output .= '<select name="page_rows" class="FormComboBox" onchange="submit()">';
 		foreach ($this->page_rows as $key => $value) 
@@ -107,7 +107,7 @@ class List_Navigator
 		
 		$output .= '<td class="NaviPointersRight">';
 		$output .= '<form action="'.$this->base_link.'" method="get" class="FormGoToPage">';
-		$output .= 'strona: ';
+	//	$output .= 'strona: ';
 		$output .= '<input type="hidden" name="route" value="'.$this->route.'" />';
 		$output .= '<input type="text" name="page" class="PageInput" /> ';
 		$output .= '<input type="submit" name="navi" value="idź" class="PageGo" />';
