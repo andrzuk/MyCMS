@@ -131,6 +131,7 @@ class Rejectors_View
 	public function ShowStatsReport($data)
 	{
 		$report = '';
+		$addresses = array();
 		$counters = array('range' => array(), 'total' => array());
 		$summary = array('range' => 0, 'total' => 0);
 		
@@ -141,6 +142,20 @@ class Rejectors_View
 		
 		foreach ($data as $i => $j)
 		{
+			if ($i == 'total')
+			{
+				foreach ($j as $k => $v)
+				{
+					foreach ($v as $key => $value)
+					{
+						if ($key == 'visitor_ip') $visitor_ip = $value;
+					}
+					$addresses[] = $visitor_ip;
+				}
+			}
+		}
+		foreach ($data as $i => $j)
+		{
 			if ($i == 'range')
 			{
 				foreach ($j as $k => $v)
@@ -148,10 +163,12 @@ class Rejectors_View
 					foreach ($v as $key => $value)
 					{
 						if ($key == 'visitor_ip') $visitor_ip = $value;
-						if ($key == 'counter') $counters['range'][$k]['count'] = $value;
+						if ($key == 'counter') $counter = $value;
 					}
-					$counters['range'][$k]['ip'] = $visitor_ip;
-					$summary['range'] += $counters['range'][$k]['count'];
+					$index = array_search($visitor_ip, $addresses);
+					$counters['range'][$index]['ip'] = $visitor_ip;
+					$counters['range'][$index]['count'] = $counter;
+					$summary['range'] += $counter;
 				}
 			}
 			if ($i == 'total')
@@ -161,10 +178,12 @@ class Rejectors_View
 					foreach ($v as $key => $value)
 					{
 						if ($key == 'visitor_ip') $visitor_ip = $value;
-						if ($key == 'counter') $counters['total'][$k]['count'] = $value;
+						if ($key == 'counter') $counter = $value;
 					}
-					$counters['total'][$k]['ip'] = $visitor_ip;
-					$summary['total'] += $counters['total'][$k]['count'];
+					$index = array_search($visitor_ip, $addresses);
+					$counters['total'][$index]['ip'] = $visitor_ip;
+					$counters['total'][$index]['count'] = $counter;
+					$summary['total'] += $counter;
 				}
 			}
 		}
@@ -173,15 +192,15 @@ class Rejectors_View
 			$report .= '<tr class="DataRowBright">';
 			$report .= '<td class="DataCell">' . strval($idx + 1) . '.</td>';
 			$report .= '<td class="DataCell">' . $counters['total'][$idx]['ip'] . '</td>';
-			$report .= '<td class="DataCell">' . number_format($counters['range'][$idx]['count'], 0, ',', ' ') . '</td>';
-			$report .= '<td class="DataCell">' . number_format($counters['total'][$idx]['count'], 0, ',', ' ') . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['range'][$idx]['count'], 0, ',', '.') . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['total'][$idx]['count'], 0, ',', '.') . '</td>';
 			$report .= '</tr>';
 		}
 		$report .= '<tr class="DataRow">';
 		$report .= '<td class="DataCell"></td>';
 		$report .= '<td class="DataCell"><b>Razem:</b></td>';
-		$report .= '<td class="DataCell"><b>' . number_format($summary['range'], 0, ',', ' ') . '</b></td>';
-		$report .= '<td class="DataCell"><b>' . number_format($summary['total'], 0, ',', ' ') . '</b></td>';
+		$report .= '<td class="DataCell"><b>' . number_format($summary['range'], 0, ',', '.') . '</b></td>';
+		$report .= '<td class="DataCell"><b>' . number_format($summary['total'], 0, ',', '.') . '</b></td>';
 		$report .= '</tr>';
 
 		$report .= '</table>';
