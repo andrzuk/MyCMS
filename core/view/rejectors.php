@@ -132,12 +132,12 @@ class Rejectors_View
 	{
 		$report = '';
 		$addresses = array();
-		$counters = array('range' => array(), 'total' => array());
-		$summary = array('range' => 0, 'total' => 0);
+		$counters = array('today' => array(), 'range' => array(), 'total' => array());
+		$summary = array('today' => 0, 'range' => 0, 'total' => 0);
 		
 		$report .= '<table class="Table" width="100%" cellpadding="5" cellspacing="1">';
 		$report .= '<tr style="font-size: larger;">';
-		$report .= '<th>Lp.</th><th>Adres IP</th><th>Liczba ostatnich</th><th>Liczba wszystkich</th>';
+		$report .= '<th>Lp.</th><th>Adres IP</th><th>Dzisiejsze</th><th>Ostatnie</th><th>Wszystkie</th>';
 		$report .= '</tr>';
 		
 		foreach ($data as $i => $j)
@@ -156,6 +156,21 @@ class Rejectors_View
 		}
 		foreach ($data as $i => $j)
 		{
+			if ($i == 'today')
+			{
+				foreach ($j as $k => $v)
+				{
+					foreach ($v as $key => $value)
+					{
+						if ($key == 'visitor_ip') $visitor_ip = $value;
+						if ($key == 'counter') $counter = $value;
+					}
+					$index = array_search($visitor_ip, $addresses);
+					$counters['today'][$index]['ip'] = $visitor_ip;
+					$counters['today'][$index]['count'] = $counter;
+					$summary['today'] += $counter;
+				}
+			}
 			if ($i == 'range')
 			{
 				foreach ($j as $k => $v)
@@ -192,6 +207,7 @@ class Rejectors_View
 			$report .= '<tr class="DataRowBright">';
 			$report .= '<td class="DataCell">' . strval($idx + 1) . '.</td>';
 			$report .= '<td class="DataCell">' . $counters['total'][$idx]['ip'] . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['today'][$idx]['count'], 0, ',', '.') . '</td>';
 			$report .= '<td class="DataCell">' . number_format($counters['range'][$idx]['count'], 0, ',', '.') . '</td>';
 			$report .= '<td class="DataCell">' . number_format($counters['total'][$idx]['count'], 0, ',', '.') . '</td>';
 			$report .= '</tr>';
@@ -199,6 +215,7 @@ class Rejectors_View
 		$report .= '<tr class="DataRow">';
 		$report .= '<td class="DataCell"></td>';
 		$report .= '<td class="DataCell"><b>Razem:</b></td>';
+		$report .= '<td class="DataCell"><b>' . number_format($summary['today'], 0, ',', '.') . '</b></td>';
 		$report .= '<td class="DataCell"><b>' . number_format($summary['range'], 0, ',', '.') . '</b></td>';
 		$report .= '<td class="DataCell"><b>' . number_format($summary['total'], 0, ',', '.') . '</b></td>';
 		$report .= '</tr>';

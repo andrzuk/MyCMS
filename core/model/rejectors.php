@@ -114,8 +114,22 @@ class Rejectors_Model
 
 	public function GetStatsData($range_days)
 	{
-		$this->rows_list = array('range' => array(), 'total' => array());
+		$this->rows_list = array('today' => array(), 'range' => array(), 'total' => array());
 
+		$str_days = '-0 days';
+		$date_range = date("Y-m-d", strtotime($str_days));
+		$query = "SELECT visitor_ip, COUNT(*) AS counter FROM " . $this->table_name . 
+				 " WHERE visited BETWEEN '" . $date_range . " 00:00:00' AND '" . $date_range . " 23:59:59'" .
+				 " GROUP BY visitor_ip ORDER BY counter DESC";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			while ($row = mysqli_fetch_assoc($result))
+			{
+				$this->rows_list['today'][] = $row;
+			}
+			mysqli_free_result($result);
+		}
 		$str_days = '-' . strval($range_days - 1) . ' days';
 		$date_range = date("Y-m-d", strtotime($str_days));
 		$query = "SELECT visitor_ip, COUNT(*) AS counter FROM " . $this->table_name . 
