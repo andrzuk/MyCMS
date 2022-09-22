@@ -25,10 +25,10 @@ include APP_DIR . 'view' . '/' . MODULE_NAME . '.php';
 $view_object = new Rejectors_View($db);
 
 $list_columns = array(
-	array('db_name' => 'id', 				'column_name' => 'Id', 					'sorting' => 1),
-	array('db_name' => 'visitor_ip', 		'column_name' => 'Host - Adres',		'sorting' => 1),
-	array('db_name' => 'request_uri', 		'column_name' => 'Adres wywołany', 		'sorting' => 1),
-	array('db_name' => 'visited', 			'column_name' => 'Godzina', 			'sorting' => 1),
+	array('db_name' => 'id',          'column_name' => 'Id',             'sorting' => 1),
+	array('db_name' => 'visitor_ip',  'column_name' => 'Host - Adres',   'sorting' => 1),
+	array('db_name' => 'request_uri', 'column_name' => 'Adres wywołany', 'sorting' => 1),
+	array('db_name' => 'visited',     'column_name' => 'Godzina',        'sorting' => 1),
 );
 
 if (isset($_POST['ListSearchButton']))

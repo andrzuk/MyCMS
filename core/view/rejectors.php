@@ -140,76 +140,32 @@ class Rejectors_View
 		$report .= '<th>Lp.</th><th>Adres IP</th><th>Dzisiejsze</th><th>Ostatnie</th><th>Wszystkie</th>';
 		$report .= '</tr>';
 		
-		foreach ($data as $i => $j)
+		foreach ($data['total'] as $item)
 		{
-			if ($i == 'total')
+			$addresses[] = $item['visitor_ip'];
+		}
+		foreach ($data as $range_name => $range_stats)
+		{
+			foreach ($range_stats as $stats_item)
 			{
-				foreach ($j as $k => $v)
+				foreach ($stats_item as $key => $value)
 				{
-					foreach ($v as $key => $value)
-					{
-						if ($key == 'visitor_ip') $visitor_ip = $value;
-					}
-					$addresses[] = $visitor_ip;
+					if ($key == 'visitor_ip') $visitor_ip = $value;
+					if ($key == 'counter') $counter = $value;
 				}
+				$index = array_search($visitor_ip, $addresses);
+				$counters[$range_name][$index] = $counter;
+				$summary[$range_name] += $counter;
 			}
 		}
-		foreach ($data as $i => $j)
-		{
-			if ($i == 'today')
-			{
-				foreach ($j as $k => $v)
-				{
-					foreach ($v as $key => $value)
-					{
-						if ($key == 'visitor_ip') $visitor_ip = $value;
-						if ($key == 'counter') $counter = $value;
-					}
-					$index = array_search($visitor_ip, $addresses);
-					$counters['today'][$index]['ip'] = $visitor_ip;
-					$counters['today'][$index]['count'] = $counter;
-					$summary['today'] += $counter;
-				}
-			}
-			if ($i == 'range')
-			{
-				foreach ($j as $k => $v)
-				{
-					foreach ($v as $key => $value)
-					{
-						if ($key == 'visitor_ip') $visitor_ip = $value;
-						if ($key == 'counter') $counter = $value;
-					}
-					$index = array_search($visitor_ip, $addresses);
-					$counters['range'][$index]['ip'] = $visitor_ip;
-					$counters['range'][$index]['count'] = $counter;
-					$summary['range'] += $counter;
-				}
-			}
-			if ($i == 'total')
-			{
-				foreach ($j as $k => $v)
-				{
-					foreach ($v as $key => $value)
-					{
-						if ($key == 'visitor_ip') $visitor_ip = $value;
-						if ($key == 'counter') $counter = $value;
-					}
-					$index = array_search($visitor_ip, $addresses);
-					$counters['total'][$index]['ip'] = $visitor_ip;
-					$counters['total'][$index]['count'] = $counter;
-					$summary['total'] += $counter;
-				}
-			}
-		}
-		for ($idx = 0; $idx < count($counters['total']); $idx++)
+		for ($idx = 0; $idx < count($addresses); $idx++)
 		{
 			$report .= '<tr class="DataRowBright">';
 			$report .= '<td class="DataCell">' . strval($idx + 1) . '.</td>';
-			$report .= '<td class="DataCell">' . $counters['total'][$idx]['ip'] . '</td>';
-			$report .= '<td class="DataCell">' . number_format($counters['today'][$idx]['count'], 0, ',', '.') . '</td>';
-			$report .= '<td class="DataCell">' . number_format($counters['range'][$idx]['count'], 0, ',', '.') . '</td>';
-			$report .= '<td class="DataCell">' . number_format($counters['total'][$idx]['count'], 0, ',', '.') . '</td>';
+			$report .= '<td class="DataCell">' . $addresses[$idx] . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['today'][$idx], 0, ',', '.') . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['range'][$idx], 0, ',', '.') . '</td>';
+			$report .= '<td class="DataCell">' . number_format($counters['total'][$idx], 0, ',', '.') . '</td>';
 			$report .= '</tr>';
 		}
 		$report .= '<tr class="DataRow">';
