@@ -22,7 +22,10 @@ class Index_Model
 		$visitor_ip = $_SERVER['REMOTE_ADDR'];
 		$this->row_item = array();
 
-		if ($this->DetectRobots($visitor_ip, 20)) return $this->row_item;
+		// odczytuje z konfiguracji limit wejść blokujący żądania:
+		$black_list_index_limit = intval($this->setting->get_config_key('black_list_index_limit'));
+
+		if ($this->DetectRobots($visitor_ip, $black_list_index_limit)) return $this->row_item;
 
 		$this->UpdatePreviews();
 

@@ -30,7 +30,10 @@ class Contact_Model
 		$visitor_ip = $_SERVER['REMOTE_ADDR'];
 		$this->row_item = array();
 
-		if ($this->DetectRobots($visitor_ip, 10)) return $this->row_item;
+		// odczytuje z konfiguracji limit wejść blokujący żądania:
+		$black_list_contact_limit = intval($this->setting->get_config_key('black_list_contact_limit'));
+
+		if ($this->DetectRobots($visitor_ip, $black_list_contact_limit)) return $this->row_item;
 
 		$this->UpdatePreviews();
 
