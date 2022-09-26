@@ -6,16 +6,25 @@
 class Index_Model
 {
 	private $db;
+	
 	private $id;
 	private $row_item;
 	private $rows_list;
 	private $table_name;
+
+	private $mySqlDateTime;
+
+	private $setting;
 	
 	public function __construct($db)
 	{
 		$this->db = $db;
 		$this->table_name = 'pages'; // nazwa głównej tabeli modelu w bazie
+
 		$this->setting = new Settings($db);		
+		
+		$timestampInSeconds = $_SERVER['REQUEST_TIME'];
+		$this->mySqlDateTime = date("Y-m-d H:i:s", $timestampInSeconds);
 	}
 	
 	public function GetPageContent()
