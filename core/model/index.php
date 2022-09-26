@@ -15,6 +15,7 @@ class Index_Model
 	{
 		$this->db = $db;
 		$this->table_name = 'pages'; // nazwa głównej tabeli modelu w bazie
+		$this->setting = new Settings($db);		
 	}
 	
 	public function GetPageContent()
