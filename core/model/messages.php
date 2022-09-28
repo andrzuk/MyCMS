@@ -129,8 +129,8 @@ class Messages_Model
 		if (strpos($this->row_item['key_value'], $record_item['client_ip']) === FALSE)
 		{
 			$query = "UPDATE configuration" .
-					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_ip'] ."\'')" .
-					 " WHERE key_name = 'black_list_visitors'";
+					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_ip'] ."\''), modified='". $this->mySqlDateTime . 
+					 "' WHERE key_name = 'black_list_visitors'";
 			mysqli_query($this->db, $query);			
 		}
 
@@ -145,15 +145,15 @@ class Messages_Model
 		if (strpos($this->row_item['key_value'], $record_item['client_name']) === FALSE)
 		{
 			$query = "UPDATE configuration" .
-					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_name'] ."\'')".
-					 " WHERE key_name = 'black_list_messages_authors'";
+					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_name'] ."\''), modified='". $this->mySqlDateTime .
+					 "' WHERE key_name = 'black_list_messages_authors'";
 			mysqli_query($this->db, $query);
 		}
 		if (strpos($this->row_item['key_value'], $record_item['client_email']) === FALSE)
 		{
 			$query = "UPDATE configuration" .
-					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_email'] ."\'')".
-					 " WHERE key_name = 'black_list_messages_authors'";
+					 " SET key_value = CONCAT(key_value, ', \'". $record_item['client_email'] ."\''), modified='". $this->mySqlDateTime .
+					 "' WHERE key_name = 'black_list_messages_authors'";
 			mysqli_query($this->db, $query);
 		}
 
