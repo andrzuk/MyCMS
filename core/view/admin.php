@@ -16,6 +16,24 @@ class Admin_View
 		$this->title = $title;
 	}
 	
+	public function ShowComponents($left_panel, $right_panel)
+	{
+		$contents = '';
+		
+		$contents .= '<table>';
+		$contents .= '<tr>';
+		$contents .= '<td width="60%" style="vertical-align: top;">';
+		$contents .= $left_panel;
+		$contents .= '</td>';
+		$contents .= '<td width="40%" style="vertical-align: top;">';
+		$contents .= $right_panel;
+		$contents .= '</td>';
+		$contents .= '<tr>';
+		$contents .= '</table>';
+		
+		return $contents;
+	}
+	 
 	public function ShowPanel($rows)
 	{
 		$site_content = NULL;
@@ -44,7 +62,7 @@ class Admin_View
 				if ($row_k == 'items') $items = $row_v;
 			}
 			
-			$site_content .= '<div style="text-align: left; font-size: 11px; padding-top: 20px; color: #999; border-bottom: 1px dotted #ccc;">';
+			$site_content .= '<div style="text-align: left; padding-top: 10px; margin: 20px; font-size: 11px; color: #999; border-bottom: 1px dotted #ccc;">';
 			$site_content .= $group;
 			$site_content .= '</div>';
 			
@@ -59,7 +77,7 @@ class Admin_View
 					if ($key == 'access') $access = $value;
 				}
 
-				$site_content .= '<span class="PanelItem" style="width: 120px; padding: 15px 20px;">';
+				$site_content .= '<span class="PanelItem" style="width: 100px; padding: 5px;">';
 
 				if ($access) // funkcja dostępna
 				{
@@ -84,6 +102,43 @@ class Admin_View
 		$site_content .= '</table>';
 
 		return $site_content;
+	}
+	
+	public function ShowSummaryChart($row)
+	{
+		// Chart Generator:
+		
+		require_once LIB_DIR . 'gener' . '/' . 'chart.php';
+		
+		$main_chart = new ChartBuilder();
+		
+		$chart_title = 'Statystyka odwiedzin';
+		
+		$chart_image = 'img/32x32/chart_line.png';
+
+		$main_chart->init($chart_title, $chart_image);
+
+		$main_chart->set_module(MODULE_NAME);
+		
+		$main_chart->set_data($row);
+		
+		$main_chart->set_params(NULL);
+		
+		$main_chart->set_import(NULL);
+			
+		// dostępne ustawianie daty:
+		$main_chart->set_dates(TRUE);
+
+		// render:
+		
+		$chart_width = 400;
+		$chart_height = 200;
+
+		$site_content = $main_chart->build_summary_chart($chart_width, $chart_height);
+
+		// Chart Generator.
+		
+		return $site_content;		
 	}
 }
 

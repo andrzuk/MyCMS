@@ -59,6 +59,7 @@ $_SESSION['date_to'] = $date_to;
 if (isset($_POST['days_range']))
 {
 	$days_range = $_POST['days_range'];
+	unset($_SESSION['rejectors_stats_data']);
 }
 $_SESSION['days_range'] = $days_range;
 
@@ -130,7 +131,19 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 	$navi_object->update($model_object, $list_params);
 	$component_left = $view_object->ShowList($record_list, $list_columns, $list_params);
 
-	$record_object = $model_object->GetSummaryData($days_range);
+	if (!isset($_SESSION['rejectors_stats_data']))
+	{
+		// pobiera dane do statystyk:
+		$record_object = $model_object->GetSummaryData($days_range);
+		// przechowuje ostatni zestaw danych:
+		$_SESSION['rejectors_stats_data'] = $record_object;
+	}
+	else
+	{
+		// korzysta z ostatniego zestawu danych:
+		$record_object = $_SESSION['rejectors_stats_data'];
+	}
+
 	$component_right = $view_object->ShowSummaryChart($record_object);
 
 	$record_object = $model_object->GetStatsData($days_range);

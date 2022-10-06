@@ -60,14 +60,14 @@ class ChartBuilder
 	 * Wykresy podsumowania:
 	 */
 	 
-	public function build_summary_chart()
+	public function build_summary_chart($width, $height)
 	{
 		$main_text = NULL;
 		
 		$cols_count = 1;
 
-		$this->chart_width = 600;
-		$this->chart_height = 250;
+		$this->chart_width = $width;
+		$this->chart_height = $height;
 		
 		$main_text .= '<table class="Table" width="100%" cellpadding="5" cellspacing="0">';
 		

@@ -8,10 +8,13 @@ class Admin_Model
 	private $db;
 	private $table_params;
 	private $table_counter;
+	private $rows_list;
+	private $table_name;
 	
 	public function __construct($db)
 	{
 		$this->db = $db;
+		$this->table_name = 'visitors';
 
 		$this->table_counter = array();
 		
@@ -121,6 +124,42 @@ class Admin_Model
 		}
 		
 		return $this->table_counter;
+	}
+
+	public function GetSummaryData($range_days)
+	{
+		$this->rows_list = array('index' => array(), 'contact' => array());
+
+		for ($day = $range_days; $day > 0; $day--)
+		{
+			$str_days = '-' . strval($day - 1) . ' days';
+			$date_range = date("Y-m-d", strtotime($str_days));
+			$query = "SELECT COUNT(*) AS counter, '" . $date_range . "' AS visited FROM " . $this->table_name . 
+			         " WHERE request_uri IN ('/', '/index.php') AND visited BETWEEN '" . $date_range . " 00:00:00' AND '" . $date_range . " 23:59:59'";
+			$result = mysqli_query($this->db, $query);
+			if ($result)
+			{
+				$row = mysqli_fetch_assoc($result);
+				$this->rows_list['index'][] = $row;
+				mysqli_free_result($result);
+			}
+		}
+		for ($day = $range_days; $day > 0; $day--)
+		{
+			$str_days = '-' . strval($day - 1) . ' days';
+			$date_range = date("Y-m-d", strtotime($str_days));
+			$query = "SELECT COUNT(*) AS counter, '" . $date_range . "' AS visited FROM " . $this->table_name . 
+			         " WHERE request_uri LIKE '%route=contact' AND visited BETWEEN '" . $date_range . " 00:00:00' AND '" . $date_range . " 23:59:59'";
+			$result = mysqli_query($this->db, $query);
+			if ($result)
+			{
+				$row = mysqli_fetch_assoc($result);
+				$this->rows_list['contact'][] = $row;
+				mysqli_free_result($result);
+			}
+		}
+		
+		return $this->rows_list;
 	}
 }
 

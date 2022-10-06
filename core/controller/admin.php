@@ -31,6 +31,15 @@ $_SESSION['sort_field'] = NULL;
 $_SESSION['sort_order'] = NULL;
 $_SESSION['list_filter'] = NULL;
 
+$days_range = isset($_SESSION['days_range']) ? $_SESSION['days_range'] : 10;
+
+if (isset($_POST['days_range']))
+{
+	$days_range = $_POST['days_range'];
+	unset($_SESSION['visitors_stats_data']);
+}
+$_SESSION['days_range'] = $days_range;
+
 /*
  * Przechodzi do skompletowania danych
  */
@@ -202,7 +211,25 @@ if (in_array($user_status, $access)) // są uprawnienia
 	$view_object->init($panel_width, $panel_image, $panel_title);
 
 	// wyświetla panel z ikonami funkcji:
-	$site_content = $view_object->ShowPanel($panel_items);
+	$component_left = $view_object->ShowPanel($panel_items);
+
+	if (!isset($_SESSION['visitors_stats_data']))
+	{
+		// pobiera dane do statystyk:
+		$record_object = $model_object->GetSummaryData($days_range);
+		// przechowuje ostatni zestaw danych:
+		$_SESSION['visitors_stats_data'] = $record_object;
+	}
+	else
+	{
+		// korzysta z ostatniego zestawu danych:
+		$record_object = $_SESSION['visitors_stats_data'];
+	}
+	// wyświetla statystyki na wykresach:
+	$component_right = $view_object->ShowSummaryChart($record_object);
+
+	// wyświetla całą stronę:
+	$site_content = $view_object->ShowComponents($component_left, $component_right);
 }
 else // brak uprawnień
 {

@@ -116,8 +116,11 @@ class Rejectors_View
 		$main_chart->set_dates(TRUE);
 
 		// render:
-		
-		$site_content = $main_chart->build_summary_chart();
+
+		$chart_width = 650;
+		$chart_height = 250;
+
+		$site_content = $main_chart->build_summary_chart($chart_width, $chart_height);
 		
 		// Chart Generator.
 		

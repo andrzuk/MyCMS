@@ -251,6 +251,17 @@ div.PageMainContent
 	font-size: small;
 }
 
+div.PageMainContent p, div.PageMainContent div, div.PageMainContent h1, div.PageMainContent h2, div.PageMainContent h3
+{
+	font-size: 17px !important;
+	line-height: 25px;
+}
+
+div.PageMainContent li
+{
+	margin: 7px 0;
+}
+
 div.PageFooter
 {
 	font-family: Verdana, Geneva, sans-serif;
@@ -923,7 +934,6 @@ li.IpItem
 .PanelItem
 {
 	padding: 20px;
-	width: 140px !important;
 	text-align: center;
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 11px;
