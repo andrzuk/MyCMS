@@ -48,7 +48,7 @@ class Users_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			if (count($row))
+			if ($row)
 			{
 				switch ($row['status'])
 				{
@@ -270,7 +270,7 @@ class Users_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			if (count($row))
+			if ($row)
 			{
 				$status = $row['status'];
 			}

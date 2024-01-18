@@ -749,9 +749,10 @@ textarea.FormInput
 
 .PagePointer
 {
-	border: 1px solid #999; /* #ccc; */
+	border: 1px solid #999; 
 	color: #369;
 	background-color: #fff;
+	margin: 2px;
 	padding: 5px 10px;
 	text-align: center;
 	line-height: 30px;
@@ -759,9 +760,10 @@ textarea.FormInput
 
 .PagePointerCurrent
 {
-	border: 1px solid #999; /* #036; */
+	border: 1px solid #999; 
 	color: #666;
 	background-color: #ddd;
+	margin: 2px;
 	padding: 5px 10px;
 	text-align: center;
 	line-height: 30px;
@@ -769,9 +771,10 @@ textarea.FormInput
 
 .PagePointerDisabled
 {
-	border: 1px solid #999; /* #ccc; */
+	border: 1px solid #999; 
 	color: #ccc;
 	background-color: #fff;
+	margin: 2px;
 	padding: 5px 10px;
 	text-align: center;
 	line-height: 30px;

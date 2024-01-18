@@ -47,7 +47,7 @@ class Logins_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			if (count($row))
+			if ($row)
 			{
 				$row['password'] = PASS_MASK;
 			}

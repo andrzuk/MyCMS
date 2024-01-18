@@ -67,9 +67,9 @@ class Contact_Model
 	
 	private function UpdatePreviews()
 	{
-		$query = "UPDATE " . $this->table_name . 
-					" SET previews = previews + 1" .
-					" WHERE visible=1 AND main_page=2";
+		$query = "UPDATE pages" .
+				" SET previews = previews + 1" .
+				" WHERE visible=1 AND main_page=2";
 		mysqli_query($this->db, $query);
 		
 		return mysqli_affected_rows($this->db);

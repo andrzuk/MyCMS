@@ -55,7 +55,7 @@ class Roles_Model
 			$sub_query =	"SELECT admin_functions.function" .
 							" FROM " . $this->table_name .
 							" INNER JOIN admin_functions ON admin_functions.id = " . $this->table_name . ".function_id" .
-							" WHERE " . $this->table_name . ".user_id = " . $row['user_id'] .
+							" WHERE " . $this->table_name . ".user_id = " . intval($user_id) .
 							" AND " . $this->table_name . ".access = 1" . 
 							" ORDER BY " . $this->table_name . ".function_id";
 

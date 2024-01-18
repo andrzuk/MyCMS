@@ -37,7 +37,19 @@ if (is_array($admin_names))
 	if (isset($admin_names[1])) $last_name = $admin_names[1];
 }
 
-$sql = array(
+$check = array(
+	array(
+		'check_exist' => array(
+			'SHOW TABLES LIKE \'documents\';',
+			'SHOW TABLES LIKE \'images\';',
+			'SHOW TABLES LIKE \'pages\';',
+			'SHOW TABLES LIKE \'user_roles\';',
+			'SHOW TABLES LIKE \'archives\';',
+		),
+	),
+);
+
+$drop = array(
 	array(
 		'drop_constraints' => array(
 			'ALTER TABLE `documents` DROP FOREIGN KEY `fk_documents_users`;',
@@ -45,10 +57,13 @@ $sql = array(
 			'ALTER TABLE `pages` DROP FOREIGN KEY `fk_pages_users`;',
 			'ALTER TABLE `user_roles` DROP FOREIGN KEY `fk_roles_users`;',
 			'ALTER TABLE `user_roles` DROP FOREIGN KEY `fk_roles_functions`;',
-			'ALTER TABLE `archives` DROP FOREIGN KEY `archives_users`;',
-			'ALTER TABLE `archives` DROP FOREIGN KEY `archives_pages`;',
+			'ALTER TABLE `archives` DROP FOREIGN KEY `fk_archives_users`;',
+			'ALTER TABLE `archives` DROP FOREIGN KEY `fk_archives_pages`;',
 		),
 	),
+);
+
+$sql = array(
 	array(
 		'drop_tables' => array(
 			'DROP TABLE IF EXISTS `admin_functions`;',
@@ -76,146 +91,127 @@ $sql = array(
 	array(
 		'create_tables' => array(
 			"
-				CREATE TABLE IF NOT EXISTS `admin_functions` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `function` varchar(128) COLLATE utf8_polish_ci NOT NULL,
-				  `meaning` varchar(512) COLLATE utf8_polish_ci NOT NULL,
-				  `module` varchar(32) COLLATE utf8_polish_ci NOT NULL,
-				  PRIMARY KEY (`id`),
-				  UNIQUE KEY `module` (`module`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;			
+				CREATE TABLE `admin_functions` (
+				  `id` int(11) UNSIGNED NOT NULL,
+				  `function` varchar(128) NOT NULL,
+				  `meaning` varchar(512) NOT NULL,
+				  `module` varchar(32) NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `archives` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `page_id` int(11) unsigned NOT NULL,
+				CREATE TABLE `archives` (
+				  `id` int(11) UNSIGNED NOT NULL,
+				  `page_id` int(11) UNSIGNED NOT NULL,
 				  `main_page` tinyint(1) NOT NULL,
 				  `system_page` tinyint(1) NOT NULL,
-				  `category_id` int(11) unsigned NOT NULL,
-				  `title` varchar(512) CHARACTER SET utf8 NOT NULL,
-				  `contents` longtext CHARACTER SET utf8,
-				  `author_id` int(11) unsigned NOT NULL,
+				  `category_id` int(11) UNSIGNED NOT NULL,
+				  `title` varchar(512) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+				  `contents` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+				  `author_id` int(11) UNSIGNED NOT NULL,
 				  `visible` tinyint(1) NOT NULL,
 				  `modified` datetime NOT NULL,
-				  `previews` int(11) unsigned NOT NULL,
-				  PRIMARY KEY (`id`),
-				  KEY `page_id` (`page_id`),
-				  KEY `fk_pages_users` (`author_id`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;			
+				  `previews` int(11) UNSIGNED NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `categories` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `categories` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `type` tinyint(1) NOT NULL,
 				  `level` tinyint(1) NOT NULL,
-				  `parent_id` int(11) unsigned NOT NULL,
+				  `parent_id` int(11) UNSIGNED NOT NULL,
 				  `permission` int(11) NOT NULL,
 				  `item_order` int(11) NOT NULL,
-				  `caption` varchar(128) CHARACTER SET utf8 NOT NULL,
-				  `link` varchar(1024) CHARACTER SET utf8 NOT NULL,
-				  `icon_id` int(11) unsigned NOT NULL,
-				  `page_id` int(11) unsigned NOT NULL,
+				  `caption` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+				  `link` varchar(1024) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+				  `icon_id` int(11) UNSIGNED NOT NULL,
+				  `page_id` int(11) UNSIGNED NOT NULL,
 				  `visible` tinyint(1) NOT NULL,
 				  `target` tinyint(1) NOT NULL,
-				  `modified` datetime NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+				  `modified` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `configuration` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `configuration` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `key_name` varchar(30) NOT NULL,
 				  `key_value` mediumtext NOT NULL,
 				  `meaning` varchar(128) DEFAULT NULL,
 				  `field_type` int(11) NOT NULL,
 				  `active` tinyint(1) NOT NULL,
-				  `modified` datetime NOT NULL,
-				  PRIMARY KEY (`id`),
-				  UNIQUE KEY `key` (`key_name`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `modified` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `documents` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `section_id` int(11) unsigned NOT NULL,
-				  `owner_id` int(11) unsigned NOT NULL,
+				CREATE TABLE `documents` (
+				  `id` int(11) UNSIGNED NOT NULL,
+				  `section_id` int(11) UNSIGNED NOT NULL,
+				  `owner_id` int(11) UNSIGNED NOT NULL,
 				  `file_format` varchar(32) NOT NULL,
 				  `file_name` varchar(512) NOT NULL,
 				  `file_size` int(11) NOT NULL,
-				  `doc_description` mediumtext,
-				  `active` tinyint(1) NOT NULL DEFAULT '1',
-				  `modified` datetime NOT NULL,
-				  PRIMARY KEY (`id`),
-				  KEY `fk_documents_users` (`owner_id`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `doc_description` mediumtext DEFAULT NULL,
+				  `active` tinyint(1) NOT NULL DEFAULT 1,
+				  `modified` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `hosts` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `hosts` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `server_ip` varchar(20) NOT NULL,
-				  `server_name` varchar(256) NOT NULL,
-				  PRIMARY KEY (`id`),
-				  UNIQUE KEY `server_ip` (`server_ip`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `server_name` varchar(256) NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `images` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `section_id` int(11) unsigned NOT NULL,
-				  `owner_id` int(11) unsigned NOT NULL,
+				CREATE TABLE `images` (
+				  `id` int(11) UNSIGNED NOT NULL,
+				  `section_id` int(11) UNSIGNED NOT NULL,
+				  `owner_id` int(11) UNSIGNED NOT NULL,
 				  `file_format` varchar(32) NOT NULL,
 				  `file_name` varchar(512) NOT NULL,
 				  `file_size` int(11) NOT NULL,
 				  `picture_width` int(11) NOT NULL,
 				  `picture_height` int(11) NOT NULL,
-				  `picture_description` mediumtext,
-				  `active` tinyint(1) NOT NULL DEFAULT '1',
-				  `modified` datetime NOT NULL,
-				  PRIMARY KEY (`id`),
-				  KEY `fk_images_users` (`owner_id`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `picture_description` mediumtext DEFAULT NULL,
+				  `active` tinyint(1) NOT NULL DEFAULT 1,
+				  `modified` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `logins` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `logins` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `agent` varchar(250) NOT NULL,
 				  `user_ip` varchar(20) NOT NULL,
-				  `user_id` int(11) unsigned NOT NULL,
-				  `login` varchar(128) NOT NULL,
+				  `user_id` int(11) UNSIGNED NOT NULL,
+				  `login` varchar(255) NOT NULL,
 				  `password` varchar(128) NOT NULL,
-				  `login_time` datetime NOT NULL,
-				  UNIQUE KEY `id` (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `login_time` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `pages` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `pages` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `main_page` tinyint(1) NOT NULL,
 				  `system_page` tinyint(1) NOT NULL,
-				  `category_id` int(11) unsigned NOT NULL,
-				  `title` varchar(512) CHARACTER SET utf8 NOT NULL,
-				  `contents` longtext CHARACTER SET utf8,
-				  `author_id` int(11) unsigned NOT NULL,
+				  `category_id` int(11) UNSIGNED NOT NULL,
+				  `title` varchar(512) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+				  `contents` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+				  `author_id` int(11) UNSIGNED NOT NULL,
 				  `visible` tinyint(1) NOT NULL,
 				  `modified` datetime NOT NULL,
-				  `previews` int(11) unsigned NOT NULL,
-				  PRIMARY KEY (`id`),
-				  KEY `category_id` (`category_id`),
-				  KEY `fk_pages_users` (`author_id`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+				  `previews` int(11) UNSIGNED NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `query_set` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `field` varchar(32) CHARACTER SET utf8 NOT NULL,
-				  `operator` varchar(32) CHARACTER SET utf8 NOT NULL,
-				  `value` text CHARACTER SET utf8 NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+				CREATE TABLE `query_set` (
+				  `id` int(10) UNSIGNED NOT NULL,
+				  `field` varchar(32) NOT NULL,
+				  `operator` varchar(32) NOT NULL,
+				  `value` text NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `registers` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `registers` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `agent` varchar(250) NOT NULL,
 				  `user_ip` varchar(20) NOT NULL,
 				  `imie` varchar(128) NOT NULL,
@@ -224,51 +220,46 @@ $sql = array(
 				  `email` varchar(128) NOT NULL,
 				  `password` varchar(128) NOT NULL,
 				  `result` tinyint(1) NOT NULL,
-				  `register_time` datetime NOT NULL,
-				  UNIQUE KEY `id` (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `register_time` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `rejectors` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `visitor_ip` varchar(20) COLLATE utf8_general_ci NOT NULL,
-				  `request_uri` text COLLATE utf8_general_ci NOT NULL,
-				  `visited` datetime NOT NULL,
-				  UNIQUE KEY `id` (`id`),
-				  KEY `visitor_ip` (`visitor_ip`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+				CREATE TABLE `rejectors` (
+				  `id` int(11) UNSIGNED NOT NULL,
+				  `visitor_ip` varchar(20) NOT NULL,
+				  `request_uri` text NOT NULL,
+				  `visited` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `reminds` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `reminds` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `agent` varchar(250) NOT NULL,
 				  `user_ip` varchar(20) NOT NULL,
 				  `login` varchar(128) NOT NULL,
 				  `email` varchar(128) NOT NULL,
 				  `result` tinyint(1) NOT NULL,
-				  `remind_time` datetime NOT NULL,
-				  UNIQUE KEY `id` (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `remind_time` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `searches` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `searches` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `agent` varchar(250) NOT NULL,
 				  `user_ip` varchar(20) NOT NULL,
-				  `search_text` varchar(128) NOT NULL,
-				  `search_time` datetime NOT NULL,
-				  UNIQUE KEY `id` (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `search_text` varchar(255) NOT NULL,
+				  `search_time` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `users` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `users` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `user_login` varchar(32) NOT NULL,
 				  `user_password` varchar(48) NOT NULL,
 				  `imie` varchar(128) NOT NULL,
 				  `nazwisko` varchar(128) NOT NULL,
 				  `email` varchar(128) NOT NULL,
-				  `status` int(11) NOT NULL DEFAULT '3',
+				  `status` int(11) NOT NULL DEFAULT 3,
 				  `ulica` varchar(64) DEFAULT NULL,
 				  `kod` varchar(6) DEFAULT NULL,
 				  `miasto` varchar(64) DEFAULT NULL,
@@ -278,68 +269,54 @@ $sql = array(
 				  `data_logowania` datetime NOT NULL,
 				  `data_modyfikacji` datetime NOT NULL,
 				  `data_wylogowania` datetime NOT NULL,
-				  `active` tinyint(1) NOT NULL,
-				  PRIMARY KEY (`id`),
-				  KEY `user_login` (`user_login`),
-				  KEY `pesel` (`pesel`),
-				  KEY `email` (`email`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `active` tinyint(1) NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `user_messages` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `user_messages` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `client_ip` varchar(20) NOT NULL,
 				  `client_name` varchar(128) NOT NULL,
 				  `client_email` varchar(256) NOT NULL,
 				  `message_content` longtext NOT NULL,
 				  `requested` tinyint(1) NOT NULL,
 				  `send_date` datetime NOT NULL,
-				  `close_date` datetime NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `close_date` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `user_online` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `user_online` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `session` char(100) NOT NULL DEFAULT '',
-				  `time` int(11) NOT NULL DEFAULT '0',
-				  `user_id` int(11) unsigned NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=MEMORY DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `time` int(11) NOT NULL DEFAULT 0,
+				  `user_id` int(11) UNSIGNED NOT NULL
+				) ENGINE=MEMORY DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `user_roles` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `user_id` int(11) unsigned NOT NULL,
-				  `function_id` int(11) unsigned NOT NULL,
-				  `access` tinyint(1) NOT NULL,
-				  PRIMARY KEY (`id`),
-				  UNIQUE KEY `user_function` (`user_id`,`function_id`),
-				  KEY `fk_roles_functions` (`function_id`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+				CREATE TABLE `user_roles` (
+				  `id` int(11) UNSIGNED NOT NULL,
+				  `user_id` int(11) UNSIGNED NOT NULL,
+				  `function_id` int(11) UNSIGNED NOT NULL,
+				  `access` tinyint(1) NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `visitors` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-				  `visitor_ip` varchar(20) COLLATE utf8_polish_ci NOT NULL,
-				  `http_referer` text COLLATE utf8_polish_ci,
-				  `request_uri` text COLLATE utf8_polish_ci NOT NULL,
-				  `visited` datetime NOT NULL,
-				  UNIQUE KEY `id` (`id`),
-				  KEY `visitor_ip` (`visitor_ip`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+				CREATE TABLE `visitors` (
+				  `id` int(11) UNSIGNED NOT NULL,
+				  `visitor_ip` varchar(20) NOT NULL,
+				  `http_referer` text DEFAULT NULL,
+				  `request_uri` text NOT NULL,
+				  `visited` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
 			",
 			"
-				CREATE TABLE IF NOT EXISTS `visitor_counter` (
-				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+				CREATE TABLE `visitor_counter` (
+				  `id` int(11) UNSIGNED NOT NULL,
 				  `visitor_ip` varchar(20) NOT NULL,
 				  `count` int(11) NOT NULL,
 				  `time` varchar(15) NOT NULL,
-				  `date` datetime NOT NULL,
-				  UNIQUE KEY `id` (`id`),
-				  KEY `visitor_ip` (`visitor_ip`),
-				  KEY `date` (`date`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+				  `date` datetime NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 			",
 		),
 	),
@@ -369,7 +346,7 @@ $sql = array(
 			",
 			"
 				INSERT INTO `configuration` (`id`, `key_name`, `key_value`, `meaning`, `field_type`, `active`, `modified`) VALUES
-				(1, 'logo_image', 'gallery/logo/1', 'obrazek logo w nagłówku strony', 1, 1, '$save_time'),
+				(1, 'logo_image', 'gallery/logo/logo.png', 'obrazek logo w nagłówku strony', 1, 1, '$save_time'),
 				(2, 'logo_width', '128', 'szerokość obrazka logo w nagłówku strony', 1, 1, '$save_time'),
 				(3, 'logo_height', '128', 'wysokość obrazka logo w nagłówku strony', 1, 1, '$save_time'),
 				(4, 'page_title', 'Tytuł', 'tytuł w nagłówku strony', 1, 1, '$save_time'),
@@ -384,7 +361,7 @@ $sql = array(
 				(13, 'main_publisher', '$base_domain', 'wydawca serwisu', 1, 1, '$save_time'),
 				(14, 'main_page_topic', '$main_title', 'topic serwisu', 2, 1, '$save_time'),
 				(15, 'base_domain', '$base_domain', 'domena (adres) serwisu', 1, 1, '$save_time'),
-				(16, 'main_site_width', '1300px', 'szerokość strony w procentach lub pikselach', 1, 1, '$save_time'),
+				(16, 'main_site_width', '1400px', 'szerokość strony w procentach lub pikselach', 1, 1, '$save_time'),
 				(17, 'menu_panel_width', '0%', 'szerokość panela menu w procentach lub pikselach', 1, 1, '$save_time'),
 				(18, 'content_panel_width', '100%', 'szerokość panela głównej treści w procentach lub pikselach', 1, 1, '$save_time'),
 				(19, 'navbar_panel_visible', 'true', 'górny panel nawigacji widoczny', 3, 1, '$save_time'),
@@ -406,9 +383,9 @@ $sql = array(
 				(35, 'send_restricted_report', 'false', 'wysyłanie e-mailem raportów do admina o użyciu zabronionego słowa w formularzu', 3, 1, '$save_time'),
 				(36, 'send_new_comment_report', 'false', 'wysyłanie e-mailem raportów do admina o pojawieniu się nowego komentarza', 3, 1, '$save_time'),
 				(37, 'send_new_message_report', 'true', 'wysyłanie e-mailem raportów do admina o pojawieniu się nowej wiadomości', 3, 1, '$save_time'),
-				(38, 'sponsored_links', 'https://java-blog-cms.herokuapp.com; https://mean-stack-web.herokuapp.com', 'linki do innych stron wstrzyknięte do raportu statystyk', 2, 1, '$save_time'),
-				(39, 'excluded_domains', 'mycms.pl, fast-cms.pl, metodycznie.pl, swoja-strona.eu, active-cms.eu, mvc.net.pl, cms-jfrmwrk.rhcloud.com', 'domeny wyłączone z raportu statystyk', 2, 1, '$save_time'),
-				(40, 'redirect_stats', 'https://java-blog-cms.herokuapp.com', 'Przekierowanie modułu stats na inną stronę internetową', 1, 1, '$save_time'),
+				(38, 'sponsored_links', 'http://exe-system.pl; http://angular-cms.pl', 'linki do innych stron wstrzyknięte do raportu statystyk', 2, 1, '$save_time'),
+				(39, 'excluded_domains', 'mycms.pl, fast-cms.pl, active-cms.pl, mvc.net.pl', 'domeny wyłączone z raportu statystyk', 2, 1, '$save_time'),
+				(40, 'redirect_stats', 'External URL, for example http://exe-system.pl', 'Przekierowanie modułu stats na inną stronę internetową', 1, 1, '$save_time'),
 				(41, 'black_list_visitors', '\'255.255.255.255\', \'1.1.1.1\'', 'lista zabronionych adresów IP', 2, 1, '$save_time'),
 				(42, 'black_list_index_limit', '10', 'limit wejść na stronę główną powodujący dopisanie do czarnej listy', 1, 1, '$save_time'),
 				(43, 'black_list_contact_limit', '6', 'limit wejść na stronę kontaktową powodujący dopisanie do czarnej listy', 1, 1, '$save_time'),
@@ -477,7 +454,198 @@ $sql = array(
 		),
 	),
 	array(
+		'create_indexes' => array(
+			'
+				ALTER TABLE `admin_functions`
+				  ADD PRIMARY KEY (`id`),
+				  ADD UNIQUE KEY `module` (`module`);
+			',
+			'
+				ALTER TABLE `archives`
+				  ADD PRIMARY KEY (`id`),
+				  ADD KEY `page_id` (`page_id`),
+				  ADD KEY `fk_pages_users` (`author_id`);
+			',
+			'
+				ALTER TABLE `categories`
+				  ADD PRIMARY KEY (`id`);
+			',
+			'
+				ALTER TABLE `configuration`
+				  ADD PRIMARY KEY (`id`),
+				  ADD UNIQUE KEY `key` (`key_name`);
+			',
+			'
+				ALTER TABLE `documents`
+				  ADD PRIMARY KEY (`id`),
+				  ADD KEY `fk_documents_users` (`owner_id`);
+			',
+			'
+				ALTER TABLE `hosts`
+				  ADD PRIMARY KEY (`id`),
+				  ADD UNIQUE KEY `server_ip` (`server_ip`);
+			',
+			'
+				ALTER TABLE `images`
+				  ADD PRIMARY KEY (`id`),
+				  ADD KEY `fk_images_users` (`owner_id`);
+			',
+			'
+				ALTER TABLE `logins`
+				  ADD UNIQUE KEY `id` (`id`);
+			',
+			'
+				ALTER TABLE `pages`
+				  ADD PRIMARY KEY (`id`),
+				  ADD KEY `category_id` (`category_id`),
+				  ADD KEY `fk_pages_users` (`author_id`);
+			',
+			'
+				ALTER TABLE `query_set`
+				  ADD PRIMARY KEY (`id`);
+			',
+			'
+				ALTER TABLE `registers`
+				  ADD UNIQUE KEY `id` (`id`);
+			',
+			'
+				ALTER TABLE `rejectors`
+				  ADD UNIQUE KEY `id` (`id`),
+				  ADD KEY `visitor_ip` (`visitor_ip`);
+			',
+			'
+				ALTER TABLE `reminds`
+				  ADD UNIQUE KEY `id` (`id`);
+			',
+			'
+				ALTER TABLE `searches`
+				  ADD UNIQUE KEY `id` (`id`);
+			',
+			'
+				ALTER TABLE `users`
+				  ADD PRIMARY KEY (`id`),
+				  ADD KEY `user_login` (`user_login`),
+				  ADD KEY `pesel` (`pesel`),
+				  ADD KEY `email` (`email`);
+			',
+			'
+				ALTER TABLE `user_messages`
+				  ADD PRIMARY KEY (`id`);
+			',
+			'
+				ALTER TABLE `user_online`
+				  ADD PRIMARY KEY (`id`);
+			',
+			'
+				ALTER TABLE `user_roles`
+				  ADD PRIMARY KEY (`id`),
+				  ADD UNIQUE KEY `user_function` (`user_id`,`function_id`),
+				  ADD KEY `fk_roles_functions` (`function_id`);
+			',
+			'
+				ALTER TABLE `visitors`
+				  ADD UNIQUE KEY `id` (`id`),
+				  ADD KEY `visitor_ip` (`visitor_ip`);
+			',
+			'
+				ALTER TABLE `visitor_counter`
+				  ADD UNIQUE KEY `id` (`id`),
+				  ADD KEY `visitor_ip` (`visitor_ip`),
+				  ADD KEY `date` (`date`);
+			',
+		),
+	),
+	array(
+		'create_autoincrements' => array(
+			'
+				ALTER TABLE `admin_functions`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+			',
+			'
+				ALTER TABLE `archives`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `categories`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `configuration`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+			',
+			'
+				ALTER TABLE `documents`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `hosts`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `images`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `logins`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `pages`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+			',
+			'
+				ALTER TABLE `query_set`
+				  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+			',
+			'
+				ALTER TABLE `registers`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `rejectors`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `reminds`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `searches`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `users`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+			',
+			'
+				ALTER TABLE `user_messages`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `user_online`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `user_roles`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+			',
+			'
+				ALTER TABLE `visitors`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+			'
+				ALTER TABLE `visitor_counter`
+				  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+			',
+		),
+	),
+	array(
 		'create_constraints' => array(
+			'
+				ALTER TABLE `archives`
+				  ADD CONSTRAINT `fk_archives_pages` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`),
+				  ADD CONSTRAINT `fk_archives_users` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`);
+			',
 			'
 				ALTER TABLE `documents`
 				  ADD CONSTRAINT `fk_documents_users` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
@@ -492,13 +660,8 @@ $sql = array(
 			',
 			'
 				ALTER TABLE `user_roles`
-				  ADD CONSTRAINT `fk_roles_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-				  ADD CONSTRAINT `fk_roles_functions` FOREIGN KEY (`function_id`) REFERENCES `admin_functions` (`id`);
-			',
-			'
-				ALTER TABLE `archives`
-				  ADD CONSTRAINT `archives_users` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
-				  ADD CONSTRAINT `archives_pages` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`);
+				  ADD CONSTRAINT `fk_roles_functions` FOREIGN KEY (`function_id`) REFERENCES `admin_functions` (`id`),
+				  ADD CONSTRAINT `fk_roles_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 			',
 		),
 	),

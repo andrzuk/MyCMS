@@ -18,7 +18,7 @@ class Stats_View
 			}
 		}
 		
-		if ($redirect_stats)
+		if (substr($redirect_stats, 0, 4) == 'http')
 		{
 			/*
 			$site_content .= '

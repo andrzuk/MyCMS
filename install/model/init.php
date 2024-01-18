@@ -6,6 +6,8 @@ class Init_Model
 
 	private $row_item;
 	private $sql_script;
+	private $check_script;
+	private $drop_script;
 	private $num_rows;
 	
 	private $mySqlDateTime;
@@ -24,6 +26,45 @@ class Init_Model
 	{
 		include 'script.php';
 		
+		$existing_count = 0;
+		
+		$this->check_script = $check;
+		
+		foreach($this->check_script as $k => $v)
+		{
+			foreach($v as $key => $val)
+			{
+				if (is_array($val))
+				{
+					foreach($val as $i => $query)
+					{
+						$result = mysqli_query($this->db, $query);
+						$existing_count += $result->num_rows;
+					}
+				}
+			}
+		}
+		
+		if ($existing_count)
+		{
+			$this->drop_script = $drop;
+			
+			foreach($this->drop_script as $k => $v)
+			{
+				foreach($v as $key => $val)
+				{
+					if (is_array($val))
+					{
+						foreach($val as $i => $query)
+						{
+							mysqli_query($this->db, $query);
+							$this->num_rows += mysqli_affected_rows($this->db);
+						}
+					}
+				}
+			}			
+		}
+
 		$this->sql_script = $sql;
 
 		foreach($this->sql_script as $k => $v)

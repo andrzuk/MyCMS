@@ -58,7 +58,7 @@ class Visitors_Model
 		if ($result)
 		{
 			$row = mysqli_fetch_assoc($result); 
-			if (count($row))
+			if ($row)
 			{
 				$row['visitor_ip'] = array(
 					'ip' => $row['visitor_ip'],

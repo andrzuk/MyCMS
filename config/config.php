@@ -42,8 +42,8 @@ define ('PAGE_IMPORT_TEMPLATE', '{_import_page_}&id=');
 define ('CONTACT_FORM', '{_contact_form_}');
 
 /* Before database starts: */
-define ('PAGE_LOGO', GALLERY_DIR.'logo/1');   // main logo
-define ('PAGE_TITLE', 'Moja');                // main title
-define ('PAGE_SUBTITLE', 'strona domowa');    // main subtitle
+define ('PAGE_LOGO', GALLERY_DIR.'logo/logo.png');  // main logo
+define ('PAGE_TITLE', 'Moja');                      // main title
+define ('PAGE_SUBTITLE', 'strona domowa');          // main subtitle
 
 ?>
