@@ -170,7 +170,7 @@ class Contact_Model
 					mysqli_real_escape_string($this->db, trim($record_item['autor'])) . "', '" . 
 					mysqli_real_escape_string($this->db, trim($record_item['email'])) . "', '" . 
 					mysqli_real_escape_string($this->db, trim($record_item['message'])) . "', '1', '" . 
-					$this->mySqlDateTime . "', '')";
+					$this->mySqlDateTime . "', NOW())";
 		mysqli_query($this->db, $query);
 		
 		// odczytuje z konfiguracji opcje wysylania raportow:
