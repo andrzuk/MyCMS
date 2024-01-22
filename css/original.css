@@ -750,6 +750,7 @@ textarea.FormInput
 .PagePointer
 {
 	border: 1px solid #999; 
+	border-radius: 3px;
 	color: #369;
 	background-color: #fff;
 	margin: 2px;
@@ -761,6 +762,7 @@ textarea.FormInput
 .PagePointerCurrent
 {
 	border: 1px solid #999; 
+	border-radius: 3px;
 	color: #666;
 	background-color: #ddd;
 	margin: 2px;
@@ -772,6 +774,7 @@ textarea.FormInput
 .PagePointerDisabled
 {
 	border: 1px solid #999; 
+	border-radius: 3px;
 	color: #ccc;
 	background-color: #fff;
 	margin: 2px;
