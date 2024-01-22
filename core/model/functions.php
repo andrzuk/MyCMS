@@ -77,6 +77,19 @@ class Functions_Model
 	
 	public function Add($record_item)
 	{
+		$query = "SELECT COUNT(*) AS licznik FROM " . $this->table_name . 
+					" WHERE module='" . mysqli_real_escape_string($this->db, $record_item['module']) . "'";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result); 
+			if ($row['licznik']) 
+			{
+				return 0;
+			}
+			mysqli_free_result($result);
+		}
+
 		$query = "INSERT INTO " . $this->table_name . " VALUES (NULL, '" . 
 					mysqli_real_escape_string($this->db, $record_item['function']) . "', '" .
 					mysqli_real_escape_string($this->db, $record_item['meaning']) . "', '" .
