@@ -550,6 +550,10 @@ class Images_View
 		$site_content .= '<p style="text-align: center; font-size: 12px; color: #666;">';
 		$site_content .= 'Zdjęcie ' . $row['id'] . '. "' . $row['picture_description'] . '"';
 		$site_content .= '</p>';
+
+		$site_content .= '<p style="text-align: center; font-size: 12px; color: #666;">';
+		$site_content .= 'Link: &lt;img src="'. GALLERY_DIR . IMG_DIR . $row['id'] . '" alt="' . $row['picture_description'] . '"&gt;';
+		$site_content .= '</p>';
 		
 		return $site_content;
 	}
