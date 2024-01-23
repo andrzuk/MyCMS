@@ -515,7 +515,11 @@ class Images_View
 
 		$main_view->set_module(MODULE_NAME);
 		
+		$row['link'] = '&lt;img src="'. GALLERY_DIR . IMG_DIR . $row['id'] .'" alt="gallery image"&gt;';
+		
 		$main_view->set_row($row);
+		
+		array_push($columns, array('db_name' => 'link', 'column_name' => 'Link obrazka', 'sorting' => 0));
 		
 		$main_view->set_columns($columns);
 		
