@@ -406,7 +406,7 @@ class Images_View
 		$js .= '		li.innerHTML = input.files[i].name;';
 		$js .= '		ul.appendChild(li);';
 		$js .= '	}';
-		$js .= '	if(!ul.hasChildNodes()) {';
+		$js .= '	if (!ul.hasChildNodes()) {';
 		$js .= '		var li = document.createElement("li");';
 		$js .= '		li.innerHTML = "(brak)";';
 		$js .= '		ul.appendChild(li);';

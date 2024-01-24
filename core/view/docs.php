@@ -392,7 +392,7 @@ class Docs_View
 		$js .= '		li.innerHTML = input.files[i].name;';
 		$js .= '		ul.appendChild(li);';
 		$js .= '	}';
-		$js .= '	if(!ul.hasChildNodes()) {';
+		$js .= '	if (!ul.hasChildNodes()) {';
 		$js .= '		var li = document.createElement("li");';
 		$js .= '		li.innerHTML = "(brak)";';
 		$js .= '		ul.appendChild(li);';
@@ -483,6 +483,21 @@ class Docs_View
 	
 	public function ShowRecord($row, $columns)
 	{
+		$mode = $row['section_id'];
+		
+		switch ($mode)
+		{
+			case 1:
+				$sub_dir = DOC_DIR;
+				break;
+			case 2:
+				$sub_dir = SND_DIR;
+				break;
+			default:
+				$sub_dir = DOC_DIR;
+				break;
+		}
+
 		// View Generator:
 		
 		require_once LIB_DIR . 'gener' . '/' . 'view.php';
@@ -497,7 +512,11 @@ class Docs_View
 
 		$main_view->set_module(MODULE_NAME);
 		
+		$row['link'] = '&lt;a href="'. GALLERY_DIR . $sub_dir . $row['id'] . '"&gt;';
+		
 		$main_view->set_row($row);
+		
+		array_push($columns, array('db_name' => 'link', 'column_name' => 'Link dokumentu', 'sorting' => 0));
 		
 		$main_view->set_columns($columns);
 		
@@ -543,6 +562,10 @@ class Docs_View
 		$site_content .= '<img src="'.$icon.'" class="TopLinkIcon" alt="'.$row['doc_description'].'" />'.'<br />';
 		$site_content .= 'Dokument ' . $row['id'] . '. "' . $row['doc_description'] . '"';
 		$site_content .= '</a>';
+		$site_content .= '</p>';
+		
+		$site_content .= '<p style="text-align: center;">';
+		$site_content .= 'Link: &lt;a href="'. GALLERY_DIR . $sub_dir . $row['id'] . '"&gt;';
 		$site_content .= '</p>';
 		
 		return $site_content;
