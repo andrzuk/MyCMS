@@ -512,7 +512,7 @@ class Docs_View
 
 		$main_view->set_module(MODULE_NAME);
 		
-		$row['link'] = '&lt;a href="'. GALLERY_DIR . $sub_dir . $row['id'] . '"&gt;';
+		$row['link'] = '&lt;a href="'. GALLERY_DIR . $sub_dir . $row['id'] . '"&gt;' . $row['doc_description'] . '&lt;/a&gt;';
 		
 		$main_view->set_row($row);
 		
@@ -565,7 +565,7 @@ class Docs_View
 		$site_content .= '</p>';
 		
 		$site_content .= '<p style="text-align: center;">';
-		$site_content .= 'Link: &lt;a href="'. GALLERY_DIR . $sub_dir . $row['id'] . '"&gt;';
+		$site_content .= 'Link: &lt;a href="'. GALLERY_DIR . $sub_dir . $row['id'] . '"&gt;' . $row['doc_description'] . '&lt;/a&gt;';
 		$site_content .= '</p>';
 		
 		return $site_content;
