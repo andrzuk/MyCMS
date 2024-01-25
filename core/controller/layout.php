@@ -66,26 +66,45 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 				'contents' => $contents, 
 			);
 			
-			// zapisuje nową zawartość pliku CSS:
-			$model_object->SaveContents($record_object);
+			// zapisuje nową zawartość pliku szablonu:
+			$result = $model_object->SaveContents($record_object);
 			
-			$site_dialog = array(
-				'INFORMATION',
-				'Zmiana układu',
-				'Nowy układ strony został poprawnie zapisany.',
-				array(
+			if ($result)
+			{
+				$site_dialog = array(
+					'INFORMATION',
+					'Zmiana układu',
+					'Nowy układ strony został poprawnie zapisany.',
 					array(
-						'index.php?route=layout', 'Edytuj'
-					),
+						array(
+							'index.php?route=layout', 'Edytuj'
+						),
+						array(
+							'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+						),
+					)
+				);
+			}
+			else
+			{
+				$site_dialog = array(
+					'ERROR',
+					'Zmiana układu',
+					'Układ strony nie został zapisany.<br>Zmień prawa dostępu do plików w folderze '.LAYOUT_DIR.'.',
 					array(
-						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
-					),
-				)
-			);
+						array(
+							'index.php?route=layout', 'Edytuj'
+						),
+						array(
+							'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+						),
+					)
+				);
+			}
 		}
 		else // nie uzupełniono wszystkich pól
 		{
-			// wczytuje zawartość pliku CSS:	
+			// wczytuje zawartość pliku szablonu:
 			$contents = $model_object->GetContents();
 
 			$record_object = array(
@@ -103,22 +122,41 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 	}
 	else if (isset($_POST['restore_button'])) // przywrócenie ustawień domyślnych
 	{
-		// kopiuje oryginalny plik CSS:
-		$model_object->RestoreContents();
+		// kopiuje oryginalny plik szablonu:
+		$result = $model_object->RestoreContents();
 		
-		$site_dialog = array(
-			'INFORMATION',
-			'Zmiana układu',
-			'Domyślny układ strony został poprawnie przywrócony.',
-			array(
+		if ($result)
+		{
+			$site_dialog = array(
+				'INFORMATION',
+				'Zmiana układu',
+				'Domyślny układ strony został poprawnie przywrócony.',
 				array(
-					'index.php?route=layout', 'Edytuj'
-				),
+					array(
+						'index.php?route=layout', 'Edytuj'
+					),
+					array(
+						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+					),
+				)
+			);
+		}
+		else
+		{
+			$site_dialog = array(
+				'ERROR',
+				'Zmiana układu',
+				'Domyślny układ strony nie został przywrócony.<br>Zmień prawa dostępu do plików w folderze '.LAYOUT_DIR.'.',
 				array(
-					'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
-				),
-			)
-		);
+					array(
+						'index.php?route=layout', 'Edytuj'
+					),
+					array(
+						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+					),
+				)
+			);	
+		}
 	}
 	else if (isset($_POST['cancel_button'])) // zamknięcie formularza
 	{
@@ -135,7 +173,7 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 	}
 	else // otwarcie do edycji
 	{
-		// wczytuje zawartość pliku CSS:	
+		// wczytuje zawartość pliku szablonu:
 		$contents = $model_object->GetContents();
 
 		$record_object = array(

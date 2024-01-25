@@ -67,21 +67,40 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 			);
 			
 			// zapisuje nową zawartość pliku CSS:
-			$model_object->SaveContents($record_object);
-			
-			$site_dialog = array(
-				'INFORMATION',
-				'Zmiana wyglądu',
-				'Nowy wygląd strony został poprawnie zapisany.',
-				array(
+			$result = $model_object->SaveContents($record_object);
+
+			if ($result)
+			{
+				$site_dialog = array(
+					'INFORMATION',
+					'Zmiana wyglądu',
+					'Nowy wygląd strony został poprawnie zapisany.',
 					array(
-						'index.php?route=style', 'Edytuj'
-					),
+						array(
+							'index.php?route=style', 'Edytuj'
+						),
+						array(
+							'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+						),
+					)
+				);	
+			}
+			else
+			{
+				$site_dialog = array(
+					'ERROR',
+					'Zmiana wyglądu',
+					'Wygląd strony nie został zapisany.<br>Zmień prawa dostępu do plików w folderze '.CSS_DIR.'.',
 					array(
-						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
-					),
-				)
-			);
+						array(
+							'index.php?route=style', 'Edytuj'
+						),
+						array(
+							'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+						),
+					)
+				);	
+			}			
 		}
 		else // nie uzupełniono wszystkich pól
 		{
@@ -104,21 +123,40 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 	else if (isset($_POST['restore_button'])) // przywrócenie ustawień domyślnych
 	{
 		// kopiuje oryginalny plik CSS:
-		$model_object->RestoreContents();
+		$result = $model_object->RestoreContents();
 		
-		$site_dialog = array(
-			'INFORMATION',
-			'Zmiana wyglądu',
-			'Domyślny wygląd strony został poprawnie przywrócony.',
-			array(
+		if ($result)
+		{
+			$site_dialog = array(
+				'INFORMATION',
+				'Zmiana wyglądu',
+				'Domyślny wygląd strony został poprawnie przywrócony.',
 				array(
-					'index.php?route=style', 'Edytuj'
-				),
+					array(
+						'index.php?route=style', 'Edytuj'
+					),
+					array(
+						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+					),
+				)
+			);				
+		}
+		else
+		{
+			$site_dialog = array(
+				'ERROR',
+				'Zmiana wyglądu',
+				'Domyślny wygląd strony nie został przywrócony.<br>Zmień prawa dostępu do plików w folderze '.CSS_DIR.'.',
 				array(
-					'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
-				),
-			)
-		);
+					array(
+						'index.php?route=style', 'Edytuj'
+					),
+					array(
+						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+					),
+				)
+			);	
+		}
 	}
 	else if (isset($_POST['cancel_button'])) // zamknięcie formularza
 	{

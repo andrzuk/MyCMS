@@ -67,21 +67,40 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 			);
 			
 			// zapisuje nową zawartość pliku JS:
-			$model_object->SaveContents($record_object);
-			
-			$site_dialog = array(
-				'INFORMATION',
-				'Zmiana działania',
-				'Nowe działanie strony zostało poprawnie zapisane.',
-				array(
+			$result = $model_object->SaveContents($record_object);
+
+			if ($result)
+			{
+				$site_dialog = array(
+					'INFORMATION',
+					'Zmiana działania',
+					'Nowe działanie strony zostało poprawnie zapisane.',
 					array(
-						'index.php?route=script', 'Edytuj'
-					),
+						array(
+							'index.php?route=script', 'Edytuj'
+						),
+						array(
+							'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+						),
+					)
+				);	
+			}
+			else
+			{
+				$site_dialog = array(
+					'ERROR',
+					'Zmiana działania',
+					'Działanie strony nie zostało zapisane.<br>Zmień prawa dostępu do plików w folderze '.JS_DIR.'.',
 					array(
-						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
-					),
-				)
-			);
+						array(
+							'index.php?route=script', 'Edytuj'
+						),
+						array(
+							'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+						),
+					)
+				);	
+			}		
 		}
 		else // nie uzupełniono wszystkich pól
 		{
@@ -104,21 +123,40 @@ if (in_array($user_status, $access) && $acl->available()) // są uprawnienia
 	else if (isset($_POST['restore_button'])) // przywrócenie ustawień domyślnych
 	{
 		// kopiuje oryginalny plik JS:
-		$model_object->RestoreContents();
+		$result = $model_object->RestoreContents();
 		
-		$site_dialog = array(
-			'INFORMATION',
-			'Zmiana działania',
-			'Domyślne działanie strony zostało poprawnie przywrócone.',
-			array(
+		if ($result)
+		{
+			$site_dialog = array(
+				'INFORMATION',
+				'Zmiana działania',
+				'Domyślne działanie strony zostało poprawnie przywrócone.',
 				array(
-					'index.php?route=script', 'Edytuj'
-				),
+					array(
+						'index.php?route=script', 'Edytuj'
+					),
+					array(
+						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+					),
+				)
+			);	
+		}
+		else
+		{
+			$site_dialog = array(
+				'ERROR',
+				'Zmiana działania',
+				'Domyślne działanie strony nie zostało przywrócone.<br>Zmień prawa dostępu do plików w folderze '.JS_DIR.'.',
 				array(
-					'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
-				),
-			)
-		);
+					array(
+						'index.php?route=script', 'Edytuj'
+					),
+					array(
+						'index.php?route=admin', 'Zamknij', 'window.location.href=window.location.href'
+					),
+				)
+			);	
+		}
 	}
 	else if (isset($_POST['cancel_button'])) // zamknięcie formularza
 	{

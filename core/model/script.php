@@ -12,8 +12,8 @@ class Script_Model
 	
 	public function __construct($db)
 	{
-		$this->orig_file = 'js/original.js';
-		$this->js_file = 'js/default.js';
+		$this->orig_file = JS_DIR . 'original.js';
+		$this->js_file = JS_DIR . 'default.js';
 	}
 	
 	public function GetSize()
@@ -40,9 +40,17 @@ class Script_Model
 		}
 		$this->contents = $contents;
 
-		$fh = fopen($this->js_file, 'w');
-		fwrite($fh, $this->contents);
-		fclose($fh);
+		$result = is_writable($this->js_file);
+		if ($result)
+		{
+			$fh = fopen($this->js_file, 'w');
+			if ($fh)
+			{
+				$res = fwrite($fh, $this->contents);
+				fclose($fh);
+			}
+		}
+		return $result && $res;
 	}
 	
 	public function RestoreContents()
@@ -51,9 +59,17 @@ class Script_Model
 		$this->contents = fread($fh, filesize($this->orig_file));
 		fclose($fh);
 		
-		$fh = fopen($this->js_file, 'w');
-		fwrite($fh, $this->contents);
-		fclose($fh);
+		$result = is_writable($this->js_file);
+		if ($result)
+		{
+			$fh = fopen($this->js_file, 'w');
+			if ($fh)
+			{
+				$res = fwrite($fh, $this->contents);
+				fclose($fh);
+			}
+		}
+		return $result && $res;
 	}
 }
 

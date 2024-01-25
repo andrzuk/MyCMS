@@ -12,8 +12,8 @@ class Layout_Model
 	
 	public function __construct($db)
 	{
-		$this->orig_file = 'layout/original.php';
-		$this->layout_file = 'layout/default.php';
+		$this->orig_file = LAYOUT_DIR . 'original.php';
+		$this->layout_file = LAYOUT_DIR . 'default.php';
 	}
 	
 	public function GetSize()
@@ -40,9 +40,17 @@ class Layout_Model
 		}
 		$this->contents = $contents;
 
-		$fh = fopen($this->layout_file, 'w');
-		fwrite($fh, $this->contents);
-		fclose($fh);
+		$result = is_writable($this->layout_file);
+		if ($result)
+		{
+			$fh = fopen($this->layout_file, 'w');
+			if ($fh)
+			{
+				$res = fwrite($fh, $this->contents);
+				fclose($fh);
+			}
+		}
+		return $result && $res;
 	}
 	
 	public function RestoreContents()
@@ -51,9 +59,17 @@ class Layout_Model
 		$this->contents = fread($fh, filesize($this->orig_file));
 		fclose($fh);
 		
-		$fh = fopen($this->layout_file, 'w');
-		fwrite($fh, $this->contents);
-		fclose($fh);
+		$result = is_writable($this->layout_file);
+		if ($result)
+		{
+			$fh = fopen($this->layout_file, 'w');
+			if ($fh)
+			{
+				$res = fwrite($fh, $this->contents);
+				fclose($fh);
+			}
+		}
+		return $result && $res;
 	}
 }
 

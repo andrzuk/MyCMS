@@ -13,6 +13,8 @@ define ('SND_DIR', 'sounds/');       // sounds directory
 define ('HELP_DIR', 'help/');        // help directory
 define ('INSTALL_DIR', 'install/');  // install directory
 define ('LAYOUT_DIR', 'layout/');    // layout directory
+define ('CSS_DIR', 'css/');          // styles directory
+define ('JS_DIR', 'js/');            // scripts directory
 
 /*
  * Database connection

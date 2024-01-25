@@ -12,8 +12,8 @@ class Style_Model
 	
 	public function __construct($db)
 	{
-		$this->orig_file = 'css/original.css';
-		$this->css_file = 'css/default.css';
+		$this->orig_file = CSS_DIR . 'original.css';
+		$this->css_file = CSS_DIR . 'default.css';
 	}
 	
 	public function GetSize()
@@ -40,9 +40,17 @@ class Style_Model
 		}
 		$this->contents = $contents;
 
-		$fh = fopen($this->css_file, 'w');
-		fwrite($fh, $this->contents);
-		fclose($fh);
+		$result = is_writable($this->css_file);
+		if ($result)
+		{
+			$fh = fopen($this->css_file, 'w');
+			if ($fh)
+			{
+				$res = fwrite($fh, $this->contents);
+				fclose($fh);
+			}
+		}
+		return $result && $res;
 	}
 	
 	public function RestoreContents()
@@ -51,9 +59,17 @@ class Style_Model
 		$this->contents = fread($fh, filesize($this->orig_file));
 		fclose($fh);
 		
-		$fh = fopen($this->css_file, 'w');
-		fwrite($fh, $this->contents);
-		fclose($fh);
+		$result = is_writable($this->css_file);
+		if ($result)
+		{
+			$fh = fopen($this->css_file, 'w');
+			if ($fh)
+			{
+				$res = fwrite($fh, $this->contents);
+				fclose($fh);
+			}
+		}
+		return $result && $res;
 	}
 }
 
