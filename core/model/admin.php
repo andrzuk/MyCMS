@@ -135,7 +135,7 @@ class Admin_Model
 			$str_days = '-' . strval($day - 1) . ' days';
 			$date_range = date("Y-m-d", strtotime($str_days));
 			$query = "SELECT COUNT(*) AS counter, '" . $date_range . "' AS visited FROM " . $this->table_name . 
-			         " WHERE request_uri IN ('/', '/index.php') AND visited BETWEEN '" . $date_range . " 00:00:00' AND '" . $date_range . " 23:59:59'";
+			         " WHERE (request_uri LIKE '%/' OR request_uri LIKE '%index.php') AND visited BETWEEN '" . $date_range . " 00:00:00' AND '" . $date_range . " 23:59:59'";
 			$result = mysqli_query($this->db, $query);
 			if ($result)
 			{
