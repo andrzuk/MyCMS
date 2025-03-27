@@ -132,7 +132,27 @@ class Contact_Model
 			$this->row_item = $row;
 			mysqli_free_result($result);
 		}
-		return strpos($this->row_item['key_value'], $author_name);
+		$author_items = explode(" ", $author_name);
+		foreach ($author_items as $author_item) {
+			if (strpos(strtolower($this->row_item['key_value']), strtolower($author_item)) !== false) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private function CheckEmails($author_email)
+	{
+		$query = "SELECT key_value FROM configuration" .
+				 " WHERE key_name = 'black_list_messages_authors'";
+		$result = mysqli_query($this->db, $query);
+		if ($result)
+		{
+			$row = mysqli_fetch_assoc($result);
+			$this->row_item = $row;
+			mysqli_free_result($result);
+		}
+		return strpos($this->row_item['key_value'], $author_email);
 	}
 	
 	public function Receive($record_item, $send_object, $send_copy)
@@ -161,7 +181,7 @@ class Contact_Model
 		{
 			if ($this->CheckAuthors(trim($record_item['autor'])))
 				return 0;
-			if ($this->CheckAuthors(trim($record_item['email'])))
+			if ($this->CheckEmails(trim($record_item['email'])))
 				return 0;
 		}
 
