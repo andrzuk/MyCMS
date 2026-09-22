@@ -13,18 +13,18 @@
 * App installer
 * Bots and contact form spam auto detect and lock
 * Locking statistics: charts and report
-* On-line: http://fast-cms.pl
+* URL of Extended Implementation (with additional features): http://in-met.com.pl
 ### Installation steps:
 * create database:
-- `CREATE DATABASE cms;`
+ `CREATE DATABASE cms;`
 * create user:
-- `CREATE USER 'user-name'@'localhost' IDENTIFIED BY 'secret-user-password';`
+ `CREATE USER 'user-name'@'localhost' IDENTIFIED BY 'secret-user-password';`
 * grant privileges:
-- `GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT ON cms.* TO 'user-name'@'localhost' WITH GRANT OPTION;`
+ `GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT ON cms.* TO 'user-name'@'localhost' WITH GRANT OPTION;`
 * customize databse connection: config/config.php
-* upload project files to HTTP server (for example http(s)://your-comain.com)
+* upload project files to HTTP server (for example http(s)://your-domain.com)
 * change attributes for following folders
-- `chmod 777 -R css gallery install js layout`
+ `chmod 777 -R css gallery install js layout`
 * open URL: `http(s)://your-comain.com/install`
 * submit installation form
 * remove or rename `/install` folder on HTTP server (if needed)
