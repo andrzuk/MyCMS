@@ -19,6 +19,27 @@ class Login_Model
 		$this->mySqlDateTime = date("Y-m-d H:i:s", $timestampInSeconds);
 	}
 	
+	public function Track($record_item)
+	{
+		// sprawdza, czy w ciągu ostatniej godziny użytkownik próbował się zalogować zbyt wiele razy:
+
+		$query = "SELECT COUNT(*) AS login_attempts FROM logins".
+				 " WHERE login='". $record_item['user_login'] ."'".
+				 " AND user_id=0".
+				 " AND login_time > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+
+		$result = mysqli_query($this->db, $query);
+		$row = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+
+		if ($row['login_attempts'] >= 3) { // jeśli więcej niż 3 prób w ciągu ostatniej godziny, blokujemy logowanie
+			return FALSE;
+		}
+		else { // jeśli mniej niż 3 próby w ciągu ostatniej godziny, zezwalamy na logowanie
+			return TRUE;
+		}
+	}
+
 	public function Login($record_item)
 	{
 		// weryfikuje uzytkownika:

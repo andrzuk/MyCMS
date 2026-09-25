@@ -87,11 +87,14 @@ if (!isset($_SESSION['user_status']) || !$_SESSION['user_status']) // nie zalogo
 				
 				if ($check_result) // kontrola bezpieczeństwa poprawna
 				{
+					// sprawdza, czy logowanie jest dozwolone:
+					$allowed = $model_object->Track($record_object);
+
 					// weryfikuje użytkownika na podstawie bazy:
-					
+
 					$result = $model_object->Login($record_object);
 					
-					if ($result) // logowanie się powiodło
+					if ($allowed && $result) // logowanie się powiodło
 					{
 						// ustawia użytkownika:
 						$_SESSION['user_id'] = $result['id'];
